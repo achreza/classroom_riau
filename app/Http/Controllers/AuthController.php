@@ -39,7 +39,7 @@ class AuthController extends Controller
         } else {
             // create a new user
             $page   = 'register';
-           
+
             // return view
             return view('register', compact('page', 'email'));
         }
@@ -51,7 +51,7 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'kode' => $request->kode, 
+            'kode' => $request->kode,
             'jurusan' => $request->jurusan,
             'role_id' => 3,
         ]);

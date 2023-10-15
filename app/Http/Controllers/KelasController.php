@@ -25,7 +25,7 @@ class KelasController extends Controller
     public function create()
     {
         //
-        
+
     }
 
     /**
@@ -38,7 +38,7 @@ class KelasController extends Controller
             'nama_kelas' => 'required',
             'deskripsi' => 'required',
         ]);
-        
+
         $kelas = Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'deskripsi' => $request->deskripsi,
@@ -51,7 +51,6 @@ class KelasController extends Controller
         } else {
             return redirect()->route('kelas');
         }
-
     }
 
     /**
@@ -100,7 +99,7 @@ class KelasController extends Controller
     public function destroy($kelas)
     {
         //
-        $kelas= Kelas::find($kelas);
+        $kelas = Kelas::find($kelas);
         $kelas->delete();
         if ($kelas) {
             return redirect()->route('dashboard.index');

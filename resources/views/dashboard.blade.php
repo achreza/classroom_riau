@@ -7,9 +7,11 @@
     <title>dashboard</title>
 </head>
 <body>
-    <h1>ini dashboard {{ $name }}</h1>
+    <h1>ini dashboard </h1>
     <a href="{{ route('kelas.index') }}">Kelas</a>
     <a href="{{ route('auth.logout') }}">Logout</a>
+
+    <a href="{{ route('kelas.edit',['kela' => $item->id]) }}">Join kelas</a>
 
     <table border="1">
         <thead>
@@ -31,10 +33,13 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit">Hapus</button>
+
                         </form>
+                        <a href="{{ route('dashboard.tugas', $item->id) }}">Tugas</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
+    </table>
 </body>
 </html>
