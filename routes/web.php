@@ -15,8 +15,13 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('main.index');
 });
+
+// login
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 Route::get('auth/google', [AuthController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
