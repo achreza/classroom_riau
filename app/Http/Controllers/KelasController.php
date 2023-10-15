@@ -15,7 +15,8 @@ class KelasController extends Controller
     public function index()
     {
         //
-        return view('kelas');
+        $class = '';
+        return view('kelas', compact('class'));
     }
 
     /**
