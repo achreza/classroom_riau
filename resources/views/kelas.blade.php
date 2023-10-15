@@ -14,6 +14,11 @@
         <input type="text" name="nama_kelas" placeholder="Nama Kelas" value="{{ $class->nama_kelas }}">
         <input type="text" name="deskripsi" placeholder="deskripsi" value="{{ $class->deskripsi }}">
         <button type="submit">Edit</button>
+    </form>
+
+    {{-- button tambah tugas --}}
+    <a href="{{ route('tugas.create', $class->id) }}">Tambah Tugas</a>
+
     @else
     <form action="{{ route('kelas.store') }}" method="post">
         @csrf

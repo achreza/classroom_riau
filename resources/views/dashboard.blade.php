@@ -9,6 +9,7 @@
 <body>
     <h1>ini dashboard {{ $name }}</h1>
     <a href="{{ route('kelas.index') }}">Kelas</a>
+    <a href="{{ route('tugas.index') }}">Tugas</a>
     <a href="{{ route('auth.logout') }}">Logout</a>
 
     <table border="1">
