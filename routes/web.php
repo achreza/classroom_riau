@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,17 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
 Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 
 // register
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+
+// logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+// route kelas
+Route::resource('kelas', KelasController::class);
+
+// dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

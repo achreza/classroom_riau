@@ -32,9 +32,9 @@ class AuthController extends Controller
             $request->session()->put('user', $existingUser);
             //    check role
             if ($existingUser->role == 1) {
-                return view('dashboard', compact('email'));
+                return redirect()->route('dashboard.index');
             } else {
-                return view('dashboard', compact('email'));
+                return redirect()->route('dashboard.index');
             }
         } else {
             // create a new user
