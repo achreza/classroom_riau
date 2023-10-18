@@ -7,7 +7,7 @@
     <title>Login</title>
 </head>
 <body>
-    <a href="{{ url('auth/google') }}" class="btn btn-primary">Login with Google</a>
-
+    <a href="{{ route('auth.login') }}">Login</a>
+    <a href="{{ route('auth.register') }}">Register</a>
 </body>
 </html>

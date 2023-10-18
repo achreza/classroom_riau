@@ -28,13 +28,18 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('/style/core.css') }}" class="template-customizer-core-css" />
+
     <link rel="stylesheet" href="{{ asset('style/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('style/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('style/custom.css') }}">
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('style/perfect-scrollbar.css') }}" />
 
-    <!-- Page CSS -->
+    <!-- Trix Editor -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('style/trix-settings.css') }}">
 
     <!-- Helpers -->
     <script src="{{ asset('js/helpers.js') }}"></script>
@@ -65,35 +70,8 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="row">
-                            <div class="col-lg-8 mb-4 order-0">
-                                <div class="card">
-                                    <div class="d-flex align-items-end row">
-                                        <div class="col-sm-7">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                                                <p class="mb-4">
-                                                    You have done <span class="fw-bold">72%</span> more sales today.
-                                                    Check your new badge in
-                                                    your profile.
-                                                </p>
 
-                                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
-                                                    Badges</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 text-center text-sm-left">
-                                            <div class="card-body pb-0 px-0 px-md-4">
-                                                <img src="../assets/img/illustrations/man-with-laptop-light.png"
-                                                    height="140" alt="View Badge User"
-                                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                                    data-app-light-img="illustrations/man-with-laptop-light.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @yield('content')
 
                     </div>
                     <!-- / Content -->
@@ -123,7 +101,8 @@
 
     <script src="{{ asset('js/menu.js') }}"></script>
     <!-- endbuild -->
-
+    {{-- Trix Settings --}}
+    <script src="{{ asset('js/trix-settings.js') }}"></script>
     <!-- Main JS -->
     <script src="{{ asset('js/main.js') }}"></script>
 
