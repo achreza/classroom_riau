@@ -20,7 +20,7 @@ use Illuminate\Routing\RouteGroup;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
-        return view('login');
+        return view('auth.login');
     });
     Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
     Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
