@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Termwind\Components\Dd;
 
+
 class AuthController extends Controller
 {
     // function redirect google
@@ -39,9 +40,8 @@ class AuthController extends Controller
         } else {
             // create a new user
             $page   = 'register';
-           
             // return view
-            return view('register', compact('page', 'email'));
+            return view('auth.register', compact('page', 'email'));
         }
     }
 
@@ -51,7 +51,7 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'kode' => $request->kode, 
+            'kode' => $request->kode,
             'jurusan' => $request->jurusan,
             'role_id' => 3,
         ]);
@@ -61,7 +61,7 @@ class AuthController extends Controller
         auth()->login($existingUser, true);
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
-        return view('dashboard', compact('email'));
+        return view('main.index', compact('email'));
 
         // return redirect()->route('login')->with('success', 'Register success');
     }
