@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth', 'dosen']], function () {
     Route::post('/tugas', [TugasController::class, 'store'])->name('tugas.store');
 });
 
-Route::group(['middleware' => ['auth', 'mahasiswa', 'dosen']], function () {
+Route::group(['middleware' => ['auth', 'dosen']], function () {
    // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
