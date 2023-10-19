@@ -62,6 +62,11 @@ class KelasController extends Controller
     {
         $tugas = Tugas::where('id_kelas', $id)->get();
         $kelas = Kelas::find($id);
+
+        // change format date of $tugas->deadline_date to d-m-Y
+        foreach ($tugas as $t) {
+            $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
+        }
         return view('kelas.detail', compact('kelas', 'tugas'));
     }
 
