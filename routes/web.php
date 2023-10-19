@@ -40,9 +40,9 @@ Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback
 // logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
-// Route::middleware(['guest'])->group(function () {
+Route::get('/download-tugas/{file}', [DashboardController::class, 'downloadTugas'])->name('download.tugas');
+Route::get('/download-pengumpulan/{file}', [DashboardController::class, 'downloadPengumpulan'])->name('download.pengumpulan');
 
-// });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // route kelas

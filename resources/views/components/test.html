@@ -8,113 +8,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        .cover-class {
-            background-image: url("./../../../public/image/cover-1.jpg");
-            background-size: cover;
-            background-clip: border-box;
-            /* background-repeat: no-repeat; */
-            width: 100%;
-            height: 400px;
-            padding: 30px 30px 30px 50px;
-            border-radius: 10px;
-        }
 
-        .cover-nama-kelas {
-            color: white;
-            font-size: 60px;
-
-        }
-
-        /* 2 */
-        .card-tugas {
-            margin-top: 100px;
-            padding-left: 30px;
-            padding-right: 30px;
-
-
-        }
-
-        .kelas-item-tugas {
-
-            width: 100%;
-            height: 100px;
-
-
-
-
-        }
-
-        .item-tugas-logo-group {
-            width: fit-content;
-            padding: 10px;
-            border-radius: 100%;
-            background-color: blueviolet;
-        }
-
-        .item-tugas-logo {
-            width: 30px;
-        }
-
-        .item-tugas-info {
-
-
-            margin-left: 20px;
-
-        }
-
-        .card-anchor {
-            text-decoration: none;
-        }
-
-        .card-tugas:hover {
-            background-color: rgba(0, 26, 255, 0.5);
-
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="cover-class d-flex justify-content-start align-items-end">
-                    <h3 class="cover-nama-kelas">Kelas Data Science</h3>
-                </div>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                    type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                    type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="" class="card-anchor">
-                    <div class="card card-tugas">
-                        <div class="card-body kelas-item-tugas d-flex align-items-center">
-                            <div class="item-tugas-logo-group ">
-                                <img class="item-tugas-logo" src="../../../public/image/task.svg" alt="">
-                            </div>
-
-                            <div class=" item-tugas-info d-flex justify-content-between w-100 align-items-start gap-2"
-                                style="position: relative;">
-
-                                <div>
-                                    <h6 class="mb-0">Tugas Menerjemahkan Bahasa Jepang ke Arab</h6>
-                                    <small class="text-muted">Deadline : 4 November, 22.00 WIB</small>
-                                </div>
-                                <div class="">
-                                    <span class="badge rounded-pill text-bg-warning">Belum Dikerjakan</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Halaman
+                1
             </div>
-
-        </div>
-        <div class="row">
-            <div class="col-12">
-
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">HAlaman 2
             </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
         </div>
     </div>
 

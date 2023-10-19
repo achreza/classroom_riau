@@ -2,34 +2,94 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-            <div class="header-tugas">
-                <div class="judul-tugas-group d-flex justify-content-between">
-                    <div>
-                        <h4 class="mb-0">{{ $tugas->nama_tugas }}</h4>
-                        <small class="text-muted">Deadline : {{ $tugas->deadline_date }},
-                            {{ $tugas->deadline_time }}</small>
-                    </div>
+        <div class="col-lg-12">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-tugas-tab" data-bs-toggle="pill" data-bs-target="#pills-tugas"
+                        type="button" role="tab" aria-controls="pills-tugas" aria-selected="true">Tugas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-pengumpulan-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-pengumpulan" type="button" role="tab" aria-controls="pills-pengumpulan"
+                        aria-selected="false">Pengumpulan</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                {{-- Tugas --}}
+                <div class="tab-pane fade show active" id="pills-tugas" role="tabpanel" aria-labelledby="pills-tugas-tab">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="header-tugas">
+                                <div class="judul-tugas-group d-flex justify-content-between">
+                                    <div>
+                                        <h4 class="mb-0">{{ $tugas->nama_tugas }}</h4>
+                                        <small class="text-muted">Deadline : {{ $dateFormatted }},
+                                            {{ $tugas->deadline_time }}</small>
+                                    </div>
 
-                    <div class="dropdown">
-                        <div class="tugas-setting-wrap rounded-circle btn btn-primary " id="dropdownMenuLink"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="tugas-setting-logo" src="{{ asset('image/setting.svg') }}" alt="">
+                                    <div class="dropdown">
+                                        <div class="tugas-setting-wrap rounded-circle btn btn-primary "
+                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="tugas-setting-logo" src="{{ asset('image/setting.svg') }}"
+                                                alt="">
+                                        </div>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#modalTugas">
+                                                    Edit tugas</a></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Hapus tugas</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-tugas">
+                                {!! $tugas->deskripsi !!}
+
+                                <a class="btn btn-primary mt-2 "
+                                    href="{{ route('download.tugas', ['file' => $tugas->file]) }}">
+                                    <img class="tugas-setting-logo me-2" src="{{ asset('image/tugas.svg') }}"
+                                        alt="">
+                                    Download Tugas
+                                </a>
+                            </div>
                         </div>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalTugas">
-                                    Edit tugas</a></li>
-                            <li><a class="dropdown-item text-danger" href="#">Hapus tugas</a></li>
-                        </ul>
                     </div>
                 </div>
-            </div>
-            <div class="body-tugas">
-                {!! $tugas->deskripsi !!}
+
+                {{-- Pengumpulan --}}
+                <div class="tab-pane fade" id="pills-pengumpulan" role="tabpanel" aria-labelledby="pills-pengumpulan-tab">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <h4>List pengumpulan</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+
+
 
     {{-- Modal Edit --}}
     <div class="modal fade" id="modalTugas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

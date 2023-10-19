@@ -67,9 +67,9 @@ class TugasController extends Controller
     {
         $tugas = Tugas::find($id);
 
-        $tugas->deadline_date = date('d-m-Y', strtotime($tugas->deadline_date));
+        $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
 
-        return view('tugas.detail', compact('tugas'));
+        return view('tugas.detail', compact('tugas', 'dateFormatted'));
     }
 
     /**
