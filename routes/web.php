@@ -70,6 +70,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Mahasiswa
     Route::group(['middleware' => ['mahasiswa']], function () {
+        Route::post(
+            '/joinkelas',
+            [KelasController::class, 'joinkelas']
+        )->name('joinkelas.store');
     });
 });
 
