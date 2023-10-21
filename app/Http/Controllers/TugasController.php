@@ -67,13 +67,19 @@ class TugasController extends Controller
      */
     public function show($id)
     {
-        $tugas = Tugas::find($id);
-        $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
-        $id_pengumpulan = $pengumpulan->pluck('id');
-        $nilai = Nilai::whereIn('id_pengumpulan', $id_pengumpulan)->get();
-        $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
-
-        return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
+        if (Auth::user()->role_id == 3) {
+            $tugas = Tugas::find($id);
+            $pengumpulan = Pengumpulan::where('id_tugas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
+            $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
+            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan'));
+        } elseif (Auth::user()->role_id == 2) {
+            $tugas = Tugas::find($id);
+            $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
+            $id_pengumpulan = $pengumpulan->pluck('id');
+            $nilai = Nilai::whereIn('id_pengumpulan', $id_pengumpulan)->get();
+            $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
+            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Mm_kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
@@ -60,6 +61,7 @@ class KelasController extends Controller
      */
     public function show($id)
     {
+        $list_mahasiswa = Mm_kelas::where('id_kelas', $id)->get();
         $tugas = Tugas::where('id_kelas', $id)->get();
         $kelas = Kelas::find($id);
 
@@ -67,7 +69,8 @@ class KelasController extends Controller
         foreach ($tugas as $t) {
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
         }
-        return view('kelas.detail', compact('kelas', 'tugas'));
+
+        return view('kelas.detail', compact('kelas', 'tugas', 'list_mahasiswa'));
     }
 
     /**
