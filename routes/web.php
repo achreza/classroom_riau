@@ -74,6 +74,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['mahasiswa']], function () {
         Route::post('/pengumpulan/{id}', [PengumpulanController::class, 'store'])->name('pengumpulan.store');
         Route::get('/pengumpulan/{id}', [PengumpulanController::class, 'destroy'])->name('pengumpulan.destroy');
+        Route::post(
+            '/joinkelas',
+            [KelasController::class, 'joinkelas']
+        )->name('joinkelas.store');
     });
 });
 
