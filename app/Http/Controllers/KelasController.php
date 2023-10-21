@@ -45,7 +45,7 @@ class KelasController extends Controller
 
         //create ranndom 6 digit string
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-        $kode_kelas = substr(str_shuffle($permitted_chars), 0, 6);
+        $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
 
 
 
