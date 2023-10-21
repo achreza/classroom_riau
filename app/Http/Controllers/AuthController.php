@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Termwind\Components\Dd;
 
+
 class AuthController extends Controller
 {
     // function redirect google
@@ -28,20 +29,16 @@ class AuthController extends Controller
         if ($existingUser) {
             // log them in
             auth()->login($existingUser, true);
-            $request->session()->put('id', $existingUser->id);
+            $request->session()->put('role', $existingUser->role_id);
             $request->session()->put('user', $existingUser);
             //    check role
-            if ($existingUser->role == 1) {
-                return redirect()->route('dashboard.index');
-            } else {
-                return redirect()->route('dashboard.index');
-            }
+            return redirect('/dashboard');
         } else {
             // create a new user
             $page   = 'register';
 
             // return view
-            return view('register', compact('page', 'email'));
+            return view('auth.register', compact('page', 'email'));
         }
     }
 
@@ -61,15 +58,14 @@ class AuthController extends Controller
         auth()->login($existingUser, true);
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
-        return view('dashboard', compact('email'));
-
-        // return redirect()->route('login')->with('success', 'Register success');
+        return redirect('/dashboard');
+        //return redirect()->route('login')->with('success', 'Register success');
     }
 
     // function logout
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return view('login');
+        return view('auth.login');
     }
 }

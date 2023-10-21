@@ -1,0 +1,117 @@
+/* a {
+    text-decoration: none;
+}
+
+.container {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrap {
+    display: flex;
+
+    border: 1px solid rgb(194, 194, 194);
+    height: fit-content;
+    width: fit-content;
+
+    position: relative;
+}
+
+.image-wrap {
+    width: 30vw;
+    height: 95vh;
+    background-image: url("../image/login-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.overlay {
+    background-color: black;
+    height: 95vh;
+    opacity: 0.4;
+}
+
+.text-on-image {
+    padding: 70px 20px 0 30px;
+    width: 200px;
+    top: 0;
+    position: absolute;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    z-index: 10;
+}
+
+.text-on-image h1 {
+    font-family: "Carter One", cursive;
+    line-height: 50px;
+}
+
+.text-on-image p {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.login-img {
+    height: 50vh;
+}
+
+.form-wrap {
+    padding: 20px 30px 20px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.username-field,
+.pass-field {
+    width: 300px;
+    height: 20px;
+    border-left: 20px;
+    border-right: 20px;
+    border-top: 300px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.submit-btn {
+    width: 100px;
+    height: 40px;
+    border-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    background-color: rgb(107, 107, 107);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.login-text {
+    margin-bottom: 30px;
+} */
+
+.btn-google {
+    display: inline-block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: 0.5px solid gray;
+}
+
+.btn-google img {
+    width: 24px;
+    margin-right: 10px;
+}
+
+.btn-google:hover {
+    background-color: #357ae8;
+}

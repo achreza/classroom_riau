@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
+use App\Models\Pengumpulan;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Termwind\Components\Dd;
 
 class TugasController extends Controller
 {
@@ -31,30 +35,45 @@ class TugasController extends Controller
     public function store(Request $request)
     {
         //
-        $validated = $request->validate([
-            'nama_tugas' => 'required',
-            'deskripsi' => 'required',
-            'file' => 'required',
-            'tgl_mulai' => 'required',
-            'tgl_akhir' => 'required',
-        ]);
+
+
+
+        // check input file
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('tugas', $filename, 'public');
+        }
 
         $tugas = Tugas::create([
             'id_kelas' => $request->id_kelas,
+            'id_dosen' => Auth::user()->id,
             'nama_tugas' => $request->nama_tugas,
             'deskripsi' => $request->deskripsi,
-            'file' => $request->file,
-            'tgl_mulai' => $request->tgl_mulai,
-            'tgl_akhir' => $request->tgl_akhir,
+            'file' => $filename,
+            'tgl_mulai' => $request->deadline_date,
+            'tgl_akhir' => $request->deadline_time,
         ]);
+        $tugas->save();
+        if ($tugas) {
+            return redirect()->route('dashboard.index');
+        } else {
+            return redirect()->route('tugas');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tugas $tugas)
+    public function show($id)
     {
-        //
+        $tugas = Tugas::find($id);
+        $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
+        $id_pengumpulan = $pengumpulan->pluck('id');
+        $nilai = Nilai::whereIn('id_pengumpulan', $id_pengumpulan)->get();
+        $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
+
+        return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
     }
 
     /**
@@ -68,9 +87,11 @@ class TugasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tugas $tugas)
+    public function update(Request $request, $id)
     {
-        //
+        $tugas = Tugas::find($id);
+        $tugas->update($request->all());
+        return redirect()->route('tugas.index');
     }
 
     /**
@@ -79,5 +100,14 @@ class TugasController extends Controller
     public function destroy(Tugas $tugas)
     {
         //
+    }
+
+    public function penilaian(Request $request, $id)
+    {
+        $nilai = Nilai::find($id);
+        $nilai->update([
+            'nilai' => $request->nilai,
+        ]);
+        return redirect()->back();
     }
 }

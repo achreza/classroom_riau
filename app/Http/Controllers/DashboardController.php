@@ -16,16 +16,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //list kelas where mm_kelas.id_mahasiswa = auth()->user()->id
-        $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
-        $kelas = [];
-        foreach ($mm_kelas as $key => $value) {
-            $kelas[] = Kelas::where('id', $value->id_kelas)->first();
+        if (Auth::user()->role_id == '2') {
+            $role = 'dosen';
+            $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
+
+            return view('main.index', compact('kelas', 'role'));
+        } else if (Auth::user()->role_id == '3') {
+            $role = 'mahasiswa';
+            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
+            $kelas = [];
+            foreach ($mm_kelas as $key => $value) {
+                $kelas[] = Kelas::where('id', $value->id_kelas)->first();
+            }
+
+            return view('main.index', compact('kelas', 'role'));
+        } else {
+            return redirect()->route('auth.login');
         }
-
-
-        $name = Auth::user()->name;
-        return view('dashboard', compact('kelas', 'name'));
     }
 
     public function detailKelas($id_kelas)
@@ -81,5 +88,55 @@ class DashboardController extends Controller
     public function destroy(Dashboard $dashboard)
     {
         //
+    }
+    public function downloadTugas($nama_file)
+    {
+        // Dapatkan path lengkap dari file yang akan didownload di dalam direktori storage
+        $filePath = storage_path("app/public/tugas/{$nama_file}");
+
+        // Cek apakah file ada di direktori storage
+        if (!file_exists($filePath)) {
+            return redirect('/dashboard')->with('error', 'File not found.');
+        }
+
+        // Ambil nama file tanpa path
+        $originalName = pathinfo($filePath, PATHINFO_FILENAME);
+
+        // Dapatkan ekstensi file
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        // Mendefinisikan headers untuk response
+        $headers = [
+            'Content-Type' => mime_content_type($filePath),
+            'Content-Disposition' => "attachment; filename=\"{$originalName}.{$extension}\"",
+        ];
+
+        // Return response dengan file untuk di-download
+        return response()->file($filePath, $headers);
+    }
+    public function downloadPengumpulan($nama_file)
+    {
+        // Dapatkan path lengkap dari file yang akan didownload di dalam direktori storage
+        $filePath = storage_path("app/public/pengumpulan/{$nama_file}");
+
+        // Cek apakah file ada di direktori storage
+        if (!file_exists($filePath)) {
+            return redirect('/dashboard')->with('error', 'File not found.');
+        }
+
+        // Ambil nama file tanpa path
+        $originalName = pathinfo($filePath, PATHINFO_FILENAME);
+
+        // Dapatkan ekstensi file
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        // Mendefinisikan headers untuk response
+        $headers = [
+            'Content-Type' => mime_content_type($filePath),
+            'Content-Disposition' => "attachment; filename=\"{$originalName}.{$extension}\"",
+        ];
+
+        // Return response dengan file untuk di-download
+        return response()->file($filePath, $headers);
     }
 }
