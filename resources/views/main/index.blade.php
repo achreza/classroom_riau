@@ -2,6 +2,8 @@
 
 
 @section('content')
+
+
     <!-- Button trigger modal -->
     @if ($role == 'dosen')
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -37,6 +39,14 @@
                                 </div>
                             </div>
 
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+
                         </form>
 
                     </div>
@@ -66,32 +76,38 @@
 
                                 </div>
                             </div>
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
                         </form>
 
                     </div>
                 @endif
 
 
-
-
-
-
-
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
+
+    {{-- print error --}}
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $item)
+            <li>{{ $item }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
     <div class="row mt-3">
         @foreach ($kelas as $item)
