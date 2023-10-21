@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'dosen']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // route kelas
     Route::resource('kelas', KelasController::class);
     // route tugas
@@ -57,12 +58,13 @@ Route::group(['middleware' => ['auth', 'dosen']], function () {
     Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
     Route::post('/tugas', [TugasController::class, 'store'])->name('tugas.store');
     Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
+    Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
 });
 
-Route::group(['middleware' => ['auth', 'dosen']], function () {
-    // dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-});
+// Route::group(['middleware' => ['auth', 'dosen']], function () {
+//     // dashboard
+
+// });
 
 
 

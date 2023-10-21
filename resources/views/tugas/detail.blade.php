@@ -60,24 +60,41 @@
                 {{-- Pengumpulan --}}
                 <div class="tab-pane fade" id="pills-pengumpulan" role="tabpanel" aria-labelledby="pills-pengumpulan-tab">
                     <div class="row">
-                        <div class="col-lg-8 offset-lg-2">
+                        <div class="col-lg-10 offset-lg-1">
                             <h4>List pengumpulan</h4>
-                            <table class="table">
+                            <table class="table" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Nomor</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Tanggal Pengumpulan</th>
+                                        <th scope="col">Nilai</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
+                                    @foreach ($nilai as $item)
+                                        <tr>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $item->pengumpulan->mahasiswa->name }}</td>
+                                            <td>{{ $item->pengumpulan->pengumpulan }}</td>
+                                            <td>{{ $item->nilai }} / 100</td>
+                                            <td>{{ $item->pengumpulan->status }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modalPenilaian"
+                                                    onclick="
+                                                    passingDataToModal('{{ $item->id }}','{{ $item->pengumpulan->file }}')
+                                                    ">
+                                                    Beri Nilai
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+
 
                                 </tbody>
                             </table>
@@ -144,16 +161,54 @@
         </div>
     </div>
 
-    <script>
-        // function prefillUpdateForm(id, namaTugas, deskripsi, ddate, dtime, file) {
-        //     console.log(deskripsi);
-        //     document.getElementById("namaTugas").value = namaTugas;
+    <!-- Modal Penilaian -->
+    <div class="modal fade" id="modalPenilaian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <form method="post" id="formPenilaian">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Lembar Penilaian</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <iframe id="pdf-preview" frameborder="0" style="width: 100%;height:100vh;"></iframe>
+                            </div>
+                            <div class="col-lg-4">
 
-        //     document.getElementById("ddate").value = ddate;
-        //     document.getElementById("dtime").value = dtime;
-        //     document.getElementById("file").value = file;
-        //     const form = document.getElementById("formUpdateTugas");
-        //     form.action = `/tugas/update/${id}`;
-        // }
+                                <div class="mb-3">
+                                    <label for="">Nilai</label>
+                                    <input type="number" class="form-control" placeholder="Masukkan nilai"
+                                        name="nilai">
+                                    <div class="form-text">Berikan nilai antara 0-100 </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let table = new DataTable('#dataTable');
+    </script>
+    <script>
+        function passingDataToModal(id, filename) {
+
+            $("#pdf-preview").attr("src", `/storage/tugas/${filename}`);
+
+            const form = $("#formPenilaian");
+            form.attr("action", `/tugas/penilaian/${id}`);
+        }
     </script>
 @endsection

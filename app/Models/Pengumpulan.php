@@ -15,4 +15,9 @@ class Pengumpulan extends Model
     {
         return $this->hasOne(User::class, 'id');
     }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
 }

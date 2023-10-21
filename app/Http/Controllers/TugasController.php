@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
+use App\Models\Pengumpulan;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,10 +68,12 @@ class TugasController extends Controller
     public function show($id)
     {
         $tugas = Tugas::find($id);
-
+        $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
+        $id_pengumpulan = $pengumpulan->pluck('id');
+        $nilai = Nilai::whereIn('id_pengumpulan', $id_pengumpulan)->get();
         $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
 
-        return view('tugas.detail', compact('tugas', 'dateFormatted'));
+        return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
     }
 
     /**
@@ -96,5 +100,14 @@ class TugasController extends Controller
     public function destroy(Tugas $tugas)
     {
         //
+    }
+
+    public function penilaian(Request $request, $id)
+    {
+        $nilai = Nilai::find($id);
+        $nilai->update([
+            'nilai' => $request->nilai,
+        ]);
+        return redirect()->back();
     }
 }
