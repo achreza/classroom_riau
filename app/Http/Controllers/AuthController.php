@@ -40,6 +40,7 @@ class AuthController extends Controller
         } else {
             // create a new user
             $page   = 'register';
+
             // return view
             return view('auth.register', compact('page', 'email'));
         }
@@ -62,7 +63,6 @@ class AuthController extends Controller
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
         return redirect('/dashboard');
-
         // return redirect()->route('login')->with('success', 'Register success');
     }
 

@@ -68,4 +68,10 @@ Route::group(['middleware' => ['auth', 'dosen']], function () {
 
 
 
-// register
+// dashboard
+
+//rute tugas by id_kelas
+Route::get('/dashboard/{id_kelas}', [DashboardController::class, 'detailKelas'])->name('dashboard.tugas');
+
+//rute joinkelas
+Route::post('/joinkelas', [DashboardController::class, 'joinKelas'])->name('dashboard.joinKelas');

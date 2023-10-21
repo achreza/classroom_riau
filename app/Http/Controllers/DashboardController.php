@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
 use App\Models\Kelas;
+use App\Models\Mm_kelas;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +16,26 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+
         $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
         return view('main.index', compact('kelas'));
+        //list kelas where mm_kelas.id_mahasiswa = auth()->user()->id
+        // $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
+        // $kelas = [];
+        // foreach ($mm_kelas as $key => $value) {
+        //     $kelas[] = Kelas::where('id', $value->id_kelas)->first();
+        // }
+
+
+        // $name = Auth::user()->name;
+        // return view('dashboard', compact('kelas', 'name'));
+    }
+
+    public function detailKelas($id_kelas)
+    {
+        $kelas = Kelas::where('id', $id_kelas)->first();
+        $tugas = Tugas::where('id_kelas', $id_kelas)->get();
+        return view('detail_kelas', compact('kelas', 'tugas'));
     }
 
     /**
