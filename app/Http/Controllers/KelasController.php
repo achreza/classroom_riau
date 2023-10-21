@@ -43,9 +43,25 @@ class KelasController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        //create ranndom 6 digit string
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-        $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
+        //create ranndom 5 digit string and check if kode kelas already exist in kelas, if exist random again
+        $kode_kelas = '';
+        do {
+            //generate a random string usually 5 digits
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
+        } while (Kelas::where('kode_kelas', $kode_kelas)->first());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
