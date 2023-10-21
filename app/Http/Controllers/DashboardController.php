@@ -16,19 +16,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id == '2') {
+            $role = 'dosen';
+            $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
 
-        $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
-        return view('main.index', compact('kelas'));
-        //list kelas where mm_kelas.id_mahasiswa = auth()->user()->id
-        // $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
-        // $kelas = [];
-        // foreach ($mm_kelas as $key => $value) {
-        //     $kelas[] = Kelas::where('id', $value->id_kelas)->first();
-        // }
+            return view('main.index', compact('kelas', 'role'));
+        } else if (Auth::user()->role_id == '3') {
+            $role = 'mahasiswa';
+            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
+            $kelas = [];
+            foreach ($mm_kelas as $key => $value) {
+                $kelas[] = Kelas::where('id', $value->id_kelas)->first();
+            }
 
-
-        // $name = Auth::user()->name;
-        // return view('dashboard', compact('kelas', 'name'));
+            return view('main.index', compact('kelas', 'role'));
+        } else {
+            return redirect()->route('auth.login');
+        }
     }
 
     public function detailKelas($id_kelas)
