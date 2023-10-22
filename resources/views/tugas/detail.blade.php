@@ -86,7 +86,16 @@
                                                 <td>{{ $item->pengumpulan->mahasiswa->name }}</td>
                                                 <td>{{ $item->pengumpulan->pengumpulan }}</td>
                                                 <td>{{ $item->nilai }} / 100</td>
-                                                <td>{{ $item->pengumpulan->status }}</td>
+                                                <td>
+                                                    @if ($item->pengumpulan->status == "Done")
+                                                        <span class="badge bg-success">Done</span>
+                                                    @elseif($item->pengumpulan->status == "Done Late")
+                                                        <span class="badge bg-warning text-dark">Done Late</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Not Done</span>
+                                                    @endif
+
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                         data-bs-target="#modalPenilaian"

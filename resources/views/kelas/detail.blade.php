@@ -33,7 +33,14 @@
                                         {{ $item->deadline_time }}</small>
                                 </div>
                                 <div class="">
-                                    <span class="badge bg-warning text-dark">Belum Dikerjakan</span>
+                                    @if (Auth::user()->role_id == 3 && $status == "Sudah Mengumpulkan")
+                                        <span class="badge bg-success">{{ $status }}</span>
+                                    @elseif(Auth::user()->role_id == 3 && $status == "Belum Mengumpulkan")
+                                        <span class="badge bg-danger">{{ $status }}</span>
+                                    @else 
+                                        
+
+                                    @endif
                                 </div>
 
                             </div>
