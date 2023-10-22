@@ -20,7 +20,21 @@ class DashboardController extends Controller
             $role = 'dosen';
             $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
 
-            return view('main.index', compact('kelas', 'role'));
+            $background = array(
+                'image/bg1.jpg',
+                'image/bg2.jpg',
+                'image/bg3.png',
+                'image/bg4.jpeg',
+                'image/bg5.jpeg',
+            );
+            //get random background name size kelas.length
+            //for example: $kelas->count() = 3, then get 3 random background name
+            $rand = [];
+            foreach ($kelas as $key => $value) {
+                $rand[] = $background[array_rand($background)];
+            }
+
+            return view('main.index', compact('kelas', 'role', 'rand'));
         } else if (Auth::user()->role_id == '3') {
             $role = 'mahasiswa';
             $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
@@ -28,8 +42,19 @@ class DashboardController extends Controller
             foreach ($mm_kelas as $key => $value) {
                 $kelas[] = Kelas::where('id', $value->id_kelas)->first();
             }
-
-            return view('main.index', compact('kelas', 'role'));
+            $background = array(
+                'image/bg1.jpg',
+                'image/bg2.jpg',
+                'image/bg3.png',
+                'image/bg4.jpeg',
+                'image/bg5.jpeg',
+            );
+            //get random background name size kelas.length
+            $rand = [];
+            foreach ($kelas as $key => $value) {
+                $rand[] = $background[array_rand($background)];
+            }
+            return view('main.index', compact('kelas', 'role', 'rand'));
         } else {
             return redirect()->route('auth.login');
         }

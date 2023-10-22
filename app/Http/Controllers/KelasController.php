@@ -94,8 +94,19 @@ class KelasController extends Controller
         }else{
             $status = "Sudah Mengumpulkan";
         }
-        return view('kelas.detail', compact('kelas', 'tugas', 'list_mahasiswa', 'status'));
+        
 
+        $background = array(
+            'image/bg1.jpg',
+            'image/bg2.jpg',
+            'image/bg3.png',
+            'image/bg4.jpeg',
+            'image/bg5.jpeg',
+        );
+        //get 1 random background name
+        $rand = $background[array_rand($background)];
+
+        return view('kelas.detail', compact('kelas', 'tugas', 'list_mahasiswa', 'rand', 'status'));
     }
 
     /**
