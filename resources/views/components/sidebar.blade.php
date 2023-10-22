@@ -4,7 +4,7 @@
      <div class="app-brand demo">
          <a href="index.html" class="app-brand-link">
              <span class="app-brand-logo demo">
-                 <img style="width: 50px" src="{{ asset('image/logo.svg') }}" alt="">
+                 <img style="width: 50px; fill:red;" src="{{ asset('image/logo.svg') }}" alt="">
              </span>
              <span class="app-brand-text demo menu-text fw-bolder ms-2">E-Learning</span>
          </a>
@@ -19,7 +19,7 @@
      <ul class="menu-inner py-1">
          <!-- Dashboard -->
          <li class="menu-item active">
-             <a href="index.html" class="menu-link">
+             <a href="{{ route('dashboard.index') }}" class="menu-link">
                  <i class="menu-icon tf-icons bx bx-home-circle"></i>
                  <div data-i18n="Analytics">Dashboard</div>
              </a>
@@ -38,21 +38,15 @@
                  <div data-i18n="Account Settings">Daftar Kelas</div>
              </a>
              <ul class="menu-sub">
-                 <li class="menu-item">
-                     <a href="pages-account-settings-account.html" class="menu-link">
-                         <div data-i18n="Account">Kelas 1</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="pages-account-settings-notifications.html" class="menu-link">
-                         <div data-i18n="Notifications">Kelas 2</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="pages-account-settings-connections.html" class="menu-link">
-                         <div data-i18n="Connections">Kelas 3</div>
-                     </a>
-                 </li>
+                 @foreach (request()->session()->get('kelas') as $item)
+                     <li class="menu-item">
+                         <a href="pages-account-settings-account.html" class="menu-link">
+                             <div data-i18n="Account">{{ $item->nama_kelas }}</div>
+                         </a>
+                     </li>
+                 @endforeach
+
+
              </ul>
          </li>
          <li class="menu-item">

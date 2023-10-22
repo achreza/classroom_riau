@@ -57,11 +57,8 @@ Route::middleware(['auth'])->group(function () {
     //     // route kelas
     //     Route::resource('kelas', KelasController::class);
     // });
-    // route kelas
-    Route::resource('kelas', KelasController::class);
-    // route tugas
-    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-    Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::post('/profile/{id}', [AuthController::class, 'userUpdate'])->name('profile.update');
 
     // Dosen
     Route::group(['middleware' => ['dosen']], function () {

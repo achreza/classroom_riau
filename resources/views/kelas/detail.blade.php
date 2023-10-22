@@ -49,7 +49,7 @@
                     <div class="card mt-3 p-3">
                         <div class="">
                             <p>Kode Kelas</p>
-                            <h3>KJ87UV</h3>
+                            <h3>{{ $kelas->kode_kelas }}</h3>
                         </div>
                     </div>
                 </div>

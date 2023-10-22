@@ -19,7 +19,7 @@ class DashboardController extends Controller
         if (Auth::user()->role_id == '2') {
             $role = 'dosen';
             $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
-
+            session()->put('kelas', $kelas);
             return view('main.index', compact('kelas', 'role'));
         } else if (Auth::user()->role_id == '3') {
             $role = 'mahasiswa';
@@ -28,6 +28,8 @@ class DashboardController extends Controller
             foreach ($mm_kelas as $key => $value) {
                 $kelas[] = Kelas::where('id', $value->id_kelas)->first();
             }
+
+            session()->put('kelas', $kelas);
 
             return view('main.index', compact('kelas', 'role'));
         } else {

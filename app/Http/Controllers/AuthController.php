@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         $user = Socialite::driver('google')->stateless()->user();
-
+        $request->session()->put('avatar', $user->avatar);
         // check if user already exists
         $existingUser = Auth::where('email', $user->email)->first();
         $email = $user->email;
@@ -31,7 +31,16 @@ class AuthController extends Controller
             auth()->login($existingUser, true);
             $request->session()->put('role', $existingUser->role_id);
             $request->session()->put('user', $existingUser);
+
+            if ($existingUser->role_id == 1) {
+                $request->session()->put('posisi', 'Admin');
+            } else if ($existingUser->role_id == 2) {
+                $request->session()->put('posisi', 'Dosen');
+            } else if ($existingUser->role_id == 3) {
+                $request->session()->put('posisi', 'Mahasiswa');
+            }
             //    check role
+
             return redirect('/dashboard');
         } else {
             // create a new user
@@ -67,5 +76,21 @@ class AuthController extends Controller
     {
         $request->session()->flush();
         return view('auth.login');
+    }
+    public function profile(Request $request)
+    {
+        $user = User::find($request->session()->get('user')->id);
+        return view('profile.index', compact('user'));
+    }
+    public function userUpdate(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->kode = $request->kode;
+        $user->jurusan = $request->jurusan;
+        $user->update();
+
+        return redirect('/profile');
     }
 }
