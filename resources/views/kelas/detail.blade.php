@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="row">
+
         <div class="col-lg-12">
-            <div class="cover-class d-flex justify-content-start align-items-end">
+            <div class="cover-class d-flex justify-content-start align-items-end" style="background-image: url('../{{ $rand }}');">
                 <h3 class="cover-nama-kelas">{{ $kelas->nama_kelas }}</h3>
             </div>
         </div>

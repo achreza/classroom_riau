@@ -1,74 +1,64 @@
- /* Detail Kelas */
- .cover-class {
-     background-image: url("../image/cover-1.jpg");
-     background-size: cover;
-     background-clip: border-box;
-     /* background-repeat: no-repeat; */
-     width: 100%;
-     height: 400px;
-     padding: 30px 30px 30px 50px;
-     border-radius: 10px;
- }
+/* Detail Kelas */
+.cover-class {
+    background-size: cover;
+    background-clip: border-box;
+    /* background-repeat: no-repeat; */
+    width: 100%;
+    height: 400px;
+    padding: 30px 30px 30px 50px;
+    border-radius: 10px;
+}
 
- .cover-nama-kelas {
-     color: white;
-     font-size: 60px;
+.cover-nama-kelas {
+    color: white;
+    font-size: 60px;
+}
 
- }
+/* 2 */
+.card-tugas {
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
 
- /* 2 */
- .card-tugas {
-     margin-top: 10px;
-     padding-left: 30px;
-     padding-right: 30px;
- }
+.kelas-item-tugas {
+    width: 100%;
+    height: 100px;
+}
 
- .kelas-item-tugas {
+.item-tugas-logo-group {
+    width: fit-content;
+    padding: 10px;
+    border-radius: 100%;
+    background-color: blueviolet;
+}
 
-     width: 100%;
-     height: 100px;
- }
+.item-tugas-logo {
+    width: 30px;
+}
 
- .item-tugas-logo-group {
-     width: fit-content;
-     padding: 10px;
-     border-radius: 100%;
-     background-color: blueviolet;
- }
+.item-tugas-info {
+    margin-left: 20px;
+}
 
+.card-anchor {
+    text-decoration: none;
+}
 
+.card-tugas:hover {
+    background-color: rgba(0, 26, 255, 0.3);
+}
 
- .item-tugas-logo {
-     width: 30px;
- }
+.header-tugas {
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid black;
+    margin-bottom: 30px;
+}
 
- .item-tugas-info {
-     margin-left: 20px;
+.tugas-setting-wrap {
+    padding: 5px;
+}
 
- }
-
- .card-anchor {
-     text-decoration: none;
- }
-
- .card-tugas:hover {
-     background-color: rgba(0, 26, 255, 0.3);
-
- }
-
- .header-tugas {
-     padding-bottom: 20px;
-     border-bottom: 0.5px solid black;
-     margin-bottom: 30px;
- }
-
- .tugas-setting-wrap {
-
-
-     padding: 5px;
- }
-
- .tugas-setting-logo {
-     width: 30px;
-
- }
+.tugas-setting-logo {
+    width: 30px;
+}

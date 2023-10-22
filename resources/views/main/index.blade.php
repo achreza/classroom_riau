@@ -15,11 +15,12 @@
     @endif
 
     <div class="row mt-3">
-        @foreach ($kelas as $item)
+        @foreach ($kelas as $index => $item)
             <div class="col-md-4">
                 <div class="card h-100">
                     <img class="card-img-top"
-                        src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/elements/2.jpg"
+
+                        src="{{ asset($rand[$index]) }}"
                         alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->nama_kelas }}</h5>
