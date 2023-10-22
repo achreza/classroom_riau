@@ -15,9 +15,8 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $kelas = Kelas::all();
-        $name = Auth::user()->name;
-        return view('dashboard', compact('kelas', 'name'));
+        $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get();
+        return view('main.index', compact('kelas'));
     }
 
     /**

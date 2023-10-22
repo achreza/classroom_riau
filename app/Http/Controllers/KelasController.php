@@ -6,6 +6,8 @@ use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
+use App\Models\Tugas;
+
 
 class KelasController extends Controller
 {
@@ -25,7 +27,7 @@ class KelasController extends Controller
     public function create()
     {
         //
-        
+
     }
 
     /**
@@ -38,7 +40,7 @@ class KelasController extends Controller
             'nama_kelas' => 'required',
             'deskripsi' => 'required',
         ]);
-        
+
         $kelas = Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'deskripsi' => $request->deskripsi,
@@ -51,25 +53,23 @@ class KelasController extends Controller
         } else {
             return redirect()->route('kelas');
         }
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Kelas $kelas)
+    public function show($id)
     {
-        //
+        $tugas = Tugas::where('id_kelas', $id)->get();
+        $kelas = Kelas::find($id);
+        return view('kelas.detail', compact('kelas', 'tugas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($kelas)
+    public function edit($id)
     {
-        //
-        $class = Kelas::find($kelas);
-        return view('kelas', compact('class'));
     }
 
     /**
@@ -100,7 +100,7 @@ class KelasController extends Controller
     public function destroy($kelas)
     {
         //
-        $kelas= Kelas::find($kelas);
+        $kelas = Kelas::find($kelas);
         $kelas->delete();
         if ($kelas) {
             return redirect()->route('dashboard.index');

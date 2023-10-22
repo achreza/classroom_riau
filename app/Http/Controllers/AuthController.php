@@ -32,7 +32,7 @@ class AuthController extends Controller
             $request->session()->put('id', $existingUser->id);
             $request->session()->put('user', $existingUser);
             //    check role
-            if ($existingUser->role == 1) {
+            if ($existingUser->role_id == 1) {
                 return redirect()->route('dashboard.index');
             } else {
                 return redirect()->route('dashboard.index');
@@ -61,7 +61,7 @@ class AuthController extends Controller
         auth()->login($existingUser, true);
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
-        return view('main.index', compact('email'));
+        return redirect('/dashboard');
 
         // return redirect()->route('login')->with('success', 'Register success');
     }

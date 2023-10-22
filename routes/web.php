@@ -18,16 +18,31 @@ use Illuminate\Routing\RouteGroup;
 |
 */
 
-Route::middleware(['guest'])->group(function () {
-    Route::get('/', function () {
-        return view('auth.login');
-    });
-    Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
-    Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-    // logout
-    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-    Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+// Route::get('/', function () {
+//     return view('main.index');
+// });
+
+// // login
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
+
+// Route::get('auth/google', [AuthController::class, 'redirectToGoogle']);
+// Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
+// register
+
+Route::get('/', function () {
+    return view('auth.login');
 });
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+// logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+// Route::middleware(['guest'])->group(function () {
+
+// });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // route kelas
@@ -39,8 +54,9 @@ Route::group(['middleware' => ['auth', 'dosen']], function () {
     Route::resource('kelas', KelasController::class);
     // route tugas
     Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-    Route::get('/tugas/{id}', [TugasController::class, 'create'])->name('tugas.create');
+    Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
     Route::post('/tugas', [TugasController::class, 'store'])->name('tugas.store');
+    Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
 });
 
 Route::group(['middleware' => ['auth', 'dosen']], function () {
