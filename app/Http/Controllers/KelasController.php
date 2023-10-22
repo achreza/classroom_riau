@@ -86,7 +86,6 @@ class KelasController extends Controller
         }
 
         $cek_tugas = $tugas->pluck('id');
-        
         $status = "";
         $cek_pengumpulan = Pengumpulan::whereIn('id_tugas', $cek_tugas)->where('id_mahasiswa', Auth::user()->id)->get();
 
