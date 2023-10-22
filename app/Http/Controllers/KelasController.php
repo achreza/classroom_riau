@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Mm_kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
 use App\Models\Tugas;
+
 
 
 class KelasController extends Controller
@@ -41,11 +43,33 @@ class KelasController extends Controller
             'deskripsi' => 'required',
         ]);
 
+        //create ranndom 5 digit string and check if kode kelas already exist in kelas, if exist random again
+        $kode_kelas = '';
+        do {
+            //generate a random string usually 5 digits
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
+        } while (Kelas::where('kode_kelas', $kode_kelas)->first());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $kelas = Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'deskripsi' => $request->deskripsi,
             'id_pembuat' => Auth::user()->id,
-            'kode_kelas' => 'PPPP',
+            'kode_kelas' => $kode_kelas,
         ]);
         $kelas->save();
         if ($kelas) {
@@ -62,6 +86,11 @@ class KelasController extends Controller
     {
         $tugas = Tugas::where('id_kelas', $id)->get();
         $kelas = Kelas::find($id);
+
+        // change format date of $tugas->deadline_date to d-m-Y
+        foreach ($tugas as $t) {
+            $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
+        }
         return view('kelas.detail', compact('kelas', 'tugas'));
     }
 
@@ -70,6 +99,28 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
+    }
+
+    public function joinkelas(Request $request)
+    {
+        // check if kode_kelas is exist
+        $kelas = Kelas::where('kode_kelas', $request->kode_kelas)->first();
+
+        if ($kelas) {
+            $mm_kelas = Mm_kelas::create([
+                'id_kelas' => $kelas->id,
+                'id_mahasiswa' => Auth::user()->id,
+            ]);
+            $mm_kelas->save();
+            if ($mm_kelas) {
+                return redirect()->route('dashboard.index');
+            } else {
+                return redirect()->route('kelas');
+            }
+        } else {
+            //redirect back
+            return redirect()->back()->with('error', 'Kode kelas tidak ditemukan');
+        }
     }
 
     /**

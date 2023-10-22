@@ -30,12 +30,7 @@
          <li class="menu-header small text-uppercase">
              <span class="menu-header-text">Kelas</span>
          </li>
-         <li class="menu-item">
-             <a href="cards-basic.html" class="menu-link">
-                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                 <div data-i18n="Basic">Cards</div>
-             </a>
-         </li>
+
          <li class="menu-item">
 
              <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -59,6 +54,12 @@
                      </a>
                  </li>
              </ul>
+         </li>
+         <li class="menu-item">
+             <a href="{{ route('auth.logout') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-collection"></i>
+                 <div data-i18n="Basic">Logout</div>
+             </a>
          </li>
      </ul>
  </aside>

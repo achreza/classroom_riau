@@ -26,7 +26,8 @@ class User extends Authenticatable
         'role_id',
     ];
 
-  
-
-  
+    public function pengumpulan()
+    {
+        return $this->hasMany(Pengumpulan::class, 'id');
+    }
 }

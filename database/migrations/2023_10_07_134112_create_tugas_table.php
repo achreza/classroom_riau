@@ -17,11 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('id_dosen');
             $table->string('nama_tugas');
             $table->string('file');
-            $table->string('deskripsi');
-            $table->dateTime('tgl_mulai');
-            $table->dateTime('tgl_akhir');
+
+            $table->string('deskripsi', 10000);
+            $table->date('deadline_date');
+            $table->time('deadline_time');
             $table->timestamps();
-        
+
             // Foreign Key Constraints
             $table->foreign('id_dosen')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade');

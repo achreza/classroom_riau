@@ -40,30 +40,55 @@ Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback
 // logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
-// Route::middleware(['guest'])->group(function () {
+Route::get('/download-tugas/{file}', [DashboardController::class, 'downloadTugas'])->name('download.tugas');
+Route::get('/download-pengumpulan/{file}', [DashboardController::class, 'downloadPengumpulan'])->name('download.pengumpulan');
 
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
-    // route kelas
-    Route::resource('kelas', KelasController::class);
-});
-
-Route::group(['middleware' => ['auth', 'dosen']], function () {
+    // Admin
+    // Route::group(['middleware' => ['admin']], function () {
+    //     // route kelas
+    //     Route::resource('kelas', KelasController::class);
+    // });
     // route kelas
     Route::resource('kelas', KelasController::class);
     // route tugas
     Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
     Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
-    Route::post('/tugas', [TugasController::class, 'store'])->name('tugas.store');
-    Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
+
+    // Dosen
+    Route::group(['middleware' => ['dosen']], function () {
+
+        Route::post(
+            '/tugas',
+            [TugasController::class, 'store']
+        )->name('tugas.store');
+        Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
+        Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
+    });
+
+    // Mahasiswa
+    Route::group(['middleware' => ['mahasiswa']], function () {
+        Route::post(
+            '/joinkelas',
+            [KelasController::class, 'joinkelas']
+        )->name('joinkelas.store');
+    });
 });
 
-Route::group(['middleware' => ['auth', 'dosen']], function () {
-   // dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-});
 
 
 
-// register
+
+
+
+
+
+// dashboard
+
+// //rute tugas by id_kelas
+// Route::get('/dashboard/{id_kelas}', [DashboardController::class, 'detailKelas'])->name('dashboard.tugas');
+
+// //rute joinkelas
+// Route::post('/joinkelas', [DashboardController::class, 'joinKelas'])->name('dashboard.joinKelas');

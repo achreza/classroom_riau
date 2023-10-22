@@ -26,8 +26,8 @@
 
                                 <div>
                                     <h6 class="mb-0">{{ $item->nama_tugas }}</h6>
-                                    <small class="text-muted">Deadline : {{ $item->tgl_mulai }},
-                                        {{ $item->tgl_akhir }}</small>
+                                    <small class="text-muted">Deadline : {{ $item->deadline_date }},
+                                        {{ $item->deadline_time }}</small>
                                 </div>
                                 <div class="">
                                     <span class="badge bg-warning text-dark">Belum Dikerjakan</span>

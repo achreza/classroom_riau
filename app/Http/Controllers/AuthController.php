@@ -29,17 +29,14 @@ class AuthController extends Controller
         if ($existingUser) {
             // log them in
             auth()->login($existingUser, true);
-            $request->session()->put('id', $existingUser->id);
+            $request->session()->put('role', $existingUser->role_id);
             $request->session()->put('user', $existingUser);
             //    check role
-            if ($existingUser->role_id == 1) {
-                return redirect()->route('dashboard.index');
-            } else {
-                return redirect()->route('dashboard.index');
-            }
+            return redirect('/dashboard');
         } else {
             // create a new user
             $page   = 'register';
+
             // return view
             return view('auth.register', compact('page', 'email'));
         }
@@ -62,14 +59,13 @@ class AuthController extends Controller
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
         return redirect('/dashboard');
-
-        // return redirect()->route('login')->with('success', 'Register success');
+        //return redirect()->route('login')->with('success', 'Register success');
     }
 
     // function logout
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return view('login');
+        return view('auth.login');
     }
 }
