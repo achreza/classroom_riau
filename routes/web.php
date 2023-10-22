@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengumpulanController;
 use App\Http\Controllers\TugasController;
 use Illuminate\Routing\RouteGroup;
 
@@ -45,6 +46,11 @@ Route::get('/download-pengumpulan/{file}', [DashboardController::class, 'downloa
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    // route kelas
+    Route::resource('kelas', KelasController::class);
+    // route tugas
+    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
+    Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
 
     // Admin
     // Route::group(['middleware' => ['admin']], function () {
@@ -70,12 +76,17 @@ Route::middleware(['auth'])->group(function () {
 
     // Mahasiswa
     Route::group(['middleware' => ['mahasiswa']], function () {
+        Route::post('/pengumpulan/{id}', [PengumpulanController::class, 'store'])->name('pengumpulan.store');
+        Route::get('/pengumpulan/{id}', [PengumpulanController::class, 'destroy'])->name('pengumpulan.destroy');
         Route::post(
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
     });
 });
+
+
+
 
 
 

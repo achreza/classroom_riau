@@ -26,21 +26,23 @@
                                         <small class="text-muted">Deadline : {{ $dateFormatted }},
                                             {{ $tugas->deadline_time }}</small>
                                     </div>
+                                    @if (request()->session()->get('role') == 2)
+                                        <div class="dropdown">
+                                            <div class="tugas-setting-wrap rounded-circle btn btn-primary "
+                                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img class="tugas-setting-logo" src="{{ asset('image/setting.svg') }}"
+                                                    alt="">
+                                            </div>
 
-                                    <div class="dropdown">
-                                        <div class="tugas-setting-wrap rounded-circle btn btn-primary "
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img class="tugas-setting-logo" src="{{ asset('image/setting.svg') }}"
-                                                alt="">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalTugas">
+                                                        Edit tugas</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#">Hapus tugas</a></li>
+                                            </ul>
                                         </div>
+                                    @endif
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#modalTugas">
-                                                    Edit tugas</a></li>
-                                            <li><a class="dropdown-item text-danger" href="#">Hapus tugas</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                             <div class="body-tugas">
@@ -57,50 +59,104 @@
                     </div>
                 </div>
 
-                {{-- Pengumpulan --}}
-                <div class="tab-pane fade" id="pills-pengumpulan" role="tabpanel" aria-labelledby="pills-pengumpulan-tab">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <h4>List pengumpulan</h4>
-                            <table class="table" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nomor</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Tanggal Pengumpulan</th>
-                                        <th scope="col">Nilai</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($nilai as $item)
+                @if (request()->session()->get('role') == 2)
+                    {{-- List Pengumpulan Dosen --}}
+                    <div class="tab-pane fade" id="pills-pengumpulan" role="tabpanel"
+                        aria-labelledby="pills-pengumpulan-tab">
+                        <div class="row">
+                            <div class="col-lg-10 offset-lg-1">
+                                <h4>List pengumpulan</h4>
+                                <table class="table" id="dataTable">
+                                    <thead>
                                         <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->pengumpulan->mahasiswa->name }}</td>
-                                            <td>{{ $item->pengumpulan->pengumpulan }}</td>
-                                            <td>{{ $item->nilai }} / 100</td>
-                                            <td>{{ $item->pengumpulan->status }}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#modalPenilaian"
-                                                    onclick="
-                                                    passingDataToModal('{{ $item->id }}','{{ $item->pengumpulan->file }}')
-                                                    ">
-                                                    Beri Nilai
-                                                </button>
-                                            </td>
+                                            <th scope="col">Nomor</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Tanggal Pengumpulan</th>
+                                            <th scope="col">Nilai</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
 
                                         </tr>
-                                    @endforeach
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($nilai as $item)
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->pengumpulan->mahasiswa->name }}</td>
+                                                <td>{{ $item->pengumpulan->pengumpulan }}</td>
+                                                <td>{{ $item->nilai }} / 100</td>
+                                                <td>{{ $item->pengumpulan->status }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#modalPenilaian"
+                                                        onclick="
+                                                    passingDataToModal('{{ $item->id }}','{{ $item->pengumpulan->file }}')
+                                                    ">
+                                                        Beri Nilai
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
 
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    {{-- Pengumpulan mahasiswa --}}
+                    <div class="tab-pane fade" id="pills-pengumpulan" role="tabpanel"
+                        aria-labelledby="pills-pengumpulan-tab">
+                        <div class="row">
+                            <div class="col-lg-10 offset-lg-1">
+                                <h4>Pengumpulan Tugas</h4>
+                                @if ($pengumpulan == null)
+                                    <form action="{{ route('pengumpulan.store', $tugas->id) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">File Tugas</label>
+                                            <input class="form-control" type="file" id="formFile" name="file">
+                                            <div id="emailHelp" class="form-text text-black">*Format file harus pdf.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Catatan</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="catatan"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Kumpulkan</button>
+                                    </form>
+                                @else
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-pengumpulan-header d-flex justify-content-between">
+                                                <h6>Catatan</h6>
+                                                <a href="{{ route('pengumpulan.destroy', $pengumpulan->id) }}"
+                                                    class="btn btn-danger text-white btn-sm">Batalkan Pengumpulan</a>
+                                            </div>
+
+                                            <p>{{ $pengumpulan->catatan }}</p>
+                                            <h6>File</h6>
+                                            <a class="btn btn-primary mt-2 "
+                                                href="{{ route('download.tugas', ['file' => $pengumpulan->file]) }}">
+                                                <img class="tugas-setting-logo me-2" src="{{ asset('image/tugas.svg') }}"
+                                                    alt="">
+                                                Download File
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
+
 
             </div>
         </div>
@@ -205,7 +261,7 @@
     <script>
         function passingDataToModal(id, filename) {
 
-            $("#pdf-preview").attr("src", `/storage/tugas/${filename}`);
+            $("#pdf-preview").attr("src", `/storage/pengumpulan/${filename}`);
 
             const form = $("#formPenilaian");
             form.attr("action", `/tugas/penilaian/${id}`);

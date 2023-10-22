@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_tugas');
             $table->unsignedBigInteger('id_mahasiswa');
+            $table->string('catatan');
             $table->string('file');
             $table->dateTime('pengumpulan');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
 
             // Foreign Key Constraints

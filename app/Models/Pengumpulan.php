@@ -13,11 +13,11 @@ class Pengumpulan extends Model
 
     public function nilai()
     {
-        return $this->hasOne(User::class, 'id');
+        return $this->hasOne(Nilai::class, 'id');
     }
 
     public function mahasiswa()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'id_mahasiswa', 'id');
     }
 }

@@ -10,9 +10,12 @@
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalTugas">
-                Tambah Tugas <i class="fas fa-plus"></i>
-            </button>
+            @if (request()->session()->get('role') == 2)
+                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalTugas">
+                    Tambah Tugas <i class="fas fa-plus"></i>
+                </button>
+            @endif
+
             @foreach ($tugas as $item)
                 <a href="{{ route('tugas.show', ['id' => $item->id]) }}" class="card-anchor ">
                     <div class="card card-tugas">
@@ -55,11 +58,20 @@
                 <div class="col-lg-12">
                     <div class="card mt-3 p-3">
                         <p>List Mahasiswa</p>
-                        <div class="kelas-list-mahasiswa d-flex align-items-center justify-content-center">
-                            <p class="text-muted">
-                                Belum ada mahasiswa
-                            </p>
-                        </div>
+                        @if ($list_mahasiswa == null)
+                            <div class="kelas-list-mahasiswa d-flex align-items-center justify-content-center">
+
+                                <p class="text-muted">
+                                    Belum ada mahasiswa
+                                </p>
+                            </div>
+                        @endif
+                        <ul>
+                            @foreach ($list_mahasiswa as $item)
+                                <li class="text-black">{{ $item->mahasiswa->name }}</li>
+                            @endforeach
+                        </ul>
+
                     </div>
                 </div>
             </div>
