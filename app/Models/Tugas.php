@@ -13,10 +13,10 @@ class Tugas extends Model
         'id_kelas',
         'id_dosen',
         'nama_tugas',
-        'deskripsi',
         'file',
-        'tgl_mulai',
-        'tgl_akhir',
+        'deskripsi',
+        'deadline_date',
+        'deadline_time',
     ];
 
     public function kelas()

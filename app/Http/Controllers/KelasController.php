@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\Mm_kelas;
+use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
 use App\Models\Tugas;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class KelasController extends Controller
@@ -61,8 +62,10 @@ class KelasController extends Controller
         ]);
         $kelas->save();
         if ($kelas) {
+            Alert::success('Sukses', 'Berhasil Menambah Kelas');
             return redirect()->route('dashboard.index');
         } else {
+            Alert::error('Error', 'Gagal Menambah Kelas');
             return redirect()->route('kelas');
         }
     }
@@ -75,13 +78,35 @@ class KelasController extends Controller
         $list_mahasiswa = Mm_kelas::where('id_kelas', $id)->get();
         $tugas = Tugas::where('id_kelas', $id)->get();
         $kelas = Kelas::find($id);
-
+        
+        
         // change format date of $tugas->deadline_date to d-m-Y
         foreach ($tugas as $t) {
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
         }
 
-        return view('kelas.detail', compact('kelas', 'tugas', 'list_mahasiswa'));
+        $cek_tugas = $tugas->pluck('id');
+        $status = "";
+        $cek_pengumpulan = Pengumpulan::whereIn('id_tugas', $cek_tugas)->where('id_mahasiswa', Auth::user()->id)->get();
+
+        if ($cek_pengumpulan->isEmpty()) {
+            $status = "Belum Mengumpulkan";
+        }else{
+            $status = "Sudah Mengumpulkan";
+        }
+        
+
+        $background = array(
+            'image/bg1.jpg',
+            'image/bg2.jpg',
+            'image/bg3.png',
+            'image/bg4.jpeg',
+            'image/bg5.jpeg',
+        );
+        //get 1 random background name
+        $rand = $background[array_rand($background)];
+
+        return view('kelas.detail', compact('kelas', 'tugas', 'list_mahasiswa', 'rand', 'status'));
     }
 
     /**

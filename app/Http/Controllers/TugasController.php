@@ -8,6 +8,7 @@ use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TugasController extends Controller
 {
@@ -51,13 +52,15 @@ class TugasController extends Controller
             'nama_tugas' => $request->nama_tugas,
             'deskripsi' => $request->deskripsi,
             'file' => $filename,
-            'tgl_mulai' => $request->deadline_date,
-            'tgl_akhir' => $request->deadline_time,
+            'deadline_date' => $request->deadline_date,
+            'deadline_time' => $request->deadline_time,
         ]);
         $tugas->save();
         if ($tugas) {
+            Alert::success('Berhasil', 'Tugas berhasil dibuat');
             return redirect()->route('dashboard.index');
         } else {
+            Alert::error('Gagal', 'Tugas gagal dibuat');
             return redirect()->route('tugas');
         }
     }

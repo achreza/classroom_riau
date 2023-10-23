@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="row">
+
         <div class="col-lg-12">
-            <div class="cover-class d-flex justify-content-start align-items-end">
+            <div class="cover-class d-flex justify-content-start align-items-end" style="background-image: url('../{{ $rand }}');">
                 <h3 class="cover-nama-kelas">{{ $kelas->nama_kelas }}</h3>
             </div>
         </div>
@@ -33,7 +34,14 @@
                                         {{ $item->deadline_time }}</small>
                                 </div>
                                 <div class="">
-                                    <span class="badge bg-warning text-dark">Belum Dikerjakan</span>
+                                    @if (Auth::user()->role_id == 3 && $status == "Sudah Mengumpulkan")
+                                        <span class="badge bg-success">{{ $status }}</span>
+                                    @elseif(Auth::user()->role_id == 3 && $status == "Belum Mengumpulkan")
+                                        <span class="badge bg-danger">{{ $status }}</span>
+                                    @else 
+                                        
+
+                                    @endif
                                 </div>
 
                             </div>
