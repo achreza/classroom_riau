@@ -33,6 +33,15 @@ class UserSeeder extends Seeder
                     'remember_token' => 'CZbkU1AtwPfzcdp1hOMWWg4ZF1cmSQJd6kUWUokC6sHbVayUlcSC1rXk0Om6',
                     'role_id' => 2
                 ],
+                [
+                    'name' => 'Administrator',
+                    'email' => 'revaldikun@gmail.com',
+                    'kode' => '000000000001',
+                    'jurusan' => 'Administrator',
+                    'remember_token' => 'cE0A0RkwK3eg77dlOZs432kWRiM2WLtsJHKRz5qv7r3w30INLZpnxDDLCj7k',
+                    'role_id' => 1
+                ],
+
             ]
 
 

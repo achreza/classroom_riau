@@ -7,7 +7,6 @@ use App\Models\Pengumpulan;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Termwind\Components\Dd;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TugasController extends Controller
@@ -52,6 +51,7 @@ class TugasController extends Controller
             'nama_tugas' => $request->nama_tugas,
             'deskripsi' => $request->deskripsi,
             'file' => $filename,
+            'kode_youtube' => $request->youtube == null ? null : $request->youtube,
             'deadline_date' => $request->deadline_date,
             'deadline_time' => $request->deadline_time,
         ]);
@@ -73,8 +73,9 @@ class TugasController extends Controller
         if (Auth::user()->role_id == 3) {
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
+            $nilai = Nilai::where('id_pengumpulan', $pengumpulan->id)->first();
             $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
-            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan'));
+            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
         } elseif (Auth::user()->role_id == 2) {
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
@@ -99,7 +100,12 @@ class TugasController extends Controller
     public function update(Request $request, $id)
     {
         $tugas = Tugas::find($id);
-        $tugas->update($request->all());
+        if($tugas){
+            $tugas->update(request()->all());
+            Alert::success('Berhasil', 'Tugas berhasil diupdate');
+        }else{
+            Alert::error('Gagal', 'Tugas gagal diupdate');
+        }
         return redirect()->route('tugas.index');
     }
 
@@ -114,9 +120,12 @@ class TugasController extends Controller
     public function penilaian(Request $request, $id)
     {
         $nilai = Nilai::find($id);
-        $nilai->update([
-            'nilai' => $request->nilai,
-        ]);
+        if($nilai){
+            $nilai->update(request()->all());
+            Alert::success('Berhasil', 'Nilai berhasil diupdate');
+        }else{
+            Alert::error('Gagal', 'Nilai gagal diupdate');
+        }
         return redirect()->back();
     }
 }

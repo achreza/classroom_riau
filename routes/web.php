@@ -57,11 +57,8 @@ Route::middleware(['auth'])->group(function () {
     //     // route kelas
     //     Route::resource('kelas', KelasController::class);
     // });
-    // route kelas
-    Route::resource('kelas', KelasController::class);
-    // route tugas
-    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-    Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::post('/profile/{id}', [AuthController::class, 'userUpdate'])->name('profile.update');
 
     // Dosen
     Route::group(['middleware' => ['dosen']], function () {
@@ -72,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         )->name('tugas.store');
         Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
         Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
+        Route::get('/kelas/delete/{id}', [KelasController::class, 'delete'])->name('kelas.delete');
     });
 
     // Mahasiswa
@@ -82,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
+    });
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::post('/user-create', [AuthController::class, 'store'])->name('user.create');
     });
 });
 

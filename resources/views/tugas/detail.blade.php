@@ -45,6 +45,13 @@
 
                                 </div>
                             </div>
+                            @if ($tugas->kode_youtube == !null)
+                                <iframe class="mt-3 mb-3" width="665" height="480"
+                                    src="https://www.youtube.com/embed/{{ $tugas->kode_youtube }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                            @endif
+
                             <div class="body-tugas">
                                 {!! $tugas->deskripsi !!}
 
@@ -87,9 +94,9 @@
                                                 <td>{{ $item->pengumpulan->pengumpulan }}</td>
                                                 <td>{{ $item->nilai }} / 100</td>
                                                 <td>
-                                                    @if ($item->pengumpulan->status == "Done")
+                                                    @if ($item->pengumpulan->status == 'Done')
                                                         <span class="badge bg-success">Done</span>
-                                                    @elseif($item->pengumpulan->status == "Done Late")
+                                                    @elseif($item->pengumpulan->status == 'Done Late')
                                                         <span class="badge bg-warning text-dark">Done Late</span>
                                                     @else
                                                         <span class="badge bg-danger">Not Done</span>
@@ -141,12 +148,14 @@
                                 @else
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="card-pengumpulan-header d-flex justify-content-between">
-                                                <h6>Catatan</h6>
+                                            <div class="card-pengumpulan-header d-flex justify-content-end">
+
                                                 <a href="{{ route('pengumpulan.destroy', $pengumpulan->id) }}"
                                                     class="btn btn-danger text-white btn-sm">Batalkan Pengumpulan</a>
                                             </div>
-
+                                            <h6>Nilai</h6>
+                                            <h5 class="fw-bold">{{ $nilai->nilai }} / 100</h5>
+                                            <h6>Catatan</h6>
                                             <p>{{ $pengumpulan->catatan }}</p>
                                             <h6>File</h6>
                                             <a class="btn btn-primary mt-2 "
@@ -263,9 +272,51 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <script>
-        let table = new DataTable('#dataTable');
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+
+                    {
+                        extend: 'excel',
+                        text: 'Export to Excel',
+                        className: 'btn btn-success'
+                    },
+
+
+
+                ]
+            });
+        });
+        // make export in datatable
+
+        // let table = new DataTable('#dataTable', {
+        //     dom: 'Bfrtip',
+        //     buttons: [{
+        //         extend: 'excelHtml5',
+        //         text: 'Export to Excel',
+        //         filename: 'Data Siswa',
+        //         exportOptions: {
+        //             columns: [0, 1, 2, 3, 4]
+        //         }
+        //     }]
+        // });
     </script>
     <script>
         function passingDataToModal(id, filename) {

@@ -35,10 +35,10 @@
         <div class="container py-4">
             <div class="row g-0 align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="card cascading-right"
+                    <div class="card cascading-right "
                         style="
             background: hsla(0, 0%, 100%, 0.55);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px); z-index: 3;
             ">
                         <div class="card-body p-5 shadow-5 text-center">
                             <h2 class="fw-bold mb-5">Sign in</h2>
@@ -55,8 +55,18 @@
                 </div>
 
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+                    <img src="https://images.unsplash.com/photo-1555116505-38ab61800975?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         class="w-100 rounded-4 shadow-4" alt="" />
+                    {{-- <div class="card " style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
