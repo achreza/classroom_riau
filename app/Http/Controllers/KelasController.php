@@ -76,7 +76,7 @@ class KelasController extends Controller
     public function show($id)
     {
         $list_mahasiswa = Mm_kelas::where('id_kelas', $id)->get();
-        $tugas = Tugas::where('id_kelas', $id)->get();
+        $tugas = Tugas::where('id_kelas', $id)->get()->sortByDesc('created_at');
         $kelas = Kelas::find($id);
         
         
@@ -134,6 +134,7 @@ class KelasController extends Controller
             }
         } else {
             //redirect back
+            Alert::error('Error', 'Kode kelas tidak ditemukan');
             return redirect()->back()->with('error', 'Kode kelas tidak ditemukan');
         }
     }
@@ -154,8 +155,10 @@ class KelasController extends Controller
         $class->deskripsi = $request->deskripsi;
         $class->save();
         if ($class) {
+            Alert::success('Sukses', 'Berhasil Mengubah Kelas');
             return redirect()->route('dashboard.index');
         } else {
+            Alert::error('Error', 'Gagal Mengubah Kelas');
             return view('kelas');
         }
     }
@@ -169,8 +172,10 @@ class KelasController extends Controller
         $kelas = Kelas::find($kelas);
         $kelas->delete();
         if ($kelas) {
+            Alert::success('Sukses', 'Berhasil Menghapus Kelas'); 
             return redirect()->route('dashboard.index');
         } else {
+            Alert::error('Error', 'Gagal Menghapus Kelas');
             return view('kelas');
         }
     }
