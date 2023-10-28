@@ -265,7 +265,20 @@
     </div>
 
     <script>
-        let table = new DataTable('#dataTable');
+        // make export in datatable
+
+        let table = new DataTable('#dataTable', {
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    filename: 'Data Siswa',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+            ]
+        });
     </script>
     <script>
         function passingDataToModal(id, filename) {
