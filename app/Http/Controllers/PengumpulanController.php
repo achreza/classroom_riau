@@ -6,6 +6,7 @@ use App\Models\Nilai;
 use Illuminate\Http\Request;
 use App\Models\Pengumpulan;
 use App\Models\Tugas;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengumpulanController extends Controller
 {
@@ -51,6 +52,7 @@ class PengumpulanController extends Controller
                 'id_pengumpulan' => $id_pengumpulan,
                 'nilai' => 0,
             ]);
+            Alert::success('Berhasil', 'Tugas berhasil dikumpulkan');
             return redirect()->back();
         } elseif ($tugas->deadline_date > now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time == now()->format('H:i:s')) {
             $pengumpulan = Pengumpulan::create([
@@ -67,8 +69,12 @@ class PengumpulanController extends Controller
                 'id_pengumpulan' => $id_pengumpulan,
                 'nilai' => 0,
             ]);
+            Alert::success('Berhasil', 'Tugas berhasil dikumpulkan');
             return redirect()->back();
-        } 
+        } else {
+            Alert::error('Gagal', 'Tugas gagal dikumpulkan');
+            return redirect()->back();
+        }
         
     }
 
@@ -102,6 +108,7 @@ class PengumpulanController extends Controller
     public function destroy($id)
     {
         Pengumpulan::destroy($id);
+        Alert::success('Berhasil', 'Tugas berhasil dihapus');
         return redirect()->back();
     }
 }

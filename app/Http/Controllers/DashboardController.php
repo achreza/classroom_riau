@@ -19,8 +19,11 @@ class DashboardController extends Controller
     {
         if (Auth::user()->role_id == '2') {
             $role = 'dosen';
-            $kelas = Kelas::where('id_pembuat', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-            session()->put('kelas', $kelas);
+            $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get()->sortByDesc('created_at');
+
+
+
+
             $background = array(
                 'image/bg1.jpg',
                 'image/bg2.jpg',

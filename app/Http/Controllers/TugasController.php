@@ -7,7 +7,6 @@ use App\Models\Pengumpulan;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Termwind\Components\Dd;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TugasController extends Controller
@@ -101,7 +100,12 @@ class TugasController extends Controller
     public function update(Request $request, $id)
     {
         $tugas = Tugas::find($id);
-        $tugas->update($request->all());
+        if($tugas){
+            $tugas->update(request()->all());
+            Alert::success('Berhasil', 'Tugas berhasil diupdate');
+        }else{
+            Alert::error('Gagal', 'Tugas gagal diupdate');
+        }
         return redirect()->route('tugas.index');
     }
 
@@ -116,9 +120,12 @@ class TugasController extends Controller
     public function penilaian(Request $request, $id)
     {
         $nilai = Nilai::find($id);
-        $nilai->update([
-            'nilai' => $request->nilai,
-        ]);
+        if($nilai){
+            $nilai->update(request()->all());
+            Alert::success('Berhasil', 'Nilai berhasil diupdate');
+        }else{
+            Alert::error('Gagal', 'Nilai gagal diupdate');
+        }
         return redirect()->back();
     }
 }
