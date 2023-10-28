@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         )->name('tugas.store');
         Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
         Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
+        Route::get('/kelas/delete/{id}', [KelasController::class, 'delete'])->name('kelas.delete');
     });
 
     // Mahasiswa
@@ -79,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
+    });
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::post('/user-create', [AuthController::class, 'store'])->name('user.create');
     });
 });
 

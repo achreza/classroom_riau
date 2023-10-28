@@ -76,10 +76,10 @@ class KelasController extends Controller
     public function show($id)
     {
         $list_mahasiswa = Mm_kelas::where('id_kelas', $id)->get();
-        $tugas = Tugas::where('id_kelas', $id)->get();
+        $tugas = Tugas::where('id_kelas', $id)->orderBy('created_at', 'desc')->get();
         $kelas = Kelas::find($id);
-        
-        
+
+
         // change format date of $tugas->deadline_date to d-m-Y
         foreach ($tugas as $t) {
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
@@ -91,10 +91,10 @@ class KelasController extends Controller
 
         if ($cek_pengumpulan->isEmpty()) {
             $status = "Belum Mengumpulkan";
-        }else{
+        } else {
             $status = "Sudah Mengumpulkan";
         }
-        
+
 
         $background = array(
             'image/bg1.jpg',
@@ -173,5 +173,10 @@ class KelasController extends Controller
         } else {
             return view('kelas');
         }
+    }
+    public function delete($id)
+    {
+        Kelas::destroy($id);
+        return redirect()->route('dashboard.index');
     }
 }

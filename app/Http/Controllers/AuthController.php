@@ -70,6 +70,17 @@ class AuthController extends Controller
         return redirect('/dashboard');
         //return redirect()->route('login')->with('success', 'Register success');
     }
+    public function store(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'kode' => $request->kode,
+            'jurusan' => $request->jurusan,
+            'role_id' => $request->role,
+        ]);
+        return redirect('/dashboard');
+    }
 
     // function logout
     public function logout(Request $request)

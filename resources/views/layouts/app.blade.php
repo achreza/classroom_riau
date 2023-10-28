@@ -48,15 +48,15 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('js/config.js') }}"></script>
 
-    
-    
+
+
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     {{-- Datatables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-      
+
 </head>
 
 <body>
@@ -101,10 +101,10 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
 
-    @include('sweetalert::alert') 
+    @include('sweetalert::alert')
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery.js') }}"></script> --}}
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/perfect-scrollbar.js') }}"></script>

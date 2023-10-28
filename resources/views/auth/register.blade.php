@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+                    <img src="https://images.unsplash.com/photo-1555116505-38ab61800975?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         class="w-100 rounded-4 shadow-4" alt="" />
                 </div>
             </div>
