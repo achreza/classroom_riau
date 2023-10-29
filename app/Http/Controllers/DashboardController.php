@@ -6,6 +6,7 @@ use App\Models\Dashboard;
 use App\Models\Kelas;
 use App\Models\Mm_kelas;
 use App\Models\Tugas;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,13 +17,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+       
+
         if (Auth::user()->role_id == '2') {
             $role = 'dosen';
             $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get()->sortByDesc('created_at');
-            
-
-
-
+            session()->put('kelas', $kelas);
             $background = array(
                 'image/bg1.jpg',
                 'image/bg2.jpg',
@@ -40,11 +40,15 @@ class DashboardController extends Controller
             return view('main.index', compact('kelas', 'role', 'rand'));
         } else if (Auth::user()->role_id == '3') {
             $role = 'mahasiswa';
-            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get()->sortByDesc('created_at');
+            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->orderBy('created_at', 'desc')->get();
             $kelas = [];
             foreach ($mm_kelas as $key => $value) {
                 $kelas[] = Kelas::where('id', $value->id_kelas)->first();
             }
+
+            session()->put('kelas', $kelas);
+
+
             $background = array(
                 'image/bg1.jpg',
                 'image/bg2.jpg',
@@ -58,6 +62,13 @@ class DashboardController extends Controller
                 $rand[] = $background[array_rand($background)];
             }
             return view('main.index', compact('kelas', 'role', 'rand'));
+        } else if (Auth::user()->role_id == '1') {
+            $title = 'Hapus User';
+            $text = 'Apakah anda yakin ingin Hapus user ini?';
+            confirmDelete($title, $text);
+            $user = User::all();
+            $role = 'admin';
+            return view('main.index', compact('user', 'role'));
         } else {
             return redirect()->route('auth.login');
         }

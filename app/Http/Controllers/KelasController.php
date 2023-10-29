@@ -78,8 +78,12 @@ class KelasController extends Controller
         $list_mahasiswa = Mm_kelas::where('id_kelas', $id)->get();
         $tugas = Tugas::where('id_kelas', $id)->get()->sortByDesc('created_at');
         $kelas = Kelas::find($id);
-        
-        
+
+        // make confirmation alert
+        $title = 'Keluar Kelas';
+        $text = 'Apakah anda yakin ingin keluar dari kelas ini?';
+        confirmDelete($title, $text);
+
         // change format date of $tugas->deadline_date to d-m-Y
         foreach ($tugas as $t) {
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
@@ -91,10 +95,10 @@ class KelasController extends Controller
 
         if ($cek_pengumpulan->isEmpty()) {
             $status = "Belum Mengumpulkan";
-        }else{
+        } else {
             $status = "Sudah Mengumpulkan";
         }
-        
+
 
         $background = array(
             'image/bg1.jpg',
@@ -166,17 +170,29 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($kelas)
+    public function hapus_kelas($id)
     {
-        //
+      
         $kelas = Kelas::find($kelas);
         $kelas->delete();
         if ($kelas) {
-            Alert::success('Sukses', 'Berhasil Menghapus Kelas'); 
+            Alert::success('Sukses', 'Berhasil Menghapus Kelas');
             return redirect()->route('dashboard.index');
         } else {
             Alert::error('Error', 'Gagal Menghapus Kelas');
             return view('kelas');
         }
+    }
+    public function delete($id)
+    {
+        Kelas::destroy($id);
+        return redirect()->route('dashboard.index');
+    }
+
+    public function destroy($kela)
+    {
+        $kelas = Mm_kelas::where('id_kelas', $kela)->where('id_mahasiswa', Auth::user()->id)->first();
+        $kelas->delete();
+        return redirect()->route('dashboard.index');
     }
 }

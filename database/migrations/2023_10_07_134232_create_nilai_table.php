@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pengumpulan');
             $table->double('nilai');
+            $table->string('catatan_dosen')->nullable();
             $table->timestamps();
 
             // Foreign Key Constraints

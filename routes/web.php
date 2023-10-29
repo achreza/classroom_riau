@@ -36,6 +36,9 @@ use Illuminate\Routing\RouteGroup;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/illegal', function () {
+    return view('error.forbidden');
+})->name('illegal');
 Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
 Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 // logout
@@ -57,11 +60,8 @@ Route::middleware(['auth'])->group(function () {
     //     // route kelas
     //     Route::resource('kelas', KelasController::class);
     // });
-    // route kelas
-    Route::resource('kelas', KelasController::class);
-    // route tugas
-    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-    Route::get('/tugas/{id}', [TugasController::class, 'show'])->name('tugas.show');
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::post('/profile/{id}', [AuthController::class, 'userUpdate'])->name('profile.update');
 
     // Dosen
     Route::group(['middleware' => ['dosen']], function () {
@@ -72,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
         )->name('tugas.store');
         Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
         Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
+        Route::delete('/kelas/delete/{id}', [KelasController::class, 'delete'])->name('kelas.delete');
+        Route::get('/tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.destroy');
     });
 
     // Mahasiswa
@@ -82,6 +84,12 @@ Route::middleware(['auth'])->group(function () {
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
+
+    });
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::post('/user-create', [AuthController::class, 'store'])->name('user.create');
+        Route::get('/user-delete/{id}', [AuthController::class, 'destroy'])->name('user.delete');
     });
 });
 

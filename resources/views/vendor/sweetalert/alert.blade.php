@@ -19,11 +19,6 @@
                         if (result.isConfirmed) {
                             var form = document.createElement('form');
                             form.action = event.target.href;
-                            form.method = 'POST';
-                            form.innerHTML = `
-                    @csrf
-                    @method('DELETE')
-                `;
                             document.body.appendChild(form);
                             form.submit();
                         }

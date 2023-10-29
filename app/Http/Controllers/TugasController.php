@@ -18,6 +18,7 @@ class TugasController extends Controller
     {
         //
         $tugas = '';
+        
         return view('tugas', compact('tugas'));
     }
 
@@ -51,9 +52,11 @@ class TugasController extends Controller
             'nama_tugas' => $request->nama_tugas,
             'deskripsi' => $request->deskripsi,
             'file' => $filename,
+            'kode_youtube' => $request->youtube,
             'deadline_date' => $request->deadline_date,
             'deadline_time' => $request->deadline_time,
         ]);
+
         $tugas->save();
         if ($tugas) {
             Alert::success('Berhasil', 'Tugas berhasil dibuat');
@@ -69,11 +72,21 @@ class TugasController extends Controller
      */
     public function show($id)
     {
+        $title = 'Hapus Tugas';
+        $text = 'Apakah anda yakin ingin Hapus tugas ini?';
+        confirmDelete($title, $text);
         if (Auth::user()->role_id == 3) {
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
             $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
-            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan'));
+            if ($pengumpulan != null) {
+                $nilai = Nilai::where('id_pengumpulan', $pengumpulan->id)->first();
+
+                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
+            } else {
+
+                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan'));
+            }
         } elseif (Auth::user()->role_id == 2) {
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->get();
@@ -98,10 +111,10 @@ class TugasController extends Controller
     public function update(Request $request, $id)
     {
         $tugas = Tugas::find($id);
-        if($tugas){
+        if ($tugas) {
             $tugas->update(request()->all());
             Alert::success('Berhasil', 'Tugas berhasil diupdate');
-        }else{
+        } else {
             Alert::error('Gagal', 'Tugas gagal diupdate');
         }
         return redirect()->route('tugas.index');
@@ -110,18 +123,21 @@ class TugasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tugas $tugas)
+    public function destroy($id)
     {
         //
+        Tugas::destroy($id);
+        Alert::success('Berhasil', 'Tugas berhasil dihapus');
+        return redirect()->route('dashboard.index');
     }
 
     public function penilaian(Request $request, $id)
     {
         $nilai = Nilai::find($id);
-        if($nilai){
+        if ($nilai) {
             $nilai->update(request()->all());
             Alert::success('Berhasil', 'Nilai berhasil diupdate');
-        }else{
+        } else {
             Alert::error('Gagal', 'Nilai gagal diupdate');
         }
         return redirect()->back();
