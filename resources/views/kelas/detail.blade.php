@@ -25,10 +25,12 @@
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>
-                                <form action="{{ route('kelas.delete', ['id' => $kelas->id]) }}" method="POST" id="form_delete_kelas">
+                                <form action="{{ route('kelas.delete', ['id' => $kelas->id]) }}" method="GET"
+                                    id="form_delete_kelas">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item text-danger fw-bold" id="hapus_kelas">Hapus Kelas</button>
+
+                                    <button type="submit" class="dropdown-item text-danger fw-bold" id="hapus_kelas">Hapus
+                                        Kelas</button>
                                 </form>
                             </li>
                         </ul>
@@ -99,15 +101,15 @@
 
                     </div>
                     @if (request()->session()->get('role') == 3)
-                    <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" id="form_delete">
-                        @csrf
-                        @method('DELETE')
-                        {{-- make with sweet alert --}}
-                        <button type="submit" class="btn btn-danger w-100 mt-3 showConfirm">
-                            Keluar dari kelas   </button>
-                    </form>
+                        <form action="{{ route('kelas.destroy', $kelas->id) }}" method="GET" id="form_delete">
+                            @csrf
+
+                            {{-- make with sweet alert --}}
+                            <button type="submit" class="btn btn-danger w-100 mt-3 showConfirm">
+                                Keluar dari kelas </button>
+                        </form>
                     @endif
-                    
+
                 </div>
             </div>
 
@@ -169,7 +171,7 @@
         </div>
     </div>
     <script>
-       $('.showConfirm').on('click', function(e) {
+        $('.showConfirm').on('click', function(e) {
             e.preventDefault();
             var form = $('#form_delete');
             Swal.fire({

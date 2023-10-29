@@ -172,8 +172,8 @@ class KelasController extends Controller
      */
     public function hapus_kelas($id)
     {
-      
-        $kelas = Kelas::find($kelas);
+
+        $kelas = Kelas::find($id);
         $kelas->delete();
         if ($kelas) {
             Alert::success('Sukses', 'Berhasil Menghapus Kelas');
