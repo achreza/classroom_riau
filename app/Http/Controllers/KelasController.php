@@ -184,4 +184,11 @@ class KelasController extends Controller
         Kelas::destroy($id);
         return redirect()->route('dashboard.index');
     }
+
+    public function keluar($id)
+    {
+        $kelas = Mm_kelas::where('id_kelas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
+        $kelas->delete();
+        return redirect()->route('dashboard.index');
+    }
 }

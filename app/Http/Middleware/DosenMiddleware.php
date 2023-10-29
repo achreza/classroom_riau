@@ -16,9 +16,9 @@ class DosenMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role_id == '2') {
+        if (Auth::user()->role_id == '2') {
             return $next($request);
         }
-        return redirect()->route('dashboard.index');
+        return redirect()->route('illegal');
     }
 }

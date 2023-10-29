@@ -18,7 +18,7 @@
 
      <ul class="menu-inner py-1">
          <!-- Dashboard -->
-         <li class="menu-item active">
+         <li class="menu-item {{ Request::is('dashboard') ? 'active' : '' }}" onclick="setActive(this)">
              <a href="{{ route('dashboard.index') }}" class="menu-link">
                  <img class="menu-icon tf-icons" src="{{ asset('image/dashboard.svg') }}" alt="">
                  <div data-i18n="Analytics">Dashboard</div>
@@ -32,7 +32,7 @@
                  <span class="menu-header-text">Kelas</span>
              </li>
 
-             <li class="menu-item">
+             <li class="menu-item {{ Request::is('kelas*') ? 'active' : '' }}">
 
                  <a href="javascript:void(0);" class="menu-link menu-toggle">
                      <img class="menu-icon tf-icons" src="{{ asset('image/classroom.svg') }}" alt="">
@@ -40,7 +40,7 @@
                  </a>
                  <ul class="menu-sub">
                      @foreach (request()->session()->get('kelas') as $item)
-                         <li class="menu-item">
+                         <li class="menu-item {{ Request::is('kelas*') ? 'active' : '' }}" onclick="setActive(this)">
                              <a href="{{ route('kelas.show', ['kela' => $item->id]) }}" class="menu-link">
                                  <div data-i18n="Account">{{ $item->nama_kelas }}</div>
                              </a>
@@ -54,7 +54,7 @@
 
 
 
-         <li class="menu-item">
+         <li class="menu-item" onclick="setActive(this)">
              <a href="{{ route('auth.logout') }}" class="menu-link">
                  <img class="menu-icon tf-icons" src="{{ asset('image/logout.svg') }}" alt="">
                  <div data-i18n="Basic">Logout</div>

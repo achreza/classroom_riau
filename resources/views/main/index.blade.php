@@ -62,8 +62,7 @@
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->role->nama_role }}</td>
                                     <td>
-                                        <a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
-                                            class="btn btn-danger">Hapus</a>
+                                        <a href="{{ route('user.delete', $item->id) }}" class="btn btn-danger">Hapus</a>
                                     </td>
                                 </tr>
                             @endforeach

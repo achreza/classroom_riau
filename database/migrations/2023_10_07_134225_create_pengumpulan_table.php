@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_tugas');
             $table->unsignedBigInteger('id_mahasiswa');
-            $table->string('catatan');
+            $table->string('catatan')->nullable();
+
             $table->string('file');
             $table->dateTime('pengumpulan');
             $table->string('status')->nullable();

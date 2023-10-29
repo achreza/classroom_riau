@@ -104,4 +104,9 @@ class AuthController extends Controller
 
         return redirect('/profile');
     }
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return redirect('/dashboard');
+    }
 }

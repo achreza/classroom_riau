@@ -17,13 +17,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
         if (Auth::user()->role_id == '2') {
             $role = 'dosen';
             $kelas = Kelas::where('id_pembuat', Auth::user()->id)->get()->sortByDesc('created_at');
-
-
-
-
+            session()->put('kelas', $kelas);
             $background = array(
                 'image/bg1.jpg',
                 'image/bg2.jpg',

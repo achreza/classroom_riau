@@ -36,6 +36,9 @@ use Illuminate\Routing\RouteGroup;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/illegal', function () {
+    return view('error.forbidden');
+})->name('illegal');
 Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.login');
 Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 // logout
@@ -80,10 +83,13 @@ Route::middleware(['auth'])->group(function () {
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
+
+        Route::get('/keluar-kelas/{id}', [KelasController::class, 'keluar'])->name('keluar.kelas');
     });
 
     Route::group(['middleware' => ['admin']], function () {
         Route::post('/user-create', [AuthController::class, 'store'])->name('user.create');
+        Route::get('/user-delete/{id}', [AuthController::class, 'destroy'])->name('user.delete');
     });
 });
 

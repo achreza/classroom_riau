@@ -94,6 +94,8 @@
                         </ul>
 
                     </div>
+                    <a href="{{ route('keluar.kelas', $kelas->id) }}" class="btn btn-danger mt-3 w-100">Keluar dari
+                        kelas</a>
                 </div>
             </div>
 

@@ -156,7 +156,7 @@
                                             <h6>Nilai</h6>
                                             <h5 class="fw-bold">{{ $nilai->nilai }} / 100</h5>
                                             <h6>Catatan</h6>
-                                            <p>{{ $pengumpulan->catatan }}</p>
+                                            <p>{{ $nilai->catatan_dosen ?? '-' }}</p>
                                             <h6>File</h6>
                                             <a class="btn btn-primary mt-2 "
                                                 href="{{ route('download.tugas', ['file' => $pengumpulan->file]) }}">
@@ -258,21 +258,22 @@
                                         name="nilai">
                                     <div class="form-text">Berikan nilai antara 0-100 </div>
                                 </div>
-
-
-
+                                <div class="mb-3">
+                                    <label for="">Catatan</label>
+                                    <textarea class="form-control" placeholder="Masukkan catatan (jika diperlukan)" name="catatan_dosen" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
                 </form>
             </div>
         </div>
     </div>
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    {{-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" language="javascript"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript"
@@ -286,37 +287,38 @@
     <script type="text/javascript" language="javascript"
         src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" language="javascript"
-        src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+        src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script> --}}
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
+        // $(document).ready(function() {
+        //     $('#dataTable').DataTable({
+        //         dom: 'Bfrtip',
+        //         buttons: [
 
-                    {
-                        extend: 'excel',
-                        text: 'Export to Excel',
-                        className: 'btn btn-success'
-                    },
+        //             {
+        //                 extend: 'excel',
+        //                 text: 'Export to Excel',
+        //                 className: 'btn btn-success'
+        //             },
 
 
 
-                ]
-            });
-        });
+        //         ]
+        //     });
+        // });
         // make export in datatable
 
-        // let table = new DataTable('#dataTable', {
-        //     dom: 'Bfrtip',
-        //     buttons: [{
-        //         extend: 'excelHtml5',
-        //         text: 'Export to Excel',
-        //         filename: 'Data Siswa',
-        //         exportOptions: {
-        //             columns: [0, 1, 2, 3, 4]
-        //         }
-        //     }]
-        // });
+        let table = new DataTable('#dataTable', {
+            dom: 'Bfrtip',
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                filename: 'Data Siswa',
+                className: 'btn btn-success',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            }]
+        });
     </script>
     <script>
         function passingDataToModal(id, filename) {

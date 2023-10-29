@@ -123,6 +123,19 @@
     <!-- Main JS -->
     <script src="{{ asset('js/main.js') }}"></script>
 
+    <script>
+        function setActive(clickedElement) {
+            // Menghapus kelas active dari semua item menu
+            var menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item) {
+                item.classList.remove('active');
+            });
+
+            // Menambahkan kelas active ke item yang diklik
+            clickedElement.classList.add('active');
+        }
+    </script>
+
 
 
 
