@@ -40,7 +40,7 @@ class DashboardController extends Controller
             return view('main.index', compact('kelas', 'role', 'rand'));
         } else if (Auth::user()->role_id == '3') {
             $role = 'mahasiswa';
-            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get();
+            $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->get()->sortByDesc('created_at');
             $kelas = [];
             foreach ($mm_kelas as $key => $value) {
                 $kelas[] = Kelas::where('id', $value->id_kelas)->first();
