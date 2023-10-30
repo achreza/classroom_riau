@@ -101,7 +101,7 @@
 
                     </div>
                     @if (request()->session()->get('role') == 3)
-                        <form action="{{ route('kelas.destroy', $kelas->id) }}" method="GET" id="form_delete">
+                        <form action="{{ route('kelas.keluar', $kelas->id) }}" method="GET" id="form_delete">
                             @csrf
 
                             {{-- make with sweet alert --}}

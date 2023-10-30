@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
     <title>Puspering</title>
     <link rel="stylesheet" href="{{ asset('/style/login.css') }}" />
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -41,7 +42,10 @@
             backdrop-filter: blur(30px); z-index: 3;
             ">
                         <div class="card-body p-5 shadow-5 text-center">
-                            <h2 class="fw-bold mb-5">Sign in</h2>
+
+                            <img style="width: 300px; margin-bottom: 30px" src="{{ asset('image/index-logo.svg') }}"
+                                alt="">
+                            <br>
                             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 

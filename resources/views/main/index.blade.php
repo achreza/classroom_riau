@@ -15,24 +15,32 @@
     @endif
 
     @if ($role == 'dosen' || $role == 'mahasiswa')
-        <div class="row mt-3">
-            @foreach ($kelas as $index => $item)
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img style="max-height: 190px" class="card-img-top" src="{{ asset($rand[$index]) }}"
-                            alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $item->nama_kelas }}</h5>
-                            <p class="card-text">
-                                {{ $item->deskripsi }}
-                            </p>
-                            <a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
-                                class="btn btn-outline-primary">Detail</a>
+        @if ($kelas == null)
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center">
+                    <img class="mt-4" style="width: 400px" src="{{ asset('image/index.png') }}" alt="">
+                </div>
+            </div>
+        @else
+            <div class="row mt-3">
+                @foreach ($kelas as $index => $item)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img style="max-height: 190px" class="card-img-top" src="{{ asset($rand[$index]) }}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item->nama_kelas }}</h5>
+                                <p class="card-text">
+                                    {{ $item->deskripsi }}
+                                </p>
+                                <a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
+                                    class="btn btn-outline-primary">Detail</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
+        @endif
     @elseif($role == 'admin')
         <div class="row mt-3">
             <div class="card">
@@ -62,7 +70,8 @@
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->role->nama_role }}</td>
                                     <td>
-                                        <a href="{{ route('user.delete', $item->id) }}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                        <a href="{{ route('user.delete', $item->id) }}" class="btn btn-danger"
+                                            data-confirm-delete="true">Hapus</a>
                                     </td>
                                 </tr>
                             @endforeach
