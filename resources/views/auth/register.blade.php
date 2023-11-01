@@ -53,7 +53,7 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" name="email"
+                                    <input type="email" id="form3Example3" name="email" disabled
                                         value ="{{ $email }}"class="form-control" placeholder="email" />
 
                                 </div>

@@ -18,7 +18,7 @@ class TugasController extends Controller
     {
         //
         $tugas = '';
-        
+
         return view('tugas', compact('tugas'));
     }
 
@@ -117,7 +117,7 @@ class TugasController extends Controller
         } else {
             Alert::error('Gagal', 'Tugas gagal diupdate');
         }
-        return redirect()->route('tugas.index');
+        return redirect()->back();
     }
 
     /**
