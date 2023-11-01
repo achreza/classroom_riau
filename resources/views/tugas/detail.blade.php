@@ -104,7 +104,7 @@
                                                     @elseif($item->pengumpulan->status == 'Done Late')
                                                         <span class="badge bg-warning text-dark">Done Late</span>
                                                     @else
-                                                        <span class="badge bg-danger">Not Done</span>
+                                                    
                                                     @endif
 
                                                 </td>

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
-    <title>Puspering</title>
+    <title>IKTN Learning</title>
     <link rel="stylesheet" href="{{ asset('/style/login.css') }}" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

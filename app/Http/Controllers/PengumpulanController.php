@@ -44,7 +44,7 @@ class PengumpulanController extends Controller
                 'file' => $filename,
                 'catatan' => $request->catatan,
                 'pengumpulan' => now(),
-                'status' => 'Done Late',
+                'status' => 'Terlambat',
             ]);
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;
@@ -61,7 +61,7 @@ class PengumpulanController extends Controller
                 'file' => $filename,
                 'catatan' => $request->catatan,
                 'pengumpulan' => now(),
-                'status' => 'Done',
+                'status' => 'Selesai',
             ]);
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;
