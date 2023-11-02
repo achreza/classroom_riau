@@ -18,7 +18,6 @@ class TugasController extends Controller
     {
         //
         $tugas = '';
-        
         return view('tugas', compact('tugas'));
     }
 
