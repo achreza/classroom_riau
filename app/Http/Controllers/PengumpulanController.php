@@ -31,6 +31,18 @@ class PengumpulanController extends Controller
      */
     public function store(Request $request, $id)
     {
+        //file validation
+        $request->validate([
+            'file' => 'max:5120',
+        ]);
+
+        // if file greater than 5mb return error
+        if ($request->file('file') != null) {
+            if ($request->file('file')->getSize() > 5120000) {
+                Alert::error('Gagal', 'File tidak boleh lebih dari 5MB');
+                return redirect()->back();
+            }
+        }
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = time() . '.' . $file->getClientOriginalExtension();
