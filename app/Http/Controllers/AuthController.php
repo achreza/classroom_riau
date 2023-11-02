@@ -73,7 +73,7 @@ class AuthController extends Controller
     }
     public function store(Request $request)
     {
-       $user=  User::create([
+        $user =  User::create([
             'name' => $request->name,
             'email' => $request->email,
             'kode' => $request->kode,
@@ -109,6 +109,8 @@ class AuthController extends Controller
         $user->kode = $request->kode;
         $user->jurusan = $request->jurusan;
         $user->update();
+
+        $request->session()->put('user', $user);
 
         return redirect('/profile');
     }
