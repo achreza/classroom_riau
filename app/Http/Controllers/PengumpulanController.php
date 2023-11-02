@@ -37,14 +37,15 @@ class PengumpulanController extends Controller
             $file->storeAs('pengumpulan', $filename, 'public');
         }
         $tugas = Tugas::find($id);
+
         if ($tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s') || $tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s')) {
             $pengumpulan = Pengumpulan::create([
                 'id_tugas' => $id,
                 'id_mahasiswa' => auth()->user()->id,
                 'file' => $filename,
                 'catatan' => $request->catatan,
-                'pengumpulan' => now(),
-                'status' => 'Done Late',
+                'pengumpulan' => now()->format('Y-m-d H:i:s'),
+                'status' => 'Terlambat',
             ]);
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;
@@ -60,8 +61,8 @@ class PengumpulanController extends Controller
                 'id_mahasiswa' => auth()->user()->id,
                 'file' => $filename,
                 'catatan' => $request->catatan,
-                'pengumpulan' => now(),
-                'status' => 'Done',
+                'pengumpulan' => now()->format('Y-m-d H:i:s'),
+                'status' => 'Selesai',
             ]);
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;

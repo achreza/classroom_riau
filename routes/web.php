@@ -72,7 +72,8 @@ Route::middleware(['auth'])->group(function () {
         )->name('tugas.store');
         Route::post('/tugas/update/{id}', [TugasController::class, 'update'])->name('tugas.update');
         Route::post('/tugas/penilaian/{id}', [TugasController::class, 'penilaian']);
-        Route::delete('/kelas/delete/{id}', [KelasController::class, 'delete'])->name('kelas.delete');
+        Route::get('/kelas/delete/{id}', [KelasController::class, 'delete'])->name('kelas.delete');
+
         Route::get('/tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.destroy');
     });
 
@@ -84,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
             '/joinkelas',
             [KelasController::class, 'joinkelas']
         )->name('joinkelas.store');
-
+        Route::get('/kelas-keluar/{id}', [KelasController::class, 'keluar'])->name('kelas.keluar');
     });
 
     Route::group(['middleware' => ['admin']], function () {

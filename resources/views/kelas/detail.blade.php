@@ -25,10 +25,12 @@
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>
-                                <form action="{{ route('kelas.delete', ['id' => $kelas->id]) }}" method="POST" id="form_delete_kelas">
+                                <form action="{{ route('kelas.delete', ['id' => $kelas->id]) }}" method="GET"
+                                    id="form_delete_kelas">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item text-danger fw-bold" id="hapus_kelas">Hapus Kelas</button>
+
+                                    <button type="submit" class="dropdown-item text-danger fw-bold" id="hapus_kelas">Hapus
+                                        Kelas</button>
                                 </form>
                             </li>
                         </ul>
@@ -99,15 +101,15 @@
 
                     </div>
                     @if (request()->session()->get('role') == 3)
-                    <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" id="form_delete">
-                        @csrf
-                        @method('DELETE')
-                        {{-- make with sweet alert --}}
-                        <button type="submit" class="btn btn-danger w-100 mt-3 showConfirm">
-                            Keluar dari kelas   </button>
-                    </form>
+                        <form action="{{ route('kelas.keluar', $kelas->id) }}" method="GET" id="form_delete">
+                            @csrf
+
+                            {{-- make with sweet alert --}}
+                            <button type="submit" class="btn btn-danger w-100 mt-3 showConfirm">
+                                Keluar dari kelas </button>
+                        </form>
                     @endif
-                    
+
                 </div>
             </div>
 
@@ -129,7 +131,7 @@
                             <label class="form-label" for="basic-default-password12">Nama Tugas</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="basic-default-password12"
-                                    placeholder="Nama Kelas" aria-describedby="basic-default-password2" name="nama_tugas">
+                                    placeholder="Nama Tugas" aria-describedby="basic-default-password2" name="nama_tugas">
                             </div>
                         </div>
                         <div class="form-password-toggle">
@@ -169,7 +171,7 @@
         </div>
     </div>
     <script>
-       $('.showConfirm').on('click', function(e) {
+        $('.showConfirm').on('click', function(e) {
             e.preventDefault();
             var form = $('#form_delete');
             Swal.fire({

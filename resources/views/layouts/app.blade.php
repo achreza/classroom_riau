@@ -9,7 +9,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>E - Learning</title>
+    <title>IKTN Learning</title>
+
+    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.svg') }}" />
 
     <meta name="description" content="" />
 
@@ -108,7 +110,7 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
 
-   
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     {{-- <script src="{{ asset('js/jquery.js') }}"></script> --}}

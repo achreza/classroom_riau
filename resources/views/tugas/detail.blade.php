@@ -38,10 +38,12 @@
                                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#modalTugas">
                                                         Edit tugas</a></li>
-                                                <li> 
-                                                    <a href="{{ route('tugas.destroy', $tugas->id) }}" class="dropdown-item text-danger fw-bold" type="submit" data-confirm-delete='true'>Hapus
+                                                <li>
+                                                    <a href="{{ route('tugas.destroy', $tugas->id) }}"
+                                                        class="dropdown-item text-danger fw-bold" type="submit"
+                                                        data-confirm-delete='true'>Hapus
                                                         Tugas</a>
-                                               </li>
+                                                </li>
                                             </ul>
                                         </div>
                                     @endif
@@ -97,12 +99,12 @@
                                                 <td>{{ $item->pengumpulan->pengumpulan }}</td>
                                                 <td>{{ $item->nilai }} / 100</td>
                                                 <td>
-                                                    @if ($item->pengumpulan->status == 'Done')
-                                                        <span class="badge bg-success">Done</span>
-                                                    @elseif($item->pengumpulan->status == 'Done Late')
-                                                        <span class="badge bg-warning text-dark">Done Late</span>
+                                                    @if ($item->pengumpulan->status == 'Selesai')
+                                                        <span class="badge bg-success">Tepat Waktu</span>
+                                                    @elseif($item->pengumpulan->status == 'Terlambat')
+                                                        <span class="badge bg-warning text-dark">Terlambat</span>
                                                     @else
-                                                        <span class="badge bg-danger">Not Done</span>
+                                                    
                                                     @endif
 
                                                 </td>
@@ -139,7 +141,8 @@
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">File Tugas</label>
                                             <input class="form-control" type="file" id="formFile" name="file">
-                                            <div id="emailHelp" class="form-text text-black">*Format file harus pdf.
+                                            <div id="emailHelp" class="form-text text-black">*Format file
+                                                pdf,word,zip,rar.
                                             </div>
                                         </div>
                                         <div class="mb-3">
@@ -154,7 +157,7 @@
                                             <div class="card-pengumpulan-header d-flex justify-content-end">
 
                                                 <a href="{{ route('pengumpulan.destroy', $pengumpulan->id) }}"
-                                                    class="btn btn-danger text-white btn-sm">Batalkan Pengumpulan</a>
+                                                    class="btn btn-danger text-white btn-sm" data-confirm-delete="true">Batalkan Pengumpulan</a>
                                             </div>
                                             <h6>Nilai</h6>
                                             <h5 class="fw-bold">{{ $nilai->nilai }} / 100</h5>
@@ -162,7 +165,7 @@
                                             <p>{{ $nilai->catatan_dosen ?? '-' }}</p>
                                             <h6>File</h6>
                                             <a class="btn btn-primary mt-2 "
-                                                href="{{ route('download.tugas', ['file' => $pengumpulan->file]) }}">
+                                                href="{{ route('download.pengumpulan', ['file' => $pengumpulan->file]) }}">
                                                 <img class="tugas-setting-logo me-2" src="{{ asset('image/tugas.svg') }}"
                                                     alt="">
                                                 Download File
@@ -190,7 +193,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tugas</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Tugas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body demo-vertical-spacing demo-only-element">
@@ -224,6 +227,11 @@
                                 value="{{ $tugas->deadline_time }}" />
                         </div>
                         <div class="form-group">
+                            <label class="form-label" for="tglAwalKegiatan">Kode Youtube:</label>
+                            <input type="text" class="form-control" id="file" name="kode_youtube"
+                                value="{{ $tugas->kode_youtube }}" />
+                        </div>
+                        <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">File:</label>
                             <input type="file" class="form-control" id="file" name="file"
                                 value="{{ $tugas->file }}" />
@@ -231,7 +239,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
@@ -262,9 +270,14 @@
                                     <div class="form-text">Berikan nilai antara 0-100 </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Catatan</label>
+                                    <label for="">Catatan untuk mahasiswa</label>
                                     <textarea class="form-control" placeholder="Masukkan catatan (jika diperlukan)" name="catatan_dosen" rows="3"></textarea>
                                 </div>
+                                {{-- <div class="mb-3">
+                                    <label class="fw-bold">Catatan dari mahasiswa</label>
+                                    <p>{{ $item->pengumpulan->catatan }}</p>
+
+                                </div> --}}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -349,5 +362,5 @@
             form.attr("action", `/tugas/penilaian/${id}`);
         }
     </script>
-    
+
 @endsection

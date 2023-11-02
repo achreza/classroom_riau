@@ -35,9 +35,6 @@ class TugasController extends Controller
     public function store(Request $request)
     {
         //
-
-
-
         // check input file
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -116,7 +113,7 @@ class TugasController extends Controller
         } else {
             Alert::error('Gagal', 'Tugas gagal diupdate');
         }
-        return redirect()->route('tugas.index');
+        return redirect()->back();
     }
 
     /**

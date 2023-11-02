@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
-    <title>Document</title>
+    <title>IKTN Learning</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.svg') }}" />
     <link rel="stylesheet" href="{{ asset('/style/login.css') }}" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -52,7 +53,7 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" name="email"
+                                    <input type="email" id="form3Example3" name="email" disabled
                                         value ="{{ $email }}"class="form-control" placeholder="email" />
 
                                 </div>

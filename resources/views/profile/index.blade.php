@@ -20,26 +20,32 @@
                     <div class="mb-3 col-md-12 fv-plugins-icon-container">
                         <label for="name" class="form-label">Name</label>
                         <input class="form-control" type="text" id="name" name="name" value="{{ $user->name }}"
-                            autofocus="">
+                            autofocus="" @if (request()->session()->get('role') == 1) disabled @endif>
                         <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                         </div>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="nim" class="form-label">NIM / NIP</label>
                         <input class="form-control" type="text" id="nim" name="kode" value="{{ $user->kode }}"
-                            placeholder="john.doe@example.com">
+                            placeholder="john.doe@example.com" @if (request()->session()->get('role') == 1) disabled @endif>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="jurusan" class="form-label">Jurusan</label>
                         <input type="text" class="form-control" id="jurusan" name="jurusan"
-                            value="{{ $user->jurusan }}">
+                            value="{{ $user->jurusan }}" @if (request()->session()->get('role') == 1) disabled @endif>
                     </div>
 
                 </div>
-                <div class="mt-2">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                @if (request()->session()->get('role') == 1)
+                    <div class=""></div>
+                @else
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">Save
+                            changes</button>
 
-                </div>
+                    </div>
+                @endif
+
                 <input type="hidden">
             </form>
         </div>
