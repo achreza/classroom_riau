@@ -63,10 +63,10 @@ class KelasController extends Controller
         $kelas->save();
         if ($kelas) {
             Alert::success('Sukses', 'Berhasil Menambah Kelas');
-            return redirect()->route('dashboard.index');
+            return redirect()->back();
         } else {
             Alert::error('Error', 'Gagal Menambah Kelas');
-            return redirect()->route('kelas');
+            return redirect()->back();
         }
     }
 
@@ -160,10 +160,10 @@ class KelasController extends Controller
         $class->save();
         if ($class) {
             Alert::success('Sukses', 'Berhasil Mengubah Kelas');
-            return redirect()->route('dashboard.index');
+            return redirect()->back();
         } else {
             Alert::error('Error', 'Gagal Mengubah Kelas');
-            return view('kelas');
+            return redirect()->back();
         }
     }
 
@@ -180,7 +180,7 @@ class KelasController extends Controller
             return redirect()->route('dashboard.index');
         } else {
             Alert::error('Error', 'Gagal Menghapus Kelas');
-            return view('kelas');
+            return redirect()->route('dashboard.index');
         }
     }
     public function delete($id)

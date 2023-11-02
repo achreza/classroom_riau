@@ -15,7 +15,7 @@
             @if (request()->session()->get('role') == 2)
                 <div class="kelas-dosen-button-group d-flex justify-content-between align-items-baseline">
                     <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalTugas">
-                        Tambah Tugas <i class="fas fa-plus"></i>
+                        Tambah Materi <i class="fas fa-plus"></i>
                     </button>
                     <div class="dropdown">
                         <div class="p-1 rounded-circle btn btn-primary " id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -120,7 +120,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tugas</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Materi</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body demo-vertical-spacing demo-only-element">
@@ -128,10 +128,10 @@
                         @csrf
                         <input type="text" name="id_kelas" value="{{ $kelas->id }}" hidden>
                         <div class="form-password-toggle">
-                            <label class="form-label" for="basic-default-password12">Nama Tugas</label>
+                            <label class="form-label" for="basic-default-password12">Nama Materi</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="basic-default-password12"
-                                    placeholder="Nama Kelas" aria-describedby="basic-default-password2" name="nama_tugas">
+                                    placeholder="Nama Tugas" aria-describedby="basic-default-password2" name="nama_tugas">
                             </div>
                         </div>
                         <div class="form-password-toggle">
@@ -163,8 +163,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambahkan</button>
                     </form>
                 </div>
             </div>

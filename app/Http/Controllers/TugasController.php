@@ -47,19 +47,28 @@ class TugasController extends Controller
             $file = $request->file('file');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('tugas', $filename, 'public');
+        } else {
+            $filename = null;
         }
 
         $tugas = Tugas::create([
-            $request->all(),
+            'id_kelas' => $request->id_kelas,
+            'id_dosen' => Auth::user()->id,
+            'nama_tugas' => $request->nama_tugas,
+            'deskripsi' => $request->deskripsi,
+            'file' => $filename,
+            'kode_youtube' => $request->youtube,
+            'deadline_date' => $request->deadline_date,
+            'deadline_time' => $request->deadline_time,
         ]);
 
         $tugas->save();
         if ($tugas) {
             Alert::success('Berhasil', 'Tugas berhasil dibuat');
-            return redirect()->route('dashboard.index');
+            return redirect()->back();
         } else {
             Alert::error('Gagal', 'Tugas gagal dibuat');
-            return redirect()->route('tugas');
+            return redirect()->back();
         }
     }
 
@@ -124,7 +133,7 @@ class TugasController extends Controller
         //
         Tugas::destroy($id);
         Alert::success('Berhasil', 'Tugas berhasil dihapus');
-        return redirect()->route('dashboard.index');
+        return redirect()->back();
     }
 
     public function penilaian(Request $request, $id)

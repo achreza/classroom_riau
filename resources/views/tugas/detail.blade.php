@@ -59,13 +59,15 @@
 
                             <div class="body-tugas">
                                 {!! $tugas->deskripsi !!}
+                                @if (!$tugas->file == null)
+                                    <a class="btn btn-primary mt-2 "
+                                        href="{{ route('download.tugas', ['file' => $tugas->file]) }}">
+                                        <img class="tugas-setting-logo me-2" src="{{ asset('image/tugas.svg') }}"
+                                            alt="">
+                                        Download Tugas
+                                    </a>
+                                @endif
 
-                                <a class="btn btn-primary mt-2 "
-                                    href="{{ route('download.tugas', ['file' => $tugas->file]) }}">
-                                    <img class="tugas-setting-logo me-2" src="{{ asset('image/tugas.svg') }}"
-                                        alt="">
-                                    Download Tugas
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -96,13 +98,14 @@
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>{{ $item->pengumpulan->mahasiswa->name }}</td>
-                                                <td>{{ $item->pengumpulan->pengumpulan }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->pengumpulan->pengumpulan)->format('d-m-Y H:i:s') }}
+                                                </td>
                                                 <td>{{ $item->nilai }} / 100</td>
                                                 <td>
-                                                    @if ($item->pengumpulan->status == 'Done')
-                                                        <span class="badge bg-success">Done</span>
-                                                    @elseif($item->pengumpulan->status == 'Done Late')
-                                                        <span class="badge bg-warning text-dark">Done Late</span>
+                                                    @if ($item->pengumpulan->status == 'Selesai')
+                                                        <span class="badge bg-success">Tepat Waktu</span>
+                                                    @elseif($item->pengumpulan->status == 'Terlambat')
+                                                        <span class="badge bg-warning text-dark">Terlambat</span>
                                                     @else
                                                     @endif
 
@@ -192,7 +195,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tugas</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Tugas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body demo-vertical-spacing demo-only-element">
@@ -237,8 +240,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Perbarui</button>
                     </form>
                 </div>
             </div>
@@ -258,7 +261,9 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-8">
-                                <iframe id="pdf-preview" frameborder="0" style="width: 100%;height:100vh;"></iframe>
+                                <iframe id="pdf-preview" frameborder="0" style="width: 100%; height: 100vh;"
+                                    sandbox="allow-same-origin allow-scripts"></iframe>
+
                             </div>
                             <div class="col-lg-4">
 
@@ -276,11 +281,12 @@
                                     <label class="fw-bold">Catatan dari mahasiswa</label>
                                     <p>{{ $item->pengumpulan->catatan ?? '-' }}</p>
                                 </div>
+
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                 </form>
             </div>
