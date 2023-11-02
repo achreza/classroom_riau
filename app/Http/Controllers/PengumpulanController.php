@@ -48,8 +48,6 @@ class PengumpulanController extends Controller
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('pengumpulan', $filename, 'public');
         }
-
-
         $tugas = Tugas::find($id);
 
         if ($tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s') || $tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s')) {
@@ -69,7 +67,7 @@ class PengumpulanController extends Controller
             ]);
             Alert::success('Berhasil', 'Tugas berhasil dikumpulkan');
             return redirect()->back();
-        } elseif ($tugas->deadline_date > $sekarang->format('Y-m-d') && $tugas->deadline_time > $sekarang->format('H:i:s') || $tugas->deadline_date == $sekarang->format('Y-m-d') && $tugas->deadline_time > $sekarang->format('H:i:s') || $tugas->deadline_date == $sekarang->format('Y-m-d') && $tugas->deadline_time == $sekarang->format('H:i:s')) {
+        } elseif ($tugas->deadline_date > now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time == now()->format('H:i:s')) {
             $pengumpulan = Pengumpulan::create([
                 'id_tugas' => $id,
                 'id_mahasiswa' => auth()->user()->id,
