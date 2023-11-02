@@ -36,9 +36,6 @@ class TugasController extends Controller
     public function store(Request $request)
     {
         //
-
-
-
         // check input file
         if ($request->hasFile('file')) {
             $file = $request->file('file');
