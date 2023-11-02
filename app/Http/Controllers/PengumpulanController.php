@@ -47,6 +47,8 @@ class PengumpulanController extends Controller
             $file = $request->file('file');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('pengumpulan', $filename, 'public');
+        } else {
+            $filename = null;
         }
         $tugas = Tugas::find($id);
 
@@ -59,6 +61,7 @@ class PengumpulanController extends Controller
                 'pengumpulan' => now()->format('Y-m-d H:i:s'),
                 'status' => 'Terlambat',
             ]);
+
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;
             Nilai::create([
@@ -76,6 +79,7 @@ class PengumpulanController extends Controller
                 'pengumpulan' => now()->format('Y-m-d H:i:s'),
                 'status' => 'Selesai',
             ]);
+
             $pengumpulan->save();
             $id_pengumpulan = $pengumpulan->id;
             Nilai::create([
