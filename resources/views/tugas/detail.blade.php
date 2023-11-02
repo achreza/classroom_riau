@@ -99,10 +99,10 @@
                                                 <td>{{ $item->pengumpulan->pengumpulan }}</td>
                                                 <td>{{ $item->nilai }} / 100</td>
                                                 <td>
-                                                    @if ($item->pengumpulan->status == 'Done')
-                                                        <span class="badge bg-success">Done</span>
-                                                    @elseif($item->pengumpulan->status == 'Done Late')
-                                                        <span class="badge bg-warning text-dark">Done Late</span>
+                                                    @if ($item->pengumpulan->status == 'Selesai')
+                                                        <span class="badge bg-success">Tepat Waktu</span>
+                                                    @elseif($item->pengumpulan->status == 'Terlambat')
+                                                        <span class="badge bg-warning text-dark">Terlambat</span>
                                                     @else
                                                     
                                                     @endif
@@ -193,7 +193,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tugas</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Tugas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body demo-vertical-spacing demo-only-element">
@@ -273,11 +273,11 @@
                                     <label for="">Catatan untuk mahasiswa</label>
                                     <textarea class="form-control" placeholder="Masukkan catatan (jika diperlukan)" name="catatan_dosen" rows="3"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label class="fw-bold">Catatan dari mahasiswa</label>
                                     <p>{{ $item->pengumpulan->catatan }}</p>
 
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="modal-footer">

@@ -131,7 +131,7 @@
                             <label class="form-label" for="basic-default-password12">Nama Tugas</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="basic-default-password12"
-                                    placeholder="Nama Kelas" aria-describedby="basic-default-password2" name="nama_tugas">
+                                    placeholder="Nama Tugas" aria-describedby="basic-default-password2" name="nama_tugas">
                             </div>
                         </div>
                         <div class="form-password-toggle">
