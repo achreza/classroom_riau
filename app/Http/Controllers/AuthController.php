@@ -112,7 +112,14 @@ class AuthController extends Controller
 
         $request->session()->put('user', $user);
 
-        return redirect('/profile');
+        // alert success
+        if ($user) {
+            Alert::success('Sukses', 'Berhasil Mengubah Profile');
+            return redirect()->back();
+        } else {
+            Alert::error('Gagal', 'Gagal Mengubah Profile');
+            return redirect()->back();
+        }
     }
     public function destroy($id)
     {
