@@ -52,18 +52,13 @@ class PengumpulanController extends Controller
 
         $tugas = Tugas::find($id);
 
-        // Mengambil zona waktu yang sesuai dengan lokasi Anda
-        $zona_waktu = 'Asia/Jakarta'; // Ganti dengan zona waktu yang sesuai dengan lokasi Anda
-
-        $sekarang = now($zona_waktu);
-
-        if ($tugas->deadline_date < $sekarang->format('Y-m-d') && $tugas->deadline_time < $sekarang->format('H:i:s') || $tugas->deadline_date < $sekarang->format('Y-m-d') && $tugas->deadline_time > $sekarang->format('H:i:s') || $tugas->deadline_date == $sekarang->format('Y-m-d') && $tugas->deadline_time < $sekarang->format('H:i:s')) {
+        if ($tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s') || $tugas->deadline_date < now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time < now()->format('H:i:s')) {
             $pengumpulan = Pengumpulan::create([
                 'id_tugas' => $id,
                 'id_mahasiswa' => auth()->user()->id,
                 'file' => $filename,
                 'catatan' => $request->catatan,
-                'pengumpulan' => $sekarang,
+                'pengumpulan' => now()->format('Y-m-d H:i:s'),
                 'status' => 'Terlambat',
             ]);
             $pengumpulan->save();
@@ -80,7 +75,7 @@ class PengumpulanController extends Controller
                 'id_mahasiswa' => auth()->user()->id,
                 'file' => $filename,
                 'catatan' => $request->catatan,
-                'pengumpulan' => $sekarang,
+                'pengumpulan' => now()->format('Y-m-d H:i:s'),
                 'status' => 'Selesai',
             ]);
             $pengumpulan->save();
