@@ -35,7 +35,10 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //file validation
+        $request->validate([
+            'file' => 'max:5120',
+        ]);
 
 
 
@@ -47,14 +50,7 @@ class TugasController extends Controller
         }
 
         $tugas = Tugas::create([
-            'id_kelas' => $request->id_kelas,
-            'id_dosen' => Auth::user()->id,
-            'nama_tugas' => $request->nama_tugas,
-            'deskripsi' => $request->deskripsi,
-            'file' => $filename,
-            'kode_youtube' => $request->youtube,
-            'deadline_date' => $request->deadline_date,
-            'deadline_time' => $request->deadline_time,
+            $request->all(),
         ]);
 
         $tugas->save();

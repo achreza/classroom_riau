@@ -104,7 +104,6 @@
                                                     @elseif($item->pengumpulan->status == 'Done Late')
                                                         <span class="badge bg-warning text-dark">Done Late</span>
                                                     @else
-                                                    
                                                     @endif
 
                                                 </td>
@@ -275,8 +274,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="fw-bold">Catatan dari mahasiswa</label>
-                                    <p>{{ $item->pengumpulan->catatan }}</p>
-
+                                    <p>{{ $item->pengumpulan->catatan ?? '-' }}</p>
                                 </div>
                             </div>
                         </div>
