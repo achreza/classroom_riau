@@ -47,8 +47,6 @@ class PengumpulanController extends Controller
             $file = $request->file('file');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('pengumpulan', $filename, 'public');
-        } else {
-            $filename = null;
         }
         $tugas = Tugas::find($id);
 

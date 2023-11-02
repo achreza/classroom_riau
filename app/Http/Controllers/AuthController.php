@@ -111,6 +111,14 @@ class AuthController extends Controller
         $user->update();
 
         $request->session()->put('user', $user);
+        $temp = $request->session()->get('user');
+        if ($temp->role_id == 1) {
+            $request->session()->put('posisi', 'Admin');
+        } else if ($temp->role_id == 2) {
+            $request->session()->put('posisi', 'Dosen');
+        } else if ($temp->role_id == 3) {
+            $request->session()->put('posisi', 'Mahasiswa');
+        }
 
         // alert success
         if ($user) {
