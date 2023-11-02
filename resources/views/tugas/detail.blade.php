@@ -157,7 +157,7 @@
                                             <div class="card-pengumpulan-header d-flex justify-content-end">
 
                                                 <a href="{{ route('pengumpulan.destroy', $pengumpulan->id) }}"
-                                                    class="btn btn-danger text-white btn-sm">Batalkan Pengumpulan</a>
+                                                    class="btn btn-danger text-white btn-sm" data-confirm-delete="true">Batalkan Pengumpulan</a>
                                             </div>
                                             <h6>Nilai</h6>
                                             <h5 class="fw-bold">{{ $nilai->nilai }} / 100</h5>
