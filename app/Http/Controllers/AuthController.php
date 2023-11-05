@@ -6,6 +6,7 @@ use App\Models\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Artisan;
 // alert
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,7 +22,7 @@ class AuthController extends Controller
     // function hadle google callback
     public function handleGoogleCallback(Request $request)
     {
-         
+
         Artisan::call('optimize');
 
         $user = Socialite::driver('google')->stateless()->user();
