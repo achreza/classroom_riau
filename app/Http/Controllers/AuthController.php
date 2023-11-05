@@ -21,6 +21,9 @@ class AuthController extends Controller
     // function hadle google callback
     public function handleGoogleCallback(Request $request)
     {
+         
+        Artisan::call('optimize');
+
         $user = Socialite::driver('google')->stateless()->user();
         $request->session()->put('avatar', $user->avatar);
         // check if user already exists
