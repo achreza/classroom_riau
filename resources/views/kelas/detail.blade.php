@@ -139,7 +139,13 @@
                             <input class="form-control" id="deskripsi" type="hidden" name="deskripsi">
                             <trix-editor input="deskripsi"></trix-editor>
                         </div>
-
+                        <div class="form-password-toggle">
+                            <label class="form-label" for="basic-default-password12">Pertemuan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="pertemuan" placeholder="Pertemuan Ke-"
+                                    aria-describedby="basic-default-password2" name="pertemuan">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Deadline Date:</label>

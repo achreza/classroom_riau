@@ -62,6 +62,7 @@ class TugasController extends Controller
             'id_kelas' => $request->id_kelas,
             'id_dosen' => Auth::user()->id,
             'nama_tugas' => $request->nama_tugas,
+            'pertemuan' => $request->pertemuan,
             'deskripsi' => $request->deskripsi,
             'file' => $filename,
             'kode_youtube' => $request->youtube,
@@ -139,9 +140,10 @@ class TugasController extends Controller
     public function destroy($id)
     {
         //
+        $id_kelas = Tugas::find($id)->id_kelas;
         Tugas::destroy($id);
         Alert::success('Berhasil', 'Tugas berhasil dihapus');
-        return redirect()->back();
+        return redirect()->route('kelas.show', ['kela' => $id_kelas]);
     }
 
     public function penilaian(Request $request, $id)

@@ -23,6 +23,8 @@
                                 <div class="judul-tugas-group d-flex justify-content-between">
                                     <div>
                                         <h4 class="mb-0">{{ $tugas->nama_tugas }}</h4>
+                                        {{-- pertemuan ke --}}
+                                        <h5 class="mb-0 mt-3">Pertemuan ke-{{ $tugas->pertemuan }}</h5>
                                         <small class="text-muted">Deadline : {{ $dateFormatted }},
                                             {{ $tugas->deadline_time }}</small>
                                     </div>
@@ -216,8 +218,14 @@
                             <input class="form-control" id="deskripsi" type="hidden" name="deskripsi">
                             <trix-editor input="deskripsi">{!! $tugas->deskripsi !!}</trix-editor>
                         </div>
-
-
+                        <div class="form-password-toggle">
+                            <label class="form-label" for="basic-default-password12">Pertemuan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="pertemuan" placeholder="Pertemuan Ke-"
+                                    aria-describedby="basic-default-password2" name="pertemuan" value="{{ $tugas->pertemuan }}">
+                            </div>
+                        </div>
+                     
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Deadline Date:</label>
                             <input type="date" class="form-control" id="ddate" name="deadline_date"
