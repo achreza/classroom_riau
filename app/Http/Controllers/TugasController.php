@@ -205,4 +205,24 @@ class TugasController extends Controller
         }
 
     }
+
+    public function komentar_update(Request $request, $id, $status_komentar)
+    {
+        $tugas = Tugas::find($id);
+        if ($tugas) {
+            if ($status_komentar == '0') {
+                $tugas->update([
+                    'status_komentar' => '1',
+                ]);
+            } else {
+                $tugas->update([
+                    'status_komentar' => '0',
+                ]);
+            }
+            Alert::success('Berhasil', 'Komentar berhasil diupdate');
+        } else {
+            Alert::error('Gagal', 'Komentar gagal diupdate');
+        }
+        return redirect()->back();
+    }
 }

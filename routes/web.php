@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
     // komentar
     Route::post('/komentar/{id}', [TugasController::class, 'komentar'])->name('komentar.store');
+    Route::get('/komentar/update/{id}/{status_komentar}', [TugasController::class, 'komentar_update'])->name('komentar.update');
 
     // Dosen
     Route::group(['middleware' => ['dosen']], function () {
