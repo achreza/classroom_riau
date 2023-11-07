@@ -20,8 +20,8 @@ class EmailPemberitahuan extends Mailable
 
     public function build()
     {
-        return $this->from('greentech.notification@gmail.com', 'GreenTech Notification')
-            ->subject('GreenTech Notification')
+        return $this->from('iktnlearning@gmail.com', 'IKTN Learning Notification')
+            ->subject('IKTN Learning Notification')
             ->view('emails.pemberitahuan')
             ->with('data', $this->data);
     }

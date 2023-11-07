@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_dosen');
             $table->string('nama_tugas');
             $table->string('pertemuan')->nullable();
+            $table->date('tanggal_perkuliahan');
             $table->string('file')->nullable();
             $table->string('kode_youtube')->nullable();
 

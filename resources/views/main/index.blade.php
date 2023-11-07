@@ -133,7 +133,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="basic-default-password12"
                                         placeholder="Kode Mata Kuliah" aria-describedby="basic-default-password2"
-                                        name="kode_kelas">
+                                        name="kode_matakuliah">
                                 </div>
                             </div>
                             <div class="form-password-toggle">

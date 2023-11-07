@@ -63,6 +63,7 @@ class TugasController extends Controller
             'id_dosen' => Auth::user()->id,
             'nama_tugas' => $request->nama_tugas,
             'pertemuan' => $request->pertemuan,
+            'tanggal_perkuliahan' => $request->tanggal_perkuliahan,
             'deskripsi' => $request->deskripsi,
             'file' => $filename,
             'kode_youtube' => $request->youtube,
@@ -93,6 +94,7 @@ class TugasController extends Controller
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
             $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
+            $tgl_perkuliahan = date('d-m-Y', strtotime($tugas->tanggal_perkuliahan));
             if ($pengumpulan != null) {
                 $nilai = Nilai::where('id_pengumpulan', $pengumpulan->id)->first();
 
@@ -107,7 +109,8 @@ class TugasController extends Controller
             $id_pengumpulan = $pengumpulan->pluck('id');
             $nilai = Nilai::whereIn('id_pengumpulan', $id_pengumpulan)->get();
             $dateFormatted =  date('d-m-Y', strtotime($tugas->deadline_date));
-            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
+            $tgl_perkuliahan = date('d-m-Y', strtotime($tugas->tanggal_perkuliahan));
+            return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai', 'tgl_perkuliahan'));
         }
     }
 

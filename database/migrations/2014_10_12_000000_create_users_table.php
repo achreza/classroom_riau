@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('kode');
             $table->string('jurusan');
+            $table->string('is_online')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
