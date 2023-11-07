@@ -9,6 +9,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Artisan;
 // alert
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail\EmailPemberitahuan;
+use Illuminate\Support\Facades\Mail;
 
 
 class AuthController extends Controller
@@ -56,6 +58,20 @@ class AuthController extends Controller
             // return view
             return view('auth.register', compact('page', 'email'));
         }
+    }
+
+    //function testEmail
+    public function testEmail()
+    {
+        $data = [
+            'subject' => "[ICGT 2023] Your Submission has been Rejected",
+            'isi' => "
+                Dear  \nInformation about your paper Entitled  for ICGT 2023 was Rejected. You can check the Comment Given by Reviewers and their status at https://gcms.uin-malang.ac.id/.\n From there, you can see the current status of the paper, whether a manuscript has been submitted and can edit the abstract information.\n\nRegards,
+        Thank you and have a nice day.\n\nWarmest Regards
+        Technical and Support-Staff\n
+        ICGT-2023",
+        ];
+        Mail::to('achmadfahreza950@gmail.com')->send(new EmailPemberitahuan($data));
     }
 
     // function register
