@@ -9,6 +9,17 @@
     border-color: #0d613f;
 }
 
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(121, 121, 121);
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .dot-online {
     height: 9px;
     width: 9px;

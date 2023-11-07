@@ -97,18 +97,18 @@
                         <div class="col-lg-8 offset-lg-2">
                             {{-- Tampilkan komentar disini --}}
                             @foreach ($komentar as $item)
-                            <div class="coment-bottom bg-white p-2 px-4 rounded-2 mb-2">
+                                <div class="coment-bottom bg-white p-2 px-4 rounded-2 mb-2">
 
-                                <div class="commented-section mt-2">
-                                    <div class="d-flex flex-row align-items-center  commented-user">
-                                    <h5 class="mr-2">{{ $item->user->name }}</h5><span class="dot"></span>
-                                        <p class="text-muted">{{ $item->created_at->diffForHumans() }}</p>
+                                    <div class="commented-section mt-2">
+                                        <div class="d-flex flex-row align-items-center  commented-user">
+                                            <h5 class="mr-2">{{ $item->user->name }}</h5><span class="dot"></span>
+                                            <p class="text-muted">{{ $item->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        <div class="comment-text-sm"><span>
+                                                {{ $item->komentar }}</span></div>
+
                                     </div>
-                                    <div class="comment-text-sm"><span>
-                                        {{ $item->komentar }}</span></div>
-
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -409,7 +409,7 @@
     <script>
         function passingDataToModal(id, filename) {
 
-            $("#pdf-preview").attr("src", `/storage/pengumpulan/${filename}`);
+            $("#pdf-preview").attr("src", `/public/storage/pengumpulan/${filename}`);
 
             const form = $("#formPenilaian");
             form.attr("action", `/tugas/penilaian/${id}`);
