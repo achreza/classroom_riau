@@ -45,12 +45,12 @@ class KelasController extends Controller
         ]);
 
         //create ranndom 5 digit string and check if kode kelas already exist in kelas, if exist random again
-        $kode_kelas = '';
-        do {
-            //generate a random string usually 5 digits
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
-        } while (Kelas::where('kode_kelas', $kode_kelas)->first());
+        // $kode_kelas = '';
+        // do {
+        //     //generate a random string usually 5 digits
+        //     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+        //     $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
+        // } while (Kelas::where('kode_kelas', $kode_kelas)->first());
 
 
 
@@ -58,7 +58,7 @@ class KelasController extends Controller
             'nama_kelas' => $request->nama_kelas,
             'deskripsi' => $request->deskripsi,
             'id_pembuat' => Auth::user()->id,
-            'kode_kelas' => $kode_kelas,
+            'kode_kelas' => $request->kode_kelas,
         ]);
         $kelas->save();
         if ($kelas) {
@@ -132,14 +132,16 @@ class KelasController extends Controller
             ]);
             $mm_kelas->save();
             if ($mm_kelas) {
+                Alert::success('Sukses', 'Berhasil Bergabung Mata Kuliah');
                 return redirect()->route('dashboard.index');
             } else {
+                Alert::error('Error', 'Gagal Bergabung Mata Kuliah');
                 return redirect()->route('kelas');
             }
         } else {
             //redirect back
-            Alert::error('Error', 'Kode kelas tidak ditemukan');
-            return redirect()->back()->with('error', 'Kode kelas tidak ditemukan');
+            Alert::error('Error', 'Kode Mata Kuliah tidak ditemukan');
+            return redirect()->back()->with('error', 'Kode Mata Kuliah tidak ditemukan');
         }
     }
 
@@ -186,6 +188,7 @@ class KelasController extends Controller
     public function delete($id)
     {
         Kelas::destroy($id);
+        Alert::success('Sukses', 'Berhasil Menghapus Kelas');
         return redirect()->route('dashboard.index');
     }
 
@@ -193,6 +196,7 @@ class KelasController extends Controller
     {
         $kelas = Mm_kelas::where('id_kelas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
         $kelas->delete();
+        Alert::success('Sukses', 'Berhasil Keluar Mata Kuliah');
         return redirect()->route('dashboard.index');
     }
 }

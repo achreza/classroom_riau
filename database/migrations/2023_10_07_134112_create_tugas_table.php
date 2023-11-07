@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kelas');
             $table->unsignedBigInteger('id_dosen');
             $table->string('nama_tugas');
+            $table->string('pertemuan')->nullable();
             $table->string('file')->nullable();
             $table->string('kode_youtube')->nullable();
 

@@ -5,12 +5,12 @@
     <!-- Button trigger modal -->
     @if ($role == 'dosen')
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Tambah Kelas <i class="fas fa-plus"></i>
+            Tambah Mata Kuliah <i class="fas fa-plus"></i>
         </button>
     @endif
     @if ($role == 'mahasiswa')
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Masuk ke Kelas <i class="fas fa-plus"></i>
+            Masuk ke Mata Kuliah <i class="fas fa-plus"></i>
         </button>
     @endif
 
@@ -114,14 +114,14 @@
                     </div>
                 @elseif ($role == 'dosen')
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Mata Kuliah</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body demo-vertical-spacing demo-only-element">
                         <form action="{{ route('kelas.store') }}" method="POST">
                             @csrf
                             <div class="form-password-toggle">
-                                <label class="form-label" for="basic-default-password12">Nama Kelas</label>
+                                <label class="form-label" for="basic-default-password12">Nama Mata Kuliah</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="basic-default-password12"
                                         placeholder="Nama Kelas" aria-describedby="basic-default-password2"
@@ -129,9 +129,17 @@
                                 </div>
                             </div>
                             <div class="form-password-toggle">
+                                <label class="form-label" for="basic-default-password12">Kode Mata Kuliah</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="basic-default-password12"
+                                        placeholder="Kode Mata Kuliah" aria-describedby="basic-default-password2"
+                                        name="kode_kelas">
+                                </div>
+                            </div>
+                            <div class="form-password-toggle">
                                 <label class="form-label" for="basic-default-password12">Deskripsi</label>
                                 <div class="input-group">
-                                    <textarea class="form-control" id="basic-default-password12" rows="3" placeholder="Deskripsi Kelas"
+                                    <textarea class="form-control" id="basic-default-password12" rows="3" placeholder="Deskripsi Mata Kuliah"
                                         aria-describedby="basic-default-password2" name="deskripsi"></textarea>
 
                                 </div>
