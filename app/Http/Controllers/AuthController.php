@@ -50,7 +50,7 @@ class AuthController extends Controller
             } else if ($existingUser->role_id == 3) {
                 $request->session()->put('posisi', 'Mahasiswa');
             }
-            
+
             return redirect('/dashboard');
         } else {
             // create a new user
@@ -91,20 +91,21 @@ class AuthController extends Controller
         Mail::to($email_user)->send(new EmailPemberitahuan($data));
     }
 
-    // function emailTerlambat
-    // public function emailTerlambat($id)
-    // {
-    //     $user = User::where('id', $id)->first();
-    //     $nama = $user->name;
-    //     $kelas = $user->kelas;
-    //     $data = [
-    //         'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
-    //         'isi' => "
-    //         Halo, Anda menerima tugas baru dari $nama yang terdaftar di kelas $kelas dengan Status Terlambat.  Silakan cek tugasnya dengan judul: $judul.",
-    //     ];
-    //     $email_user = request()->session()->get('email');
-    //     Mail::to($email_user)->send(new EmailPemberitahuan($data));
-    // }
+
+    public function emailTerlambat($id)
+    {
+        $user = User::where('id', $id)->first();
+        $nama = $user->name;
+        $kelas = $user->kelas;
+        $judul = $user->judul;
+        $data = [
+            'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
+            'isi' => "
+            Halo, Anda menerima tugas baru dari $nama yang terdaftar di kelas $kelas dengan Status Terlambat.  Silakan cek tugasnya dengan judul: $judul.",
+        ];
+        $email_user = request()->session()->get('email');
+        Mail::to($email_user)->send(new EmailPemberitahuan($data));
+    }
 
 
     // function register

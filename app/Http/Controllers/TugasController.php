@@ -9,6 +9,10 @@ use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail\EmailPemberitahuan;
+use App\Models\Mm_kelas;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class TugasController extends Controller
 {
@@ -75,6 +79,27 @@ class TugasController extends Controller
 
         $tugas->save();
         if ($tugas) {
+
+            $users = Mm_kelas::where('id_kelas', $request->id_kelas)->get();
+            $userdata = [];
+
+            foreach ($users as $user) {
+                $userdata[] = $user->id_mahasiswa;
+            }
+            $mahasiswa = User::whereIn('id', $userdata)->get();
+            foreach ($mahasiswa as $user) {
+                $nama = $user->name;
+                $kelas = $user->kelas;
+                $data = [
+                    'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
+                    'isi' => "
+                Hai $nama! Tugas baru telah ditambahkan ke kelas $kelas. Jangan lupa untuk memeriksanya dan tetap terorganisir, jangan sampai melewatkan deadline. Mulai sekarang dan tunjukkan yang terbaik.",
+                ];
+                $email_user = $user->email;
+                Mail::to($email_user)->send(new EmailPemberitahuan($data));
+            }
+
+
             Alert::success('Berhasil', 'Tugas berhasil dibuat');
             return redirect()->back();
         } else {
@@ -91,7 +116,7 @@ class TugasController extends Controller
         $title = 'Hapus Tugas';
         $text = 'Apakah anda yakin ingin Hapus tugas ini?';
         confirmDelete($title, $text);
-        $komentar = Komentar::with('user', 'tugas')->get();
+        $komentar = Komentar::with('user', 'tugas')->where('id_tugas', $id)->get();
         if (Auth::user()->role_id == 3) {
             $tugas = Tugas::find($id);
             $pengumpulan = Pengumpulan::where('id_tugas', $id)->where('id_mahasiswa', Auth::user()->id)->first();
