@@ -66,6 +66,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('/profile/{id}', [AuthController::class, 'userUpdate'])->name('profile.update');
 
+    // komentar
+    Route::post('/komentar/{id}', [TugasController::class, 'komentar'])->name('komentar.store');
+
     // Dosen
     Route::group(['middleware' => ['dosen']], function () {
 
