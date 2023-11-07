@@ -146,7 +146,10 @@
                                     aria-describedby="basic-default-password2" name="pertemuan">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="form-label" for="tglAwalKegiatan">Tanggal Perkuliahan:</label>
+                            <input type="date" class="form-control" id="tglAwalKegiatan" name="tanggal_perkuliahan" />
+                        </div>
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Deadline Date:</label>
                             <input type="date" class="form-control" id="tglAwalKegiatan" name="deadline_date" />
