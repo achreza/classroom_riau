@@ -75,7 +75,7 @@ class PengumpulanController extends Controller
             $namamahasiswa = auth()->user()->name;
             $kelas = $tugas->kelas->nama_kelas;
             $data = [
-                'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
+                'subject' => "[IKTN Learning] Pengumpulan Tugas Terlambat",
                 'isi' => "
                 Halo, Anda menerima tugas baru dari $namamahasiswa yang terdaftar di kelas $kelas dengan Status Terlambat.  Silakan cek tugasnya.",
             ];

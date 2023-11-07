@@ -20,4 +20,9 @@ class Tugas extends Model
     {
         return $this->belongsTo(User::class, 'id_dosen', 'id');
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class, 'id');
+    }
 }
