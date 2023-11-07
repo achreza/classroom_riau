@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Pengumpulan;
 use App\Models\Tugas;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail\EmailPemberitahuan;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class PengumpulanController extends Controller
 {
@@ -66,6 +69,19 @@ class PengumpulanController extends Controller
                 'id_pengumpulan' => $id_pengumpulan,
                 'nilai' => 0,
             ]);
+            //email
+            $dosen = User::where('id', $tugas->id_dosen)->first();
+            $emaildosen = $dosen->email;
+            $namamahasiswa = auth()->user()->name;
+            $kelas = $tugas->kelas->nama_kelas;
+            $data = [
+                'subject' => "[IKTN Learning] Pengumpulan Tugas Terlambat",
+                'isi' => "
+                Halo, Anda menerima tugas baru dari $namamahasiswa yang terdaftar di kelas $kelas dengan Status Terlambat.  Silakan cek tugasnya.",
+            ];
+            $email_user = request()->session()->get('email');
+            Mail::to($emaildosen)->send(new EmailPemberitahuan($data));
+
             Alert::success('Berhasil', 'Tugas berhasil dikumpulkan');
             return redirect()->back();
         } elseif ($tugas->deadline_date > now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time > now()->format('H:i:s') || $tugas->deadline_date == now()->format('Y-m-d') && $tugas->deadline_time == now()->format('H:i:s')) {

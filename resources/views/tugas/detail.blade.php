@@ -81,14 +81,14 @@
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             <div class="comment-section  py-4" style="border-top: 1px solid gray; margin-top: 30px">
-                                <div class="form" action="" method="post">
+                                <form class="form" action="{{ route('komentar.store', $tugas->id) }}" method="post">
+                                    @csrf
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Kirim</button>
-
-                                </div>
+                                </form>
                             </div>
 
                         </div>
@@ -96,20 +96,20 @@
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             {{-- Tampilkan komentar disini --}}
-                            <div class="coment-bottom bg-white p-2 px-4 rounded-2">
+                            @foreach ($komentar as $item)
+                            <div class="coment-bottom bg-white p-2 px-4 rounded-2 mb-2">
 
                                 <div class="commented-section mt-2">
                                     <div class="d-flex flex-row align-items-center  commented-user">
-                                        <h5 class="mr-2">Corey oates</h5><span class="dot"></span>
-                                        <p class="text-muted">4 hours ago</p>
+                                    <h5 class="mr-2">{{ $item->user->name }}</h5><span class="dot"></span>
+                                        <p class="text-muted">{{ $item->created_at->diffForHumans() }}</p>
                                     </div>
-                                    <div class="comment-text-sm"><span>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.</span></div>
+                                    <div class="comment-text-sm"><span>
+                                        {{ $item->komentar }}</span></div>
 
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

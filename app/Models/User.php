@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class, 'id');
+    }
 }
