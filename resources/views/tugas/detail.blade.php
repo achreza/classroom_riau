@@ -310,8 +310,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-8">
-                                <iframe id="pdf-preview" frameborder="0" style="width: 100%; height: 100vh;"
-                                    sandbox="allow-same-origin allow-scripts"></iframe>
+                                <iframe id="pdf-preview" frameborder="0" style="width: 100%; height: 100vh;"></iframe>
 
                             </div>
                             <div class="col-lg-4">
