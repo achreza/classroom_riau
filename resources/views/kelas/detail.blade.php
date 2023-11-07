@@ -38,7 +38,7 @@
                 </div>
             @endif
 
-            @foreach ($tugas as $item)
+            @foreach ($tugas as $index => $item)
                 <a href="{{ route('tugas.show', ['id' => $item->id]) }}" class="card-anchor ">
                     <div class="card card-tugas">
                         <div class="card-body kelas-item-tugas d-flex align-items-center">
@@ -55,10 +55,10 @@
                                         {{ $item->deadline_time }}</small>
                                 </div>
                                 <div class="">
-                                    @if (Auth::user()->role_id == 3 && $status == 'Sudah Mengumpulkan')
-                                        <span class="badge bg-success">{{ $status }}</span>
-                                    @elseif(Auth::user()->role_id == 3 && $status == 'Belum Mengumpulkan')
-                                        <span class="badge bg-danger">{{ $status }}</span>
+                                    @if (Auth::user()->role_id == 3 && $status[$index] == 'Sudah Mengumpulkan')
+                                        <span class="badge bg-success">Sudah Mengumpulkan</span>
+                                    @elseif(Auth::user()->role_id == 3 && $status[$index] == 'Belum Mengumpulkan')
+                                        <span class="badge bg-danger">Belum Mengumpulkan</span>
                                     @else
                                     @endif
                                 </div>

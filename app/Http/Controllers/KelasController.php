@@ -83,21 +83,27 @@ class KelasController extends Controller
         $title = 'Keluar Kelas';
         $text = 'Apakah anda yakin ingin keluar dari kelas ini?';
         confirmDelete($title, $text);
-
+        $status[] = '';
         // change format date of $tugas->deadline_date to d-m-Y
         foreach ($tugas as $t) {
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
         }
 
-        $cek_tugas = $tugas->pluck('id');
-        $status = "";
-        $cek_pengumpulan = Pengumpulan::whereIn('id_tugas', $cek_tugas)->where('id_mahasiswa', Auth::user()->id)->get();
+        for($i = 0; $i < count($tugas); $i++){
+            $cek_pengumpulan = Pengumpulan::where('id_tugas', $tugas[$i]->id)->where('id_mahasiswa', Auth::user()->id)->first();
+            
 
-        if ($cek_pengumpulan->isEmpty()) {
-            $status = "Belum Mengumpulkan";
-        } else {
-            $status = "Sudah Mengumpulkan";
+            if (!empty($cek_pengumpulan)) {
+                $status[$i] = 'Sudah Mengumpulkan';
+            } else {
+                 $status[$i] = 'Belum Mengumpulkan';
+            }
+            
         }
+        // $cek_pengumpulan = Pengumpulan::whereIn('id_tugas', $cek_tugas)->where('id_mahasiswa', Auth::user()->id)->get();
+        // dd($cek_pengumpulan);
+
+        
 
 
         $background = array(
