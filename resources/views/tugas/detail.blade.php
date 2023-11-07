@@ -409,7 +409,7 @@
     <script>
         function passingDataToModal(id, filename) {
 
-            $("#pdf-preview").attr("src", `/public/storage/pengumpulan/${filename}`);
+            $("#pdf-preview").attr("src", `/storage/pengumpulan/${filename}`);
 
             const form = $("#formPenilaian");
             form.attr("action", `/tugas/penilaian/${id}`);
