@@ -27,6 +27,17 @@
                 margin-right: -50px;
             }
 
+            .bg-auth {
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+
+            }
+
+            /* .card {
+                margin-top: 80px;
+            } */
+
             @media (max-width: 991.98px) {
                 .cascading-right {
                     margin-right: 0;
@@ -35,35 +46,37 @@
         </style>
 
         <!-- Jumbotron -->
-        <div class="container py-4">
-            <div class="row g-0 align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="card cascading-right "
-                        style="
-            background: hsla(0, 0%, 100%, 0.55);
-            backdrop-filter: blur(30px); z-index: 3;
+        <div class="bg-auth" style="background-image: url({{ asset('image/gedung2.jpg') }}); ">
+            <div class="container py-4">
+                <div class="row g-0 align-items-center">
+                    <div class="col-lg-12 mb-5 mb-lg-0">
+                        <div class="card "
+                            style="
+                        width: fit-content;
+            background: hsla(0, 0%, 100%, 0.2);
+            backdrop-filter: blur(5px); z-index: 3;
             ">
-                        <div class="card-body p-5 shadow-5 text-center">
+                            <div class="card-body p-5 shadow-5 text-center">
 
-                            <img style="width: 300px; margin-bottom: 30px" src="{{ asset('image/index-logo.svg') }}"
-                                alt="">
-                            <br>
-                            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+                                <img style="width: 240px; margin-bottom: 30px" src="{{ asset('image/logo2.png') }}"
+                                    alt="">
+                                <br>
+                                <link rel="stylesheet" type="text/css"
+                                    href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 
-                            <a href="{{ url('/auth/google') }}" class="btn-google">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                                    alt="Google Icon">
-                                Login with Google
-                            </a>
+                                <a href="{{ url('/auth/google') }}" class="btn-google">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                                        alt="Google Icon">
+                                    Login with Google
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1555116505-38ab61800975?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="w-100 rounded-4 shadow-4" alt="" />
-                    {{-- <div class="card " style="width: 18rem;">
+                    {{-- <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="{{ asset('image/gedung2.jpg') }}" class="w-100 rounded-4 shadow-4" alt="" />
+                    <div class="card " style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -72,10 +85,12 @@
                             <a href="#" class="card-link">Card link</a>
                             <a href="#" class="card-link">Another link</a>
                         </div>
-                    </div> --}}
+                    </div>
+                </div> --}}
                 </div>
             </div>
         </div>
+
         <!-- Jumbotron -->
     </section>
     <!-- Section: Design Block -->

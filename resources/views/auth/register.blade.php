@@ -25,6 +25,13 @@
                 margin-right: -50px;
             }
 
+            .bg-auth {
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+
+            }
+
             @media (max-width: 991.98px) {
                 .cascading-right {
                     margin-right: 0;

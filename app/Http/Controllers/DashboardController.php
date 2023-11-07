@@ -178,4 +178,8 @@ class DashboardController extends Controller
         // Return response dengan file untuk di-download
         return response()->file($filePath, $headers);
     }
+
+    public function back(){
+        return redirect()->back();
+    } 
 }
