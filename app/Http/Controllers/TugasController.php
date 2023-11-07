@@ -98,10 +98,10 @@ class TugasController extends Controller
             if ($pengumpulan != null) {
                 $nilai = Nilai::where('id_pengumpulan', $pengumpulan->id)->first();
 
-                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai'));
+                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'nilai', 'tgl_perkuliahan'));
             } else {
 
-                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan'));
+                return view('tugas.detail', compact('tugas', 'dateFormatted', 'pengumpulan', 'tgl_perkuliahan'));
             }
         } elseif (Auth::user()->role_id == 2) {
             $tugas = Tugas::find($id);
