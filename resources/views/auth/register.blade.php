@@ -9,8 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
     <title>IKTN Learning</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.svg') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('/style/login.css') }}" />
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,82 +22,176 @@
     <!-- Section: Design Block -->
     <section class="text-center text-lg-start">
         <style>
-            .cascading-right {
-                margin-right: -50px;
+            a {
+                text-decoration: none;
             }
 
-            .bg-auth {
-                background-repeat: no-repeat;
+            .container {
+                padding-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .login-wrap {
+                display: flex;
+
+                border: 1px solid rgb(194, 194, 194);
+                height: fit-content;
+                width: 90vw;
+
+                position: relative;
+            }
+
+            .image-wrap {
+                width: 70vw;
+                height: 95vh;
+                background-position-x: -240px;
                 background-size: cover;
-                height: 100vh;
+                background-repeat: no-repeat;
 
             }
 
-            @media (max-width: 991.98px) {
-                .cascading-right {
-                    margin-right: 0;
-                }
+            .overlay {
+                background-color: black;
+                height: 95vh;
+                opacity: 0.3;
+            }
+
+            .text-on-image {
+                padding: 70px 20px 0 30px;
+                width: 200px;
+                top: 0;
+                position: absolute;
+                font-size: 20px;
+                color: rgb(255, 255, 255);
+                z-index: 10;
+            }
+
+            .text-on-image h1 {
+                font-family: "Carter One", cursive;
+                line-height: 50px;
+            }
+
+            .text-on-image p {
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            .login-img {
+                height: 50vh;
+            }
+
+            form {
+                width: 130%
+            }
+
+
+
+
+
+            .username-field,
+            .pass-field {
+                width: 300px;
+                height: 20px;
+                border-left: 20px;
+                border-right: 20px;
+                border-top: 300px;
+            }
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            .submit-btn {
+                width: 100px;
+                height: 40px;
+                border-color: rgb(255, 255, 255);
+                border-radius: 30px;
+                background-color: rgb(107, 107, 107);
+                color: rgb(255, 255, 255);
+                font-size: 16px;
+                font-weight: 800;
+            }
+
+            .login-text {
+                margin-bottom: 30px;
+            }
+
+            .btn-google:hover {
+                color: white;
+            }
+
+            .btn-primary {
+                background-color: #0d613f !important;
+                border-color: #0d613f;
             }
         </style>
 
         <!-- Jumbotron -->
-        <div class="container py-4">
-            <div class="row g-0 align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="card cascading-right"
-                        style="
-            background: hsla(0, 0%, 100%, 0.55);
-            backdrop-filter: blur(30px);
-            ">
-                        <div class="card-body p-5 shadow-5 text-center">
-                            <h2 class="fw-bold mb-5">Sign up now</h2>
-                            <form action="{{ url('register') }}" method="post">
-                                @csrf
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="name" id="form3Example4" class="form-control"
-                                        placeholder="Nama" />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="login-wrap">
+                        <div class="image-wrap" style="background-image: url({{ asset('image/gedung2.jpg') }}); ">
+                            <div class="overlay"></div>
 
+                        </div>
+                        <div class="form-wrap">
+
+                            <div class="card border-0"
+                                style="background: hsla(0, 0%, 100%, 0.55);backdrop-filter: blur(30px);">
+                                <div class="card-body ">
+                                    <h2 class="fw-bold mb-5">Sign up now</h2>
+                                    <form action="{{ url('register') }}" method="post">
+                                        @csrf
+                                        <div class="form-outline mb-4">
+                                            <input type="text" name="name" id="form3Example4" class="form-control"
+                                                placeholder="Nama" />
+
+                                        </div>
+
+                                        <!-- Email input -->
+                                        <div class="form-outline mb-4">
+                                            <input type="email" id="form3Example3" name="email" readonly
+                                                value ="{{ $email }}"class="form-control" placeholder="email" />
+
+                                        </div>
+
+                                        <!-- Password input -->
+                                        <div class="form-outline mb-4">
+                                            <input type="text" name="kode" id="form3Example4" class="form-control"
+                                                placeholder="NIM" />
+
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" name="jurusan" id="form3Example4" class="form-control"
+                                                placeholder="Jurusan" />
+
+                                        </div>
+
+
+
+                                        <!-- Submit button -->
+                                        <button type="submit" style="width: 100%"
+                                            class="btn btn-primary btn-block mb-4">
+                                            Sign up
+                                        </button>
+
+
+                                    </form>
                                 </div>
+                            </div>
 
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" name="email" readonly
-                                        value ="{{ $email }}"class="form-control" placeholder="email" />
-
-                                </div>
-
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="kode" id="form3Example4" class="form-control"
-                                        placeholder="NIM" />
-
-                                </div>
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="jurusan" id="form3Example4" class="form-control"
-                                        placeholder="Jurusan" />
-
-                                </div>
-
-
-
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">
-                                    Sign up
-                                </button>
-
-
-                            </form>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1555116505-38ab61800975?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="w-100 rounded-4 shadow-4" alt="" />
-                </div>
             </div>
+
         </div>
+
         <!-- Jumbotron -->
+
+
     </section>
     <!-- Section: Design Block -->
 

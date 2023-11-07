@@ -1,13 +1,44 @@
 /*  */
-.dot {
-    height: 7px;
-    width: 7px;
+.btn-primary {
+    background-color: #0d613f !important;
+    border-color: #0d613f;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d613f !important;
+    border-color: #0d613f;
+}
+
+.dot-online {
+    height: 9px;
+    width: 9px;
     margin-top: -15px;
     margin-left: 10px;
     margin-right: 10px;
-    background-color: #bbb;
+    background-color: greenyellow;
     border-radius: 50%;
     display: inline-block;
+}
+
+.dot-offline {
+    height: 9px;
+    width: 9px;
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mhs-list,
+.mhs-list li {
+
+    list-style-type: none;
+    list-style-position: inside;
+    margin: 0;
+    padding: 0;
+
 }
 
 /* Detail Kelas */
@@ -58,7 +89,7 @@
 }
 
 .card-tugas:hover {
-    background-color: rgba(0, 26, 255, 0.3);
+    background-color: rgba(0, 197, 59, 0.3);
 }
 
 .header-tugas {

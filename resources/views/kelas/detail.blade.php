@@ -6,7 +6,8 @@
         <div class="col-lg-12">
             <div class="cover-class d-flex justify-content-start align-items-end"
                 style="background-image: url('../{{ $rand }}');">
-                <h3 class="cover-nama-kelas">{{ $kelas->nama_kelas }}</h3>
+                <h3 class="cover-nama-kelas">{{ $kelas->nama_kelas }} - {{ $kelas->kode_matakuliah }}</h3>
+
             </div>
         </div>
     </div>
@@ -51,6 +52,8 @@
 
                                 <div>
                                     <h6 class="mb-0">{{ $item->nama_tugas }}</h6>
+                                    <small class="text-muted">Tanggal Perkuliahan : {{ $item->tanggal_perkuliahan }}</small>
+                                    <br>
                                     <small class="text-muted">Deadline : {{ $item->deadline_date }},
                                         {{ $item->deadline_time }}</small>
                                 </div>
@@ -93,9 +96,15 @@
                                 </p>
                             </div>
                         @endif
-                        <ul>
+                        <ul class="mhs-list">
                             @foreach ($list_mahasiswa as $item)
-                                <li class="text-black">{{ $item->mahasiswa->name }}</li>
+                                @if ($item->mahasiswa->is_online == 0)
+                                    <li class="text-black "> <span class="dot-offline"></span>{{ $item->mahasiswa->name }}
+                                    </li>
+                                @elseif($item->mahasiswa->is_online == 1)
+                                    <li class="text-black "> <span class="dot-online"></span>{{ $item->mahasiswa->name }}
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
 
@@ -148,7 +157,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Tanggal Perkuliahan:</label>
-                            <input type="date" class="form-control" id="tglAwalKegiatan" name="tanggal_perkuliahan" />
+                            <input type="date" class="form-control" id="tglAwalKegiatan"
+                                name="tanggal_perkuliahan" />
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Deadline Date:</label>

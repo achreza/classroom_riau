@@ -10,8 +10,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>IKTN Learning</title>
-
-    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.svg') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.png') }}" />
 
     <meta name="description" content="" />
 

@@ -4,6 +4,10 @@
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item me-3">
+                    <a href="{{ url()->previous() }}"><img src="{{ asset('image/back.svg') }}"
+                            style="width: 30px;margin-top: 5px" alt=""></a>
+                </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-tugas-tab" data-bs-toggle="pill" data-bs-target="#pills-tugas"
                         type="button" role="tab" aria-controls="pills-tugas" aria-selected="true">Materi</button>

@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
     <title>IKTN Learning</title>
-
-    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.svg') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('image/logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('/style/login.css') }}" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -23,75 +22,155 @@
     <!-- Section: Design Block -->
     <section class="text-center text-lg-start">
         <style>
-            .cascading-right {
-                margin-right: -50px;
+            .btn-primary {
+                background-color: #0d613f !important;
+                border-color: #0d613f;
             }
 
-            .bg-auth {
-                background-repeat: no-repeat;
+            a {
+                text-decoration: none;
+            }
+
+            .container {
+                padding-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .login-wrap {
+                display: flex;
+
+                border: 1px solid rgb(194, 194, 194);
+                height: fit-content;
+                width: fit-content;
+
+                position: relative;
+            }
+
+            .image-wrap {
+                width: 70vw;
+                height: 95vh;
+                background-position-x: -240px;
                 background-size: cover;
-                height: 100vh;
+                background-repeat: no-repeat;
 
             }
 
-            /* .card {
-                margin-top: 80px;
-            } */
+            .overlay {
+                background-color: black;
+                height: 95vh;
+                opacity: 0.3;
+            }
 
-            @media (max-width: 991.98px) {
-                .cascading-right {
-                    margin-right: 0;
-                }
+            .text-on-image {
+                padding: 70px 20px 0 30px;
+                width: 200px;
+                top: 0;
+                position: absolute;
+                font-size: 20px;
+                color: rgb(255, 255, 255);
+                z-index: 10;
+            }
+
+            .text-on-image h1 {
+                font-family: "Carter One", cursive;
+                line-height: 50px;
+            }
+
+            .text-on-image p {
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            .login-img {
+                height: 50vh;
+            }
+
+            .form-wrap {
+                padding: 20px 30px 20px 60px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .username-field,
+            .pass-field {
+                width: 300px;
+                height: 20px;
+                border-left: 20px;
+                border-right: 20px;
+                border-top: 300px;
+            }
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            .submit-btn {
+                width: 100px;
+                height: 40px;
+                border-color: rgb(255, 255, 255);
+                border-radius: 30px;
+                background-color: rgb(107, 107, 107);
+                color: rgb(255, 255, 255);
+                font-size: 16px;
+                font-weight: 800;
+            }
+
+            .login-text {
+                margin-bottom: 30px;
+            }
+
+            .btn-google:hover {
+                color: white;
             }
         </style>
 
         <!-- Jumbotron -->
-        <div class="bg-auth" style="background-image: url({{ asset('image/gedung2.jpg') }}); ">
-            <div class="container py-4">
-                <div class="row g-0 align-items-center">
-                    <div class="col-lg-12 mb-5 mb-lg-0">
-                        <div class="card "
-                            style="
-                        width: fit-content;
-            background: hsla(0, 0%, 100%, 0.2);
-            backdrop-filter: blur(5px); z-index: 3;
-            ">
-                            <div class="card-body p-5 shadow-5 text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="login-wrap">
+                        <div class="image-wrap" style="background-image: url({{ asset('image/gedung2.jpg') }}); ">
+                            <div class="overlay"></div>
 
-                                <img style="width: 240px; margin-bottom: 30px" src="{{ asset('image/logo2.png') }}"
-                                    alt="">
-                                <br>
-                                <link rel="stylesheet" type="text/css"
-                                    href="//fonts.googleapis.com/css?family=Open+Sans" />
+                        </div>
+                        <div class="form-wrap">
+
+                            <div class="card border-0"
+                                style="
+                        width: fit-content;background: hsla(0, 0%, 100%, 0.2);backdrop-filter: blur(5px); z-index: 3;">
+                                <div class="card-body p-5 shadow-5 text-center">
+
+                                    <img style="width: 240px; margin-bottom: 30px" src="{{ asset('image/logo2.png') }}"
+                                        alt="">
+                                    <br>
+                                    <link rel="stylesheet" type="text/css"
+                                        href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 
-                                <a href="{{ url('/auth/google') }}" class="btn-google">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                                        alt="Google Icon">
-                                    Login with Google
-                                </a>
+                                    <a href="{{ url('/auth/google') }}" class="btn-google">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                                            alt="Google Icon">
+                                        Login with Google
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    {{-- <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="{{ asset('image/gedung2.jpg') }}" class="w-100 rounded-4 shadow-4" alt="" />
-                    <div class="card " style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
                         </div>
                     </div>
-                </div> --}}
                 </div>
             </div>
+
         </div>
 
         <!-- Jumbotron -->
+
+
     </section>
     <!-- Section: Design Block -->
 

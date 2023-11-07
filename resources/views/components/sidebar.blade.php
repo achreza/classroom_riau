@@ -1,15 +1,9 @@
  <!-- Menu -->
 
  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-     <div class="app-brand demo">
-         <a href="{{ route('dashboard.index') }}" class="app-brand-link">
-             <span class="app-brand-logo demo">
-                 <img style="width: 50px; fill:red;" src="{{ asset('image/logo.svg') }}" alt="">
-             </span>
-             <div class="">
-                 <span>IKTN</span>
-                 <span class="app-brand-text demo menu-text fw-bolder ms-2">Learning</span>
-             </div>
+     <div class="app-brand d-flex justify-content-center">
+         <a href="{{ route('dashboard.index') }}" class="app-brand-link ">
+             <img src="{{ asset('image/logo2.png') }}" style="width: 120px" class="" alt="">
 
          </a>
 
