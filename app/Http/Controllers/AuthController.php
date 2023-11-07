@@ -34,6 +34,9 @@ class AuthController extends Controller
         if ($existingUser) {
             // log them in
             auth()->login($existingUser, true);
+            $existingUser->update([
+                'is_online' => 1,
+            ]);
             $request->session()->put('role', $existingUser->role_id);
             $request->session()->put('user', $existingUser);
 
@@ -44,8 +47,7 @@ class AuthController extends Controller
             } else if ($existingUser->role_id == 3) {
                 $request->session()->put('posisi', 'Mahasiswa');
             }
-            //    check role
-
+            
             return redirect('/dashboard');
         } else {
             // create a new user
@@ -72,6 +74,9 @@ class AuthController extends Controller
         auth()->login($existingUser, true);
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
+        $existingUser->update([
+            'is_online' => 1,
+        ]);
         return redirect('/dashboard');
         //return redirect()->route('login')->with('success', 'Register success');
     }
@@ -97,6 +102,10 @@ class AuthController extends Controller
     // function logout
     public function logout(Request $request)
     {
+        $existingUser = User::find($request->session()->get('user')->id);
+        $existingUser->update([
+            'is_online' => 0,
+        ]);
         $request->session()->flush();
         return view('auth.login');
     }

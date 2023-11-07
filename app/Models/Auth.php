@@ -10,5 +10,13 @@ class Auth extends Authenticatable
 {
     use HasFactory;
     protected $table = 'users';
+    protected $fillable = [
+        'name',
+        'email',
+        'kode',
+        'jurusan',
+        'is_online',
+        'role_id',
+    ];
 
 }

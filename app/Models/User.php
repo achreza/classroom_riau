@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'kode',
         'jurusan',
+        'is_online',
         'role_id',
     ];
 
