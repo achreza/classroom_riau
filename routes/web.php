@@ -36,6 +36,8 @@ use Illuminate\Routing\RouteGroup;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::get('/testEmail', [AuthController::class, 'testEmail']);
 Route::get('/illegal', function () {
     return view('error.forbidden');
 })->name('illegal');
