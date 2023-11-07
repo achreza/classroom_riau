@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Mail\EmailPemberitahuan;
 use Illuminate\Support\Facades\Mail;
-
+use Termwind\Components\Dd;
 
 class AuthController extends Controller
 {
@@ -36,8 +36,12 @@ class AuthController extends Controller
         if ($existingUser) {
             // log them in
             auth()->login($existingUser, true);
+            $existingUser->update([
+                'is_online' => 1,
+            ]);
             $request->session()->put('role', $existingUser->role_id);
             $request->session()->put('user', $existingUser);
+            $request->session()->put('email', $existingUser->email);
 
             if ($existingUser->role_id == 1) {
                 $request->session()->put('posisi', 'Admin');
@@ -46,8 +50,7 @@ class AuthController extends Controller
             } else if ($existingUser->role_id == 3) {
                 $request->session()->put('posisi', 'Mahasiswa');
             }
-            //    check role
-
+            
             return redirect('/dashboard');
         } else {
             // create a new user
@@ -62,15 +65,47 @@ class AuthController extends Controller
     public function testEmail()
     {
         $data = [
-            'subject' => "[ICGT 2023] Your Submission has been Rejected",
+            'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
             'isi' => "
                 Dear  \nInformation about your paper Entitled  for ICGT 2023 was Rejected. You can check the Comment Given by Reviewers and their status at https://gcms.uin-malang.ac.id/.\n From there, you can see the current status of the paper, whether a manuscript has been submitted and can edit the abstract information.\n\nRegards,
         Thank you and have a nice day.\n\nWarmest Regards
         Technical and Support-Staff\n
         ICGT-2023",
         ];
-        Mail::to('achmadfahreza950@gmail.com')->send(new EmailPemberitahuan($data));
+        $email_user = request()->session()->get('email');
+        Mail::to($email_user)->send(new EmailPemberitahuan($data));
     }
+
+    // function emailTugasBaru
+    public function emailTugasBaru($id)
+    {
+        $user = User::where('id', $id)->first();
+        $nama = $user->name;
+        $kelas = $user->kelas;
+        $data = [
+            'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
+            'isi' => "
+            Hai $nama! Tugas baru telah ditambahkan ke kelas $kelas. Jangan lupa untuk memeriksanya dan tetap terorganisir, jangan sampai melewatkan deadline. Mulai sekarang dan tunjukkan yang terbaik.",
+        ];
+        $email_user = request()->session()->get('email');
+        Mail::to($email_user)->send(new EmailPemberitahuan($data));
+    }
+
+    // function emailTerlambat
+    // public function emailTerlambat($id)
+    // {
+    //     $user = User::where('id', $id)->first();
+    //     $nama = $user->name;
+    //     $kelas = $user->kelas;
+    //     $data = [
+    //         'subject' => "[IKTN Learning] Tugas baru Telah Ditambahkan",
+    //         'isi' => "
+    //         Halo, Anda menerima tugas baru dari $nama yang terdaftar di kelas $kelas dengan Status Terlambat.  Silakan cek tugasnya dengan judul: $judul.",
+    //     ];
+    //     $email_user = request()->session()->get('email');
+    //     Mail::to($email_user)->send(new EmailPemberitahuan($data));
+    // }
+
 
     // function register
     public function register(Request $request)
@@ -88,6 +123,9 @@ class AuthController extends Controller
         auth()->login($existingUser, true);
         $request->session()->put('id', $existingUser->id);
         $request->session()->put('user', $existingUser);
+        $existingUser->update([
+            'is_online' => 1,
+        ]);
         return redirect('/dashboard');
         //return redirect()->route('login')->with('success', 'Register success');
     }
@@ -113,6 +151,10 @@ class AuthController extends Controller
     // function logout
     public function logout(Request $request)
     {
+        $existingUser = User::find($request->session()->get('user')->id);
+        $existingUser->update([
+            'is_online' => 0,
+        ]);
         $request->session()->flush();
         return view('auth.login');
     }

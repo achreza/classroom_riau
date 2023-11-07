@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->unsignedBigInteger('id_pembuat');
             $table->string('kode_kelas');
+            $table->string('kode_matakuliah')->nullable();
             $table->timestamps();
 
             $table->foreign('id_pembuat')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

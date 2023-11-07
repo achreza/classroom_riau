@@ -25,6 +25,7 @@
                                         <h4 class="mb-0">{{ $tugas->nama_tugas }}</h4>
                                         {{-- pertemuan ke --}}
                                         <h5 class="mb-0 mt-3">Pertemuan ke-{{ $tugas->pertemuan }}</h5>
+                                        <h6 class="mb-2 mt-2">Tanggal Perkulihan : {{ $tgl_perkuliahan }}</h6>
                                         <small class="text-muted">Deadline : {{ $dateFormatted }},
                                             {{ $tugas->deadline_time }}</small>
                                     </div>
