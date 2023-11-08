@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             PengumpulanSeeder::class,
             NilaiSeeder::class,
             KelasMahasiswaSeeder::class,
+            KomentarSeeder::class,
         ]);
     }
 }

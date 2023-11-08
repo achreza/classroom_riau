@@ -45,6 +45,11 @@
                                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#modalTugas">
                                                         Edit tugas</a></li>
+                                                @if ($tugas->status_komentar == '0')
+                                                    <li><a class="dropdown-item" href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '0']) }}">Buka Komentar</a></li>
+                                                @else
+                                                    <li><a class="dropdown-item" href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '1']) }}">Tutup Komentar</a></li>
+                                                @endif
                                                 <li>
                                                     <a href="{{ route('tugas.destroy', $tugas->id) }}"
                                                         class="dropdown-item text-danger fw-bold" type="submit"
@@ -78,6 +83,7 @@
                             </div>
                         </div>
                     </div>
+                    @if ($tugas->status_komentar == '1')
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             <div class="comment-section  py-4" style="border-top: 1px solid gray; margin-top: 30px">
@@ -93,6 +99,8 @@
 
                         </div>
                     </div>
+                    @endif
+                    
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             {{-- Tampilkan komentar disini --}}

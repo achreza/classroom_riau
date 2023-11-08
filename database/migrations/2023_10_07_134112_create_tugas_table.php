@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('deskripsi', 10000);
             $table->date('deadline_date');
             $table->time('deadline_time');
+            $table->string('status_komentar')->default('0');
             $table->timestamps();
 
             // Foreign Key Constraints
