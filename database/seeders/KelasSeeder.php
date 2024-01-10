@@ -20,6 +20,7 @@ class KelasSeeder extends Seeder
                 'id_pembuat' => 2,
                 'kode_matakuliah' => 'PMW-01A',
                 'kode_kelas' => 'KJ776',
+                'modul' => 'Modul 1',
             ],
 
 

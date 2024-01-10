@@ -118,7 +118,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body demo-vertical-spacing demo-only-element">
-                        <form action="{{ route('kelas.store') }}" method="POST">
+                        <form action="{{ route('kelas.store') }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="form-password-toggle">
                                 <label class="form-label" for="basic-default-password12">Nama Mata Kuliah</label>
@@ -142,6 +142,13 @@
                                     <textarea class="form-control" id="basic-default-password12" rows="3" placeholder="Deskripsi Mata Kuliah"
                                         aria-describedby="basic-default-password2" name="deskripsi"></textarea>
 
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Modul Kelas</label>
+                                <input class="form-control" type="file" id="formFile" name="modul">
+                                <div id="emailHelp" class="form-text text-black">*Format file
+                                    pdf,word,zip,rar.
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -174,7 +181,7 @@
 
                             </div>
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="">NIM / NIP</label>
+                                <label class="form-label" for="">NIM / NIDN</label>
                                 <input type="text" name="kode" id="form3Example4" class="form-control"
                                     placeholder="NIM / NIP" />
                                 <div class="form-text">Masukkan NIM jika mendaftarkan mahasiswa, masukkan NIP jika

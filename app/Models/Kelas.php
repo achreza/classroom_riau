@@ -14,7 +14,8 @@ class Kelas extends Model
         'deskripsi',
         'id_pembuat',
         'kode_kelas',
-        'kode_matakuliah'
+        'kode_matakuliah',
+        'modul',
     ];
 
     public function user()

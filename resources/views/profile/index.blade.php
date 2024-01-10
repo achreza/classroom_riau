@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="nim" class="form-label">NIM / NIP</label>
+                        <label for="nim" class="form-label">NIM / NIDN</label>
                         <input class="form-control" type="text" id="nim" name="kode" value="{{ $user->kode }}"
                             placeholder="john.doe@example.com" @if (request()->session()->get('role') == 1) disabled @endif>
                     </div>

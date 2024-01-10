@@ -38,11 +38,15 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $validated = $request->validate([
+
+
+        $request->validate([
             'nama_kelas' => 'required',
             'deskripsi' => 'required',
+
+
         ]);
+
 
         //create ranndom 5 digit string and check if kode kelas already exist in kelas, if exist random again
         $kode_kelas = '';
@@ -52,6 +56,21 @@ class KelasController extends Controller
             $kode_kelas = substr(str_shuffle($permitted_chars), 0, 5);
         } while (Kelas::where('kode_kelas', $kode_kelas)->first());
 
+        if ($request->file('modul') != null && $request->file('modul')->getSize() > 10120000) {
+
+            Alert::error('Gagal', 'File tidak boleh lebih dari 10MB');
+            return redirect()->back();
+        }
+        // check input file
+        if ($request->hasFile('modul')) {
+            $file = $request->file('modul');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('modul', $filename, 'public');
+        } else {
+            $filename = null;
+        }
+
+
 
 
         $kelas = Kelas::create([
@@ -60,7 +79,10 @@ class KelasController extends Controller
             'id_pembuat' => Auth::user()->id,
             'kode_kelas' => $kode_kelas,
             'kode_matakuliah' => $request->kode_matakuliah,
+            'modul' => $filename,
         ]);
+
+
         $kelas->save();
         if ($kelas) {
             Alert::success('Sukses', 'Berhasil Menambah Kelas');
@@ -90,21 +112,20 @@ class KelasController extends Controller
             $t->deadline_date = date('d-m-Y', strtotime($t->deadline_date));
         }
 
-        for($i = 0; $i < count($tugas); $i++){
+        for ($i = 0; $i < count($tugas); $i++) {
             $cek_pengumpulan = Pengumpulan::where('id_tugas', $tugas[$i]->id)->where('id_mahasiswa', Auth::user()->id)->first();
-            
+
 
             if (!empty($cek_pengumpulan)) {
                 $status[$i] = 'Sudah Mengumpulkan';
             } else {
-                 $status[$i] = 'Belum Mengumpulkan';
+                $status[$i] = 'Belum Mengumpulkan';
             }
-            
         }
         // $cek_pengumpulan = Pengumpulan::whereIn('id_tugas', $cek_tugas)->where('id_mahasiswa', Auth::user()->id)->get();
         // dd($cek_pengumpulan);
 
-        
+
 
 
         $background = array(
@@ -205,5 +226,32 @@ class KelasController extends Controller
         $kelas->delete();
         Alert::success('Sukses', 'Berhasil Keluar Mata Kuliah');
         return redirect()->route('dashboard.index');
+    }
+    public function downloadModul($nama_file)
+    {
+        // Dapatkan path lengkap dari file yang akan didownload di dalam direktori storage
+        $filePath = storage_path("app/public/modul/{$nama_file}");
+
+        // Cek apakah file ada di direktori storage
+        if (!file_exists($filePath)) {
+
+            Alert::error('Error', 'File tidak ditemukan');
+            return redirect()->back();
+        }
+
+        // Ambil nama file tanpa path
+        $originalName = pathinfo($filePath, PATHINFO_FILENAME);
+
+        // Dapatkan ekstensi file
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        // Mendefinisikan headers untuk response
+        $headers = [
+            'Content-Type' => mime_content_type($filePath),
+            'Content-Disposition' => "attachment; filename=\"{$originalName}.{$extension}\"",
+        ];
+
+        // Return response dengan file untuk di-download
+        return response()->file($filePath, $headers);
     }
 }

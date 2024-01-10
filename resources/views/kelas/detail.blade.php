@@ -75,6 +75,14 @@
         </div>
         <div class="col-lg-3">
             <div class="row">
+                <div class="col-lg-12 ">
+                    <a href="{{ route('download.modul', $kelas->modul) }}" class="btn btn-primary mt-3"
+                        style="width: 100%">Download Modul
+                        Kelas</a>
+
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="card mt-3 p-3">
                         <div class="">
