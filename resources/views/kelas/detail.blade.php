@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-lg-12 ">
             <div class="cover-class d-flex justify-content-start align-items-end"
                 style="background-image: url('../{{ $rand }}');">
                 <h3 class="cover-nama-kelas">{{ $kelas->nama_kelas }} - {{ $kelas->kode_matakuliah }}</h3>
@@ -57,7 +57,7 @@
                                     <small class="text-muted">Deadline : {{ $item->deadline_date }},
                                         {{ $item->deadline_time }}</small>
                                 </div>
-                                <div class="">
+                                <div class="status-pengumpulan">
                                     @if (Auth::user()->role_id == 3 && $status[$index] == 'Sudah Mengumpulkan')
                                         <span class="badge bg-success">Sudah Mengumpulkan</span>
                                     @elseif(Auth::user()->role_id == 3 && $status[$index] == 'Belum Mengumpulkan')

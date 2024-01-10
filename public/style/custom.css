@@ -116,3 +116,34 @@
 .tugas-setting-logo {
     width: 30px;
 }
+
+@media (max-width: 767px) {
+    .card-tugas {
+        padding: initial;
+    }
+
+    .kelas-item-tugas {
+        height: 250px;
+        flex-direction: column;
+        /* Mengubah arah layout menjadi vertikal */
+    }
+
+    .item-tugas-logo-group {
+        margin-bottom: 10px;
+        /* Menambahkan ruang antara logo dan informasi tugas */
+    }
+
+    .item-tugas-info {
+        width: 100%;
+        /* Memastikan lebar penuh pada tampilan mobile */
+    }
+
+    .status-pengumpulan {
+        margin-top: 10px;
+        /* Menambahkan ruang di atas status pengumpulan */
+    }
+
+    .cover-nama-kelas {
+        font-size: 24px;
+    }
+}

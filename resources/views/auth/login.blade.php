@@ -31,7 +31,7 @@
                 text-decoration: none;
             }
 
-            .container {
+            .container-fluid {
                 padding-top: 10px;
                 display: flex;
                 justify-content: center;
@@ -128,12 +128,58 @@
             .btn-google:hover {
                 color: white;
             }
+
+            @media (max-width: 768px) {
+
+
+                .login-wrap {
+                    flex-direction: column-reverse;
+                }
+
+                .image-wrap {
+                    display: none;
+                }
+
+                .text-on-image {
+                    padding: 20px;
+                    width: auto;
+                    font-size: 16px;
+                }
+
+                .form-wrap {
+                    padding: 20px;
+                }
+
+                .card {
+                    width: 100%;
+                }
+
+                .submit-btn {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+
+                .card-body {
+                    padding: 0 !important;
+                }
+
+                .container-fluid {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+
+
+
+
+            }
         </style>
 
         <!-- Jumbotron -->
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 col-sm-6">
                     <div class="login-wrap">
                         <div class="image-wrap" style="background-image: url({{ asset('image/gedung2.jpg') }}); ">
                             <div class="overlay"></div>
@@ -147,15 +193,16 @@
                                 <div class="card-body p-5 shadow-5 text-center">
 
                                     <img style="width: 240px; margin-bottom: 30px" src="{{ asset('image/logo2.png') }}"
-                                        alt="">
+                                        alt="" class="logo-login">
                                     <br>
                                     <link rel="stylesheet" type="text/css"
                                         href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 
                                     <a href="{{ url('/auth/google') }}" class="btn-google">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                                            alt="Google Icon">
+                                        <img src="{{ asset('image/ggl.png') }}" style="width: 20px; margin-right: 10px"
+                                            alt="Google
+                                            Icon">
                                         Login with Google
                                     </a>
                                 </div>

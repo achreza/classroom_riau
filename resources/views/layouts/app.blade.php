@@ -138,6 +138,26 @@
     </script>
     @include('sweetalert::alert')
 
+    <script>
+        function deleteSession() {
+            fetch('/flush', {
+                    method: 'GET',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error deleting session');
+                    }
+                    console.log('Session deleted successfully');
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+        window.addEventListener('unload', function() {
+            deleteSession();
+        });
+    </script>
+
 
 
 

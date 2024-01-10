@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -46,9 +47,13 @@
                                                         data-bs-target="#modalTugas">
                                                         Edit tugas</a></li>
                                                 @if ($tugas->status_komentar == '0')
-                                                    <li><a class="dropdown-item" href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '0']) }}">Buka Komentar</a></li>
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '0']) }}">Buka
+                                                            Komentar</a></li>
                                                 @else
-                                                    <li><a class="dropdown-item" href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '1']) }}">Tutup Komentar</a></li>
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('komentar.update', ['id' => $tugas->id, 'status_komentar' => '1']) }}">Tutup
+                                                            Komentar</a></li>
                                                 @endif
                                                 <li>
                                                     <a href="{{ route('tugas.destroy', $tugas->id) }}"
@@ -84,23 +89,23 @@
                         </div>
                     </div>
                     @if ($tugas->status_komentar == '1')
-                    <div class="row">
-                        <div class="col-lg-8 offset-lg-2">
-                            <div class="comment-section  py-4" style="border-top: 1px solid gray; margin-top: 30px">
-                                <form class="form" action="{{ route('komentar.store', $tugas->id) }}" method="post">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                </form>
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <div class="comment-section  py-4" style="border-top: 1px solid gray; margin-top: 30px">
+                                    <form class="form" action="{{ route('komentar.store', $tugas->id) }}" method="post">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </form>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
                     @endif
-                    
+
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             {{-- Tampilkan komentar disini --}}

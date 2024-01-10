@@ -197,4 +197,9 @@ class AuthController extends Controller
         User::destroy($id);
         return redirect('/dashboard');
     }
+
+    public function flushSession(Request $request)
+    {
+        $request->session()->flush();
+    }
 }

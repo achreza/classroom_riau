@@ -15,9 +15,11 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
-       
+
 
         if (Auth::user()->role_id == '2') {
             $role = 'dosen';
@@ -179,7 +181,8 @@ class DashboardController extends Controller
         return response()->file($filePath, $headers);
     }
 
-    public function back(){
+    public function back()
+    {
         return redirect()->back();
-    } 
+    }
 }
