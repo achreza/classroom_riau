@@ -148,7 +148,7 @@
                             <label class="form-label" for="basic-default-password12">Nama Materi</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="basic-default-password12"
-                                    placeholder="Nama Tugas" aria-describedby="basic-default-password2" name="nama_tugas">
+                                    placeholder="Nama Materi" aria-describedby="basic-default-password2" name="nama_tugas">
                             </div>
                         </div>
                         <div class="form-password-toggle">
@@ -178,7 +178,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="tglAwalKegiatan">Kode Youtube:</label>
-                            <input type="text" class="form-control" id="tglAwalKegiatan" name="youtube" />
+                            <input type="text" class="form-control" id="tglAwalKegiatan" name="youtube"
+                                placeholder="Contoh : lv5R6C3hz54" />
                             <div id="emailHelp" class="form-text">*Optional, kosongkan bila tidak mengupload video
                                 pembelajaran</div>
                         </div>
