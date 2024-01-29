@@ -117,6 +117,7 @@ class AuthController extends Controller
             'kode' => $request->kode,
             'jurusan' => $request->jurusan,
             'role_id' => 3,
+            'belum_bayar' => 0,
         ]);
 
         $email = $request->email;
@@ -138,6 +139,7 @@ class AuthController extends Controller
             'kode' => $request->kode,
             'jurusan' => $request->jurusan,
             'role_id' => $request->role,
+            'belum_bayar' => 0,
         ]);
         if ($user) {
             Alert::success('Sukses', 'Berhasil Menambah User');
@@ -206,8 +208,8 @@ class AuthController extends Controller
     public function active($id)
     {
         $userIdsArray = explode(',', $id);
-        
-    
+
+
         foreach ($userIdsArray as $userId) {
             $user = User::find($userId);
             if ($user->belum_bayar == 1) {
@@ -220,7 +222,7 @@ class AuthController extends Controller
         User::whereIn('id', $userIdsArray)->update(['belum_bayar' => $newState]);
 
         Alert::success('Sukses', 'Berhasil Mengubah Status User');
- 
+
 
         return response()->json(['message' => "User berhasil dinonaktifkan"]);
     }

@@ -51,7 +51,7 @@
             .image-wrap {
                 width: 70vw;
                 height: 95vh;
-                background-position-x: -240px;
+                background-position-x: -290px;
                 background-size: cover;
                 background-repeat: no-repeat;
 
