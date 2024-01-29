@@ -75,12 +75,15 @@
         </div>
         <div class="col-lg-3">
             <div class="row">
-                <div class="col-lg-12 ">
-                    <a href="{{ route('download.modul', $kelas->modul) }}" class="btn btn-primary mt-3"
-                        style="width: 100%">Download Modul
-                        Kelas</a>
-
-                </div>
+                <div class="col-lg-12">
+                    @if($kelas->modul)
+                        <a href="{{ route('download.modul', $kelas->modul) }}" class="btn btn-primary mt-3" style="width: 100%">
+                            Download Modul Kelas
+                        </a>
+                    @else
+                        <p>No modul available for this class.</p>
+                    @endif
+                </div>                
             </div>
             <div class="row">
                 <div class="col-lg-12">

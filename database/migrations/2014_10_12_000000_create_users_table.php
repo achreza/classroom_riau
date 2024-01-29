@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode');
             $table->string('jurusan');
             $table->string('is_online')->default('0');
+            $table->string('belum_bayar')->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

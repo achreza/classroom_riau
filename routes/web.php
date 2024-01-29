@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::post('/user-create', [AuthController::class, 'store'])->name('user.create');
         Route::get('/user-delete/{id}', [AuthController::class, 'destroy'])->name('user.delete');
+        Route::get('/user-active/{id}', [AuthController::class, 'active'])->name('user.active');
     });
 });
 

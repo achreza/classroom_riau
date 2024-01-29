@@ -56,9 +56,11 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>NIP/NIM</th>
-                                <th>Jurusan</th>
+                                <th>NIDN/NIM</th>
                                 <th>Status</th>
+                                <th>Status Aktif</th>
+                                <th>Action</th>
+                                <th>Active</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,12 +72,28 @@
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->role->nama_role }}</td>
                                     <td>
-                                        <a href="{{ route('user.delete', $item->id) }}" class="btn btn-danger"
-                                            data-confirm-delete="true">Hapus</a>
+                                        @if ($item->belum_bayar == 0)
+                                            <span class="badge bg-danger">Belum Aktif</span>
+                                        @else
+                                            <span class="badge bg-success">Aktif</span>
+                                        @endif
+                                    <td>
+                                        <a href="{{ route('user.delete', $item->id) }}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="active_users[]" value="{{ $item->id }}">
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" id="bulkActivate" >UBAH STATUS AKTIF</button>
+                                </td>
+                            </tr>
+                        </tfoot>                        
                     </table>
                 </div>
             </div>
@@ -224,5 +242,27 @@
         $(document).ready(function() {
             $('#tableUser').DataTable();
         });
+        $(document).ready(function () {
+        $('#bulkActivate').on('click', function () {
+            var selectedUserIds = [];
+
+            // Get selected user IDs
+            $('input[name="active_users[]"]:checked').each(function () {
+                selectedUserIds.push($(this).val());
+            });
+
+            // Send AJAX request to update the database
+            $.ajax({
+                type: 'GET',
+                url: '/user-active' + '/' + selectedUserIds.join(','), 
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (response) {
+                    alert('An error occurred.');
+                }
+            });
+        });
+    });
     </script>
 @endsection

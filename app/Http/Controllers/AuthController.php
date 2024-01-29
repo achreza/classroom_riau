@@ -202,4 +202,26 @@ class AuthController extends Controller
     {
         $request->session()->flush();
     }
+
+    public function active($id)
+    {
+        $userIdsArray = explode(',', $id);
+        
+    
+        foreach ($userIdsArray as $userId) {
+            $user = User::find($userId);
+            if ($user->belum_bayar == 1) {
+                $newState = 0;
+            } else {
+                $newState = 1;
+            }
+        }
+        // Update the users
+        User::whereIn('id', $userIdsArray)->update(['belum_bayar' => $newState]);
+
+        Alert::success('Sukses', 'Berhasil Mengubah Status User');
+ 
+
+        return response()->json(['message' => "User berhasil dinonaktifkan"]);
+    }
 }
