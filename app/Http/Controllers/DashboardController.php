@@ -38,8 +38,8 @@ class DashboardController extends Controller
             foreach ($kelas as $key => $value) {
                 $rand[] = $background[array_rand($background)];
             }
-
-            return view('main.index', compact('kelas', 'role', 'rand'));
+            $status = User::where('id', Auth::user()->id)->first()->belum_bayar;
+            return view('main.index', compact('kelas', 'role', 'rand', 'status'));
         } else if (Auth::user()->role_id == '3') {
             $role = 'mahasiswa';
             $mm_kelas = Mm_kelas::where('id_mahasiswa', Auth::user()->id)->orderBy('created_at', 'desc')->get();
@@ -63,14 +63,16 @@ class DashboardController extends Controller
             foreach ($kelas as $key => $value) {
                 $rand[] = $background[array_rand($background)];
             }
-            return view('main.index', compact('kelas', 'role', 'rand'));
+            $status = User::where('id', Auth::user()->id)->first()->belum_bayar;
+            return view('main.index', compact('kelas', 'role', 'rand', 'status'));
         } else if (Auth::user()->role_id == '1') {
             $title = 'Hapus User';
             $text = 'Apakah anda yakin ingin Hapus user ini?';
             confirmDelete($title, $text);
             $user = User::all();
             $role = 'admin';
-            return view('main.index', compact('user', 'role'));
+            $status = User::where('id', Auth::user()->id)->first()->belum_bayar;
+            return view('main.index', compact('user', 'role', 'status'));
         } else {
             return redirect()->route('auth.login');
         }

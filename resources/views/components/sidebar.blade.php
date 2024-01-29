@@ -37,17 +37,22 @@
                      <img class="menu-icon tf-icons" src="{{ asset('image/classroom.svg') }}" alt="">
                      <div data-i18n="Account Settings">Daftar Kelas</div>
                  </a>
+                 @if ($status == '1')
                  <ul class="menu-sub">
-                     @foreach (request()->session()->get('kelas') as $item)
-                         <li class="menu-item {{ Request::is('kelas*') ? 'active' : '' }}" onclick="setActive(this)">
-                             <a href="{{ route('kelas.show', ['kela' => $item->id]) }}" class="menu-link">
-                                 <div data-i18n="Account">{{ $item->nama_kelas }}</div>
-                             </a>
-                         </li>
-                     @endforeach
+                    @foreach (request()->session()->get('kelas') as $item)
+                        <li class="menu-item {{ Request::is('kelas*') ? 'active' : '' }}" onclick="setActive(this)">
+                            <a href="{{ route('kelas.show', ['kela' => $item->id]) }}" class="menu-link">
+                                <div data-i18n="Account">{{ $item->nama_kelas }}</div>
+                            </a>
+                        </li>
+                    @endforeach
 
 
-                 </ul>
+                </ul>
+                @else
+                
+                @endif
+                 
              </li>
          @endif
 

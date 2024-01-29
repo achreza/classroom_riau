@@ -8,13 +8,20 @@
             Tambah Mata Kuliah <i class="fas fa-plus"></i>
         </button>
     @endif
-    @if ($role == 'mahasiswa')
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Masuk ke Mata Kuliah <i class="fas fa-plus"></i>
-        </button>
-    @endif
-
-    @if ($role == 'dosen' || $role == 'mahasiswa')
+@if($status == 0)
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center align-items-center">
+                <h1 class="text-center">Anda belum membayar UKT</h1>
+            </div>
+        </div>
+@elseif($status == 1)
+        @if ($role == 'mahasiswa')
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Masuk ke Mata Kuliah <i class="fas fa-plus"></i>
+            </button>
+        @endif
+        
+        @if ($role == 'dosen' || $role == 'mahasiswa')
         @if ($kelas == null)
             <div class="row">
                 <div class="col-lg-12 d-flex justify-content-center align-items-center">
@@ -101,6 +108,9 @@
 
         </div>
     @endif
+@endif
+
+    
 
 
     <!-- Modal -->
