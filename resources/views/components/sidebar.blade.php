@@ -37,7 +37,7 @@
                      <img class="menu-icon tf-icons" src="{{ asset('image/classroom.svg') }}" alt="">
                      <div data-i18n="Account Settings">Daftar Kelas</div>
                  </a>
-                 @if ($status == '1')
+                 @if (request()->session()->get('user')->belum_bayar == 1)
                  <ul class="menu-sub">
                     @foreach (request()->session()->get('kelas') as $item)
                         <li class="menu-item {{ Request::is('kelas*') ? 'active' : '' }}" onclick="setActive(this)">
@@ -50,7 +50,7 @@
 
                 </ul>
                 @else
-                
+
                 @endif
                  
              </li>

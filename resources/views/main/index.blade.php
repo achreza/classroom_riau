@@ -8,7 +8,7 @@
             Tambah Mata Kuliah <i class="fas fa-plus"></i>
         </button>
     @endif
-    @if ($status == 0)
+    @if (request()->session()->get('user')->belum_bayar == 0)
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-center align-items-center">
                 <img style="width: 500px" src="{{ asset('image/admin.png') }}" alt="">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-    @elseif($status == 1)
+    @elseif(request()->session()->get('user')->belum_bayar == 1)
         @if ($role == 'mahasiswa')
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Masuk ke Mata Kuliah <i class="fas fa-plus"></i>
@@ -74,7 +74,7 @@
                                     <th>Status</th>
                                     <th>Status Aktif</th>
                                     <th>Action</th>
-                                    <th>Active</th>
+                                    <th>Active <input type="checkbox" id="checkAll"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -208,13 +208,13 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="">Nama Lengkap</label>
                                 <input type="text" name="name" id="form3Example4" class="form-control"
-                                    placeholder="Nama" />
+                                    placeholder="Nama" required />
 
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="">Email</label>
                                 <input type="email" id="form3Example3" name="email" class="form-control"
-                                    placeholder="email" />
+                                    placeholder="email" required/>
                                 <div class="form-text">Email harus menggunakan email akun google yang sudah terdaftar.
                                 </div>
 
@@ -222,22 +222,22 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="">NIM / NIDN</label>
                                 <input type="text" name="kode" id="form3Example4" class="form-control"
-                                    placeholder="NIM / NIP" />
-                                <div class="form-text">Masukkan NIM jika mendaftarkan mahasiswa, masukkan NIP jika
+                                    placeholder="NIM / NIDN" required/>
+                                <div class="form-text">Masukkan NIM jika mendaftarkan mahasiswa, masukkan NIDN jika
                                     mendaftarkan dosen.</div>
 
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="">Jurusan</label>
                                 <input type="text" name="jurusan" id="form3Example4" class="form-control"
-                                    placeholder="Jurusan" />
+                                    placeholder="Jurusan" required/>
 
                             </div>
                             {{-- select role --}}
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="">Role</label>
                                 <select class="form-control form-select" name="role"
-                                    aria-label="Default select example">
+                                    aria-label="Default select example" required>
                                     <option selected>Pilih Role</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Dosen</option>
@@ -264,6 +264,20 @@
             $('#tableUser').DataTable();
         });
         $(document).ready(function() {
+
+             // Check All checkbox functionality
+        $('#checkAll').click(function () {
+            $('input[name="active_users[]"]').prop('checked', $(this).prop('checked'));
+        });
+
+        // Individual checkbox click
+        $('input[name="active_users[]"]').click(function () {
+            // Uncheck "Check All" if any individual checkbox is unchecked
+            if (!$(this).prop('checked')) {
+                $('#checkAll').prop('checked', false);
+            }
+        });
+
             $('#bulkActivate').on('click', function() {
                 var selectedUserIds = [];
 
